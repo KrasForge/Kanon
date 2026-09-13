@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pin-plan",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "fpga": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "part": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "package": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family_adapter": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "banks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "voltage": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "vref_v": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "signals": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "pin": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "io_standard": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "required_voltage_v": {
+                      "type": "number"
+                    },
+                    "direction": {
+                      "enum": [
+                        "input",
+                        "output",
+                        "bidirectional"
+                      ]
+                    },
+                    "differential_partner": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "requires_clock_pin": {
+                      "type": "boolean"
+                    },
+                    "reserved": {
+                      "type": "boolean"
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "pin",
+                    "io_standard",
+                    "required_voltage_v",
+                    "direction"
+                  ]
+                }
+              },
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "voltage",
+              "signals"
+            ]
+          }
+        },
+        "clocks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "frequency_hz": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "destinations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "jitter_limit_ps": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "id",
+              "source",
+              "frequency_hz",
+              "destinations"
+            ]
+          }
+        },
+        "configuration": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "interface": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "boot_device": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "straps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "required": [
+            "interface"
+          ]
+        },
+        "debug": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "jtag": {
+              "type": "boolean"
+            },
+            "uart": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "jtag",
+            "uart"
+          ]
+        }
+      },
+      "required": [
+        "part",
+        "banks",
+        "clocks",
+        "configuration",
+        "debug"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "fpga"
+  ]
+}

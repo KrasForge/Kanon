@@ -1,0 +1,3 @@
+critical_nets_require_review: true
+stackup_changes_require_explicit_intent: true
+mutation_invalidates_evidence: true

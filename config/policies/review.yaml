@@ -1,0 +1,4 @@
+independent_reviewer_required: true
+source_access: read-only
+blocking_severities: [blocker, major]
+vision_is_supplementary: true

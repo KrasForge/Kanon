@@ -1,0 +1,43 @@
+gates:
+  - check_id: requirements.complete
+    mode: MANUAL
+    mandatory: true
+  - check_id: architecture.review
+    mode: MANUAL
+    mandatory: true
+  - check_id: components.review
+    mode: MANUAL
+    mandatory: true
+  - check_id: schematic.erc
+    mode: AUTOMATED
+    mandatory: true
+  - check_id: schematic.review
+    mode: MANUAL
+    mandatory: true
+  - check_id: pcb.drc
+    mode: AUTOMATED
+    mandatory: true
+  - check_id: power.review
+    mode: MANUAL
+    mandatory: true
+  - check_id: critical-nets.review
+    mode: MANUAL
+    mandatory: true
+  - check_id: mechanical.review
+    mode: MANUAL
+    mandatory: true
+  - check_id: bom.integrity
+    mode: AUTOMATED
+    mandatory: true
+  - check_id: dfm.review
+    mode: MANUAL
+    mandatory: true
+  - check_id: export.gerbers
+    mode: AUTOMATED
+    mandatory: true
+  - check_id: export.drill
+    mode: AUTOMATED
+    mandatory: true
+  - check_id: review.independent
+    mode: MANUAL
+    mandatory: true

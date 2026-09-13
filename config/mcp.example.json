@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "status": "contract-only; runtime mapping required",
+  "servers": {
+    "kicad-designer": {
+      "url_env": "KICAD_MCP_URL",
+      "optional": false,
+      "tool_allowlist": [],
+      "intended_capabilities": [
+        "design.read",
+        "design.write"
+      ]
+    },
+    "parts": {
+      "url_env": "PARTS_MCP_URL",
+      "optional": true,
+      "tool_allowlist": [],
+      "intended_capabilities": [
+        "parts.read"
+      ]
+    },
+    "freecad": {
+      "url_env": "FREECAD_MCP_URL",
+      "optional": true,
+      "tool_allowlist": [],
+      "intended_capabilities": [
+        "mechanical.read",
+        "mechanical.write"
+      ]
+    },
+    "documents": {
+      "url_env": "DATASHEETS_MCP_URL",
+      "optional": true,
+      "tool_allowlist": [],
+      "intended_capabilities": [
+        "documents.read"
+      ]
+    }
+  },
+  "reviewer": {
+    "servers": [],
+    "tools": [],
+    "deny_unknown_tools": true,
+    "requires_frozen_snapshot": true
+  }
+}

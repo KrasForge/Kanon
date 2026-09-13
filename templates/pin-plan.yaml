@@ -1,0 +1,16 @@
+schema_version: '1.0'
+fpga:
+  part: null
+  package: null
+  family_adapter: null
+  banks:
+    bank_0:
+      voltage: 3.3
+      signals: []
+      evidence: []
+  clocks: []
+  configuration:
+    interface: null
+  debug:
+    jtag: true
+    uart: true

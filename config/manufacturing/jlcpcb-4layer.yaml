@@ -1,0 +1,24 @@
+name: jlcpcb-4layer-conservative-draft
+status: UNQUALIFIED
+capabilities_checked_at: null
+source_url: https://jlcpcb.com/capabilities/pcb-capabilities
+notice: Project preferences only; check current fab and assembly capabilities before fabrication.
+layer_count: 4
+board_thickness_mm: 1.6
+copper_oz:
+  outer: 1
+  inner: 0.5
+minimum_trace_mm: 0.2
+minimum_spacing_mm: 0.2
+via_drill_mm: 0.3
+annular_ring_mm: 0.15
+copper_edge_clearance_mm: 0.5
+soldermask:
+  color: green
+  minimum_web_mm: 0.1
+preferred_package: '0603 imperial'
+bga_policy: requires_explicit_process_review
+policy_0402: requires_assembly_review
+single_sided_assembly_preferred: true
+sourcing_preferences: [authorized_sources, consolidate_mpn, verify_lcsc_stock]
+stackup: requires_fabricator_confirmation

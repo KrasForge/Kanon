@@ -1,0 +1,3 @@
+substitution_requires_explicit_intent: true
+manufacturer_evidence_required: true
+stock_freshness_hours: 24
