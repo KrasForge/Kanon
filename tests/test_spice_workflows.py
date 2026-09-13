@@ -28,7 +28,7 @@ def test_real_ngspice_assertions(tmp_path, name):
     assert run_job(job, ROOT, tmp_path / "pass.log").exit_code == 0
     assertions = dict(job.assertions)
     first = next(iter(assertions))
-    assertions[first] = type(assertions[first])(min=100, max=101)
+    assertions[first] = type(assertions[first])(min=100, max=101, unit=assertions[first].unit)
     failed = run_job(job.model_copy(update={"assertions": assertions}), ROOT, tmp_path / "fail.log")
     assert failed.exit_code == 1
     assert any(c.status == "FAIL" for c in failed.results)

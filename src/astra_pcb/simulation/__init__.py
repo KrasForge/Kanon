@@ -7,18 +7,24 @@ from pathlib import Path
 
 from astra_pcb.models import CheckResult, CheckStatus
 from astra_pcb.models.provenance import file_digest
+from astra_pcb.simulation.models import ModelFile, flatten
 from astra_pcb.verification.process import ProcessResult, run
 
 
-def simulate(netlist: Path, output: Path, executable: str = "ngspice") -> ProcessResult:
+def simulate(
+    netlist: Path, output: Path, executable: str = "ngspice", *, models: tuple[ModelFile, ...] = ()
+) -> ProcessResult:
     if output.exists() or output.is_symlink():
         raise FileExistsError(output)
     command = [executable, "-n", "-b", "-o", str(output.resolve()), str(netlist.resolve())]
     if not netlist.is_file():
         return ProcessResult(command=tuple(command), exit_code=None, error="Missing netlist")
-    content = netlist.read_text()
+    try:
+        content, digest, input_hashes = flatten(netlist, models)
+    except (OSError, ValueError) as exc:
+        return ProcessResult(command=tuple(command), exit_code=None, error=str(exc))
     # SPICE control blocks can execute shell commands; admit only analysis/math controls.
-    # External .include/.lib models need a reviewed, self-contained flattened netlist for now.
+    # Includes are flattened only after their local provenance and digest are checked.
     control = False
     for line in content.splitlines()[1:]:
         stripped = line.strip().lower()
@@ -40,7 +46,6 @@ def simulate(netlist: Path, output: Path, executable: str = "ngspice") -> Proces
                 exit_code=None,
                 error="External model or unsupported SPICE directive; flatten/audit first",
             )
-    digest = file_digest(netlist)
     version = run([executable, "--version"], timeout=10)
     match = re.search(r"ngspice-(\d+)", version.stdout + version.stderr, re.I)
     if version.error or version.exit_code != 0 or not match or int(match[1]) < 42:
@@ -64,8 +69,8 @@ def simulate(netlist: Path, output: Path, executable: str = "ngspice") -> Proces
             r"(^\s*(error|fatal)\b|simulation.*aborted|analysis not run)", log, re.I | re.M
         ):
             errors.append("ngspice log reports failed analysis/measurement")
-    if file_digest(netlist) != digest:
-        errors.append("Netlist changed during simulation")
+    if any(not Path(p).is_file() or file_digest(Path(p)) != h for p, h in input_hashes.items()):
+        errors.append("Netlist or model changed during simulation")
     return result.model_copy(
         update={
             "error": result.error or ("; ".join(errors) if errors else None),
