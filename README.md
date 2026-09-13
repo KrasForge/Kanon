@@ -7,7 +7,7 @@ signed input/artifact approvals.
 
 Implemented: typed reports and signed release-gate decisions; schema/semantic validation;
 independent KiCad ERC/DRC and export receipts; a qualified external MCP board-editing path;
-real ngspice assertions and ideal circuit workflows; BOM import and public sourcing lookup;
+real ngspice assertions and ideal circuit workflows; BOM import and credential-free JLCSearch/Adafruit sourcing lookups;
 a local datasheet registry; declared power, FPGA-bank and rule-driven electrical audits;
 role-isolated lifecycle/review orchestration and quantified placement constraints;
 a two-phase release coordinator with content-addressed manifests and Gerber rendering;

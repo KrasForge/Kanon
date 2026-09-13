@@ -6,7 +6,8 @@ Install Python >=3.12 and uv, then run `uv sync --extra dev` (or create a venv a
 
 Install KiCad 10 and ngspice through a trusted platform installer. Put `kicad-cli` and
 `ngspice` on PATH; macOS KiCad commonly needs its application binary directory added.
-Run `astra-pcb environment` to inspect discovery. FreeCADCmd is optional. Discovery does
+Run `astra-pcb environment` to inspect discovery. FreeCADCmd is optional; the tested official user-local installation is documented in
+[FreeCAD setup](freecad.md). Discovery does
 not certify supported versions or functional correctness. MCP endpoint presence is reported
 without contacting endpoints or printing credentials. Copy .env.example for your harness;
 this CLI does not automatically load .env. Never commit credentials.

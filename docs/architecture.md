@@ -28,18 +28,41 @@ mandatory automated check to PASS; WARN/SKIP/missing also block. Manual gates re
 Waivers require an explicitly trusted human signer and per-gate permission (disabled by
 default). Private signing keys are external to agent tools; see foundation.md. An imported JSON PASS is untrusted aggregation input, not release proof.
 
-KiCad command hooks capture exit status/output/artifacts, refuse existing export targets
-and never turn missing executables into success. M1 parses JSON violations and qualifies KiCad 10, captures export hashes and provides
-persisted-source snapshots. Complete fabrication validation remains in M4. ngspice
-supports process capture and scalar `.measure` parsing; circuit workflows and validated
-models remain pending. BOM checks are offline and do not establish live stock or suitability.
+KiCad checks capture exit status/output/artifacts, refuse existing export targets and never
+turn missing executables into success. JSON violations, exclusions and warnings retain their
+status. Saved native snapshots retain content hashes. ngspice executes bounded self-contained
+netlists with scalar assertions; external model/include qualification remains incomplete.
+BOM checks establish declared integrity. Public JLCSearch and Adafruit lookups add sourcing
+observations without establishing engineering suitability or committing a purchase.
 
 ## Evidence and release
-Future snapshots must bind source/library/model/config hashes, dirty-tree content, tool
-versions, simulation inputs, decisions and report identities. Every mutation invalidates
-affected evidence. Release must run fresh checks, export into a new directory, validate all
-expected layers/drills/BOM/placement/STEP artifacts, hash a manifest, and obtain independent
-review. Generated files alone are insufficient. No release bundle is currently produced.
+Snapshots and release identities bind source/library/model/config hashes and dirty contents
+to a Git revision. Every mutation invalidates affected evidence. The implemented release
+coordinator runs checks, exports into a fresh directory, validates artifacts, and produces a
+candidate manifest. Finalization requires separate signed reviews of the exact artifact
+manifest. The example has no populated native board and cannot be released.
+
+```mermaid
+flowchart LR
+    SPEC[Specification and cited constraints] --> ARCH[Architect]
+    ARCH --> DES[Designer: audited mutation tools]
+    DES --> SAVE[Persisted source and frozen snapshot]
+    SAVE --> CLI[Independent KiCad and engineering checks]
+    SAVE --> REV[Reviewer: frozen data, no mutation tools]
+    CLI --> REV
+    REV --> FIX[Findings and remediation]
+    FIX --> DES
+    CLI --> GATE[Deterministic release gates]
+    REV --> SIGN[External independent signer]
+    SIGN --> GATE
+    GATE --> EXPORT[Fresh exports and candidate manifest]
+    EXPORT --> ART[Independent artifact review and signature]
+    ART --> FINAL[Hash verification and final manifest]
+```
+
+See [capabilities](capabilities.md) for implemented versus unqualified operations and
+[issue acceptance audit](issue-acceptance.md) for remaining acceptance criteria. Python tool
+facades are not an OS sandbox: deployment isolation and live model transport remain open.
 
 ## Sources checked during initialization
 - [KiCad 10 CLI](https://docs.kicad.org/10.0/en/cli/cli.html): command syntax reference.

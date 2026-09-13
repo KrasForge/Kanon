@@ -9,6 +9,7 @@ from pydantic import ValidationError
 from yaml import YAMLError
 
 from astra_pcb.bom import check_bom
+from astra_pcb.bom.adafruit import Adafruit
 from astra_pcb.bom.importer import import_bom
 from astra_pcb.bom.jlcsearch import JLCSearch
 from astra_pcb.config import load_yaml, validate_document
@@ -64,7 +65,8 @@ def main(argv: list[str] | None = None) -> int:
     power = sub.add_parser("check-power")
     power.add_argument("document", type=Path)
     sourcing = sub.add_parser("source-part")
-    sourcing.add_argument("lcsc")
+    sourcing.add_argument("part_number")
+    sourcing.add_argument("--provider", choices=("jlcsearch", "adafruit"), default="jlcsearch")
     sourcing.add_argument("--expected-mpn")
     releasing = sub.add_parser("release")
     releasing.add_argument("--project", type=Path)
@@ -104,7 +106,8 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "check-power":
             report = PowerTree.model_validate(load_yaml(args.document)).audit()
         elif args.command == "source-part":
-            _, check = JLCSearch().lookup(args.lcsc, expected_mpn=args.expected_mpn)
+            provider = Adafruit() if args.provider == "adafruit" else JLCSearch()
+            _, check = provider.lookup(args.part_number, expected_mpn=args.expected_mpn)
             report = VerificationReport(results=(check,))
         elif args.command == "environment":
             report = diagnose(probe_mcp=args.probe_mcp)

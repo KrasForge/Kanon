@@ -1,5 +1,6 @@
 """Optional supplier-MCP lookup and transparent, timestamped sourcing risk."""
 
+import re
 from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from typing import Literal
@@ -13,9 +14,11 @@ from astra_pcb.models import CheckResult, CheckStatus, StrictModel
 class SourcingRecord(StrictModel):
     mpn: str = Field(min_length=1)
     manufacturer: str | None = Field(default=None, min_length=1)
-    supplier: Literal["LCSC", "JLCPCB"]
-    supplier_part_number: str = Field(pattern=r"^C\d+$")
-    package: str
+    supplier: str = Field(min_length=1)
+    supplier_part_number: str = Field(min_length=1)
+    package: str | None = None
+    availability: str | None = None
+    raw_lifecycle: str | None = None
     stock: int | None = Field(default=None, ge=0)
     unit_cost: Decimal | None = Field(default=None, ge=0)
     currency: str | None = None
@@ -31,6 +34,10 @@ class SourcingRecord(StrictModel):
 
     @model_validator(mode="after")
     def metadata(self):
+        if self.supplier in {"LCSC", "JLCPCB"} and not re.fullmatch(
+            r"C[1-9]\d*", self.supplier_part_number
+        ):
+            raise ValueError("LCSC/JLCPCB supplier IDs must be canonical C-prefixed numbers")
         if self.observed_at.tzinfo is None or (
             self.stock_updated_at is not None and self.stock_updated_at.tzinfo is None
         ):
