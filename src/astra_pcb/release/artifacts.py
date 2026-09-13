@@ -73,12 +73,19 @@ def artifact(root: Path, path: Path, role: str) -> Artifact:
 
 
 def check_export(
-    kind: str, result: ProcessResult, *, expected_layers: tuple[str, ...] = ()
+    kind: str,
+    result: ProcessResult,
+    *,
+    expected_layers: tuple[str, ...] = (),
+    expected_drills: tuple[str, ...] | None = None,
 ) -> CheckResult:
     error = result.error
     if result.exit_code != 0 or not result.input_digest or not result.artifacts:
         error = error or "Export failed or lacks source/artifact identity"
     observed = set()
+    drill_categories = []
+    if len(result.artifacts) != len(set(result.artifacts)):
+        error = "Duplicate artifact receipt"
     for name in result.artifacts:
         path = Path(name)
         if not path.is_file() or result.artifact_hashes.get(str(path.resolve())) != file_digest(
@@ -95,6 +102,13 @@ def check_export(
                 continue  # KiCad job file is recorded separately in the receipt.
             if "M02*" not in data[-100:] or "%FS" not in data or "%MO" not in data:
                 error = "Invalid Gerber envelope"
+            matching_layers = [
+                layer
+                for layer in expected_layers
+                if path.name.endswith("-" + layer.replace(".", "_") + ".gbr")
+            ]
+            if len(matching_layers) != 1 or matching_layers[0] in observed:
+                error = "Unexpected or duplicate Gerber layer"
             for layer in expected_layers:
                 if path.name.endswith("-" + layer.replace(".", "_") + ".gbr"):
                     functions = {
@@ -120,12 +134,32 @@ def check_export(
             if not re.search(r"^M48\s*$", data, re.M) or not re.search(r"^M30\s*$", data, re.M):
                 error = "Invalid Excellon envelope"
             observed.add("drill")
+            category = (
+                "NPTH"
+                if path.stem.endswith("-NPTH")
+                else "PTH"
+                if path.stem.endswith("-PTH")
+                else "combined"
+            )
+            drill_categories.append(category)
+            function = re.search(r"; #@! TF.FileFunction,([^\n]+)", data)
+            if function and (
+                (category == "NPTH" and not function[1].startswith("NonPlated,"))
+                or (category == "PTH" and not function[1].startswith("Plated,"))
+            ):
+                error = "Drill filename and plating identity disagree"
     if kind == "gerbers" and set(expected_layers) - observed:
         error = "Missing requested Gerber layers: " + ", ".join(
             sorted(set(expected_layers) - observed)
         )
     if kind == "drill" and "drill" not in observed:
         error = "No Excellon drill file generated"
+    if (
+        kind == "drill"
+        and expected_drills is not None
+        and sorted(drill_categories) != sorted(expected_drills)
+    ):
+        error = "Drill categories differ from expected inventory: " + str(drill_categories)
     return CheckResult(
         check_id=f"export.{kind}",
         name=f"{kind} export consistency",

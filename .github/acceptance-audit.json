@@ -495,15 +495,26 @@
       "number": 47,
       "title": "P1 \u2014 Implement STEP-export verification pipeline",
       "milestone": "M4 \u2013 Manufacturing Release",
-      "assessment": "partial",
-      "reason": "STEP envelope/hash/source verification works; required missing-3D-model reporting and explicit unit/origin qualification are incomplete."
+      "assessment": "implemented",
+      "reason": "STEP receipts require current hashes, millimetre length units and explicit board origin; release separately checks native model assignments, hidden/missing files and explicit per-reference exemptions. Actual populated export qualified.",
+      "evidence": [
+        "src/astra_pcb/mechanical/models.py",
+        "tests/test_remaining_manufacturing.py",
+        "tests/test_populated_release.py"
+      ]
     },
     {
       "number": 48,
       "title": "P1 \u2014 Add FreeCAD MCP integration profile",
       "milestone": "M4 \u2013 Manufacturing Release",
-      "assessment": "partial",
-      "reason": "Optional configuration and now the installed FreeCAD application exist; the selected FreeCAD MCP provider/addon and its operations remain unqualified."
+      "assessment": "implemented",
+      "reason": "Pinned FreeCAD 1.1.3/provider subset installed and locally exercised over MCP with native geometry readback, FCStd/STEP artifacts and missing-object control. Reviewer has no transport; remaining provider tools are not exposed.",
+      "evidence": [
+        "scripts/qualify_freecad_mcp.py",
+        "tests/test_freecad.py",
+        "docs/freecad.md",
+        "config/integrations/freecad-mcp-qualification.json"
+      ]
     },
     {
       "number": 49,
@@ -564,15 +575,24 @@
       "number": 54,
       "title": "P1 \u2014 Implement configurable DFM rules",
       "milestone": "M4 \u2013 Manufacturing Release",
-      "assessment": "partial",
-      "reason": "Measured trace/space/via/edge constraints work; the scoped fabrication/assembly rules are incomplete, including package/assembly policy enforcement."
+      "assessment": "implemented",
+      "reason": "Manufacturability API combines measured fabrication minima with evidence-backed package/BGA/0402, sidedness, courtyard, fiducial, polarity and rotation declarations. Unknown measurements remain SKIP.",
+      "evidence": [
+        "src/astra_pcb/manufacturing/assembly.py",
+        "tests/test_remaining_manufacturing.py"
+      ]
     },
     {
       "number": 55,
       "title": "P1 \u2014 Add fabrication-output consistency tests",
       "milestone": "M4 \u2013 Manufacturing Release",
-      "assessment": "partial",
-      "reason": "Fresh hash/layer identity tests exist; exact drill-category and unexpected/extra-layer coverage is incomplete."
+      "assessment": "implemented",
+      "reason": "Exact Gerber and drill inventories reject extra/duplicate layers, missing plating categories and plating-header contradictions; source/current-invocation hashes and real native exports are tested.",
+      "evidence": [
+        "src/astra_pcb/release/artifacts.py",
+        "tests/test_remaining_manufacturing.py",
+        "tests/test_populated_release.py"
+      ]
     },
     {
       "number": 56,
@@ -741,8 +761,12 @@
       "number": 73,
       "title": "P1 \u2014 Add end-to-end minimal-board test",
       "milestone": "M4 \u2013 Manufacturing Release",
-      "assessment": "partial",
-      "reason": "Spec validation and blocked release are tested, and release contracts use synthetic approvals/exporters; a reproducible populated-board real-check release path is not demonstrated."
+      "assessment": "implemented",
+      "reason": "Populated project-owned native fixture runs actual spec validation, ERC/DRC/parity, manufacturing exports and two-phase manifest finalization; synthetic test-only independent signatures and negative source-change control are explicit.",
+      "evidence": [
+        "examples/populated-fixture/README.md",
+        "tests/test_populated_release.py"
+      ]
     },
     {
       "number": 74,
@@ -770,8 +794,13 @@
       "number": 76,
       "title": "P1 \u2014 Write \u201cDesign a board with Astra\u201d walkthrough",
       "milestone": "M4 \u2013 Manufacturing Release",
-      "assessment": "partial",
-      "reason": "An honest staged walkthrough exists; the full reproducible spec-to-populated-board-to-release artifact walkthrough remains incomplete."
+      "assessment": "implemented",
+      "reason": "Walkthrough connects requirements/architecture/parts, native schematic/PCB, frozen review and two-phase release, with reproducible populated native CI path and explicit live-harness/physical-engineering limitations.",
+      "evidence": [
+        "docs/walkthrough.md",
+        "examples/populated-fixture/README.md",
+        "docs/manufacturing-release.md"
+      ]
     }
   ]
 }

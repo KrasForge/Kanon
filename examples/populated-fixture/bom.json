@@ -1,0 +1,20 @@
+[
+  {
+    "reference": "R1",
+    "quantity": 1,
+    "value": "1k",
+    "manufacturer": "KANON TEST FIXTURE - NOT PURCHASABLE",
+    "mpn": "SYNTHETIC-1K",
+    "package": "Fixture:Passive",
+    "notes": "Software qualification only; not a real manufacturer part."
+  },
+  {
+    "reference": "R2",
+    "quantity": 1,
+    "value": "1k",
+    "manufacturer": "KANON TEST FIXTURE - NOT PURCHASABLE",
+    "mpn": "SYNTHETIC-1K",
+    "package": "Fixture:Passive",
+    "notes": "Software qualification only; not a real manufacturer part."
+  }
+]

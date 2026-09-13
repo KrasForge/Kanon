@@ -18,6 +18,7 @@ from astra_pcb.kicad.reports import interpret
 from astra_pcb.kicad.snapshot import nodes, parse_sexpr
 from astra_pcb.manufacturing import ManufacturingProfile
 from astra_pcb.mechanical import check_step
+from astra_pcb.mechanical.models import model_inventory
 from astra_pcb.models import CheckResult, CheckStatus, StrictModel, VerificationReport
 from astra_pcb.models.engineering import Review
 from astra_pcb.models.provenance import InputIdentity, canonical_digest, file_digest
@@ -35,6 +36,8 @@ class ReleaseProject(StrictModel):
     bom: str
     manufacturing_profile: str
     critical_net_plan: str | None = None
+    model_exemptions: dict[str, str] = Field(default_factory=dict)
+    expected_drills: tuple[Literal["combined", "PTH", "NPTH"], ...] = ("combined",)
     additional_inputs: tuple[str, ...] = ()
     gerber_layers: tuple[str, ...] = Field(min_length=3)
     parity: Literal[True] = True
@@ -184,6 +187,16 @@ def release(
                 or str(resolved.relative_to(root.resolve())) not in identity.files
             ):
                 raise ValueError("3D model absent from release input identity")
+        models = model_inventory(root / project.pcb, exemptions=project.model_exemptions)
+        checks.append(
+            CheckResult(
+                check_id="mechanical.models",
+                name="Native 3D model completeness",
+                status="PASS" if models.exit_code == 0 else "FAIL",
+                message="Model coverage checked; dimensional accuracy needs independent review",
+                evidence=(models.model_dump_json(),),
+            )
+        )
         validate_document(root / project.spec, spec_schema)
         checks.append(
             CheckResult(
@@ -196,7 +209,7 @@ def release(
         bom_items = import_bom(root / project.bom)
         checks.extend(check_bom(bom_items))
         checks.append(check_board_bom(bom_items, (root / project.pcb).read_text()))
-        source_nets = frozenset(n[-1] for n in nodes(board_tree, "net") if len(n) >= 3 and n[-1])
+        source_nets = frozenset(n[-1] for n in nodes(board_tree, "net") if len(n) >= 2 and n[-1])
         if not project.critical_net_plan:
             raise ValueError("Critical-net classification plan is required for release")
         plan = load_yaml(root / project.critical_net_plan)
@@ -271,6 +284,7 @@ def release(
             "bom.integrity": "AUTOMATED",
             "bom.parity": "AUTOMATED",
             "manufacturing.profile": "AUTOMATED",
+            "mechanical.models": "AUTOMATED",
             "spec.schema": "AUTOMATED",
         }
         configured = {g.check_id: g for g in gates.gates}
@@ -323,10 +337,13 @@ def release(
                 layers=project.gerber_layers if kind == "gerbers" else (),
             )
             check = (
-                check_step(result, dest)
+                check_step(result, dest, require_frame=True)
                 if kind == "step"
                 else check_export(
-                    kind, result, expected_layers=project.gerber_layers if kind == "gerbers" else ()
+                    kind,
+                    result,
+                    expected_layers=project.gerber_layers if kind == "gerbers" else (),
+                    expected_drills=project.expected_drills if kind == "drill" else None,
                 )
             )
             checks.append(check)

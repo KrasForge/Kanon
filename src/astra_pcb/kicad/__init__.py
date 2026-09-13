@@ -134,6 +134,8 @@ class KiCadCLI:
             if kind != "gerbers" or any("," in layer for layer in layers):
                 raise ValueError("Explicit layers apply only to Gerbers")
             args += ["--layers", ",".join(layers)]
+        if kind == "step":
+            args += ["--user-origin", "0x0mm"]
         if kind == "pos":
             args += ["--format", "csv", "--units", "mm", "--exclude-dnp"]
         if kind == "gerbers":

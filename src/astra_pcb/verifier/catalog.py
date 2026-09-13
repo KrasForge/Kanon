@@ -21,6 +21,7 @@ from astra_pcb.engineering.fpga import FamilyRules, check_banks
 from astra_pcb.engineering.fpga_device import BootPlan, DeviceRules, check_pin_plan
 from astra_pcb.engineering.power import PowerTree, Regulator, check_regulator
 from astra_pcb.manufacturing import Feature, ManufacturingProfile, check_dfm
+from astra_pcb.manufacturing.assembly import AssemblyPlan
 from astra_pcb.models import CheckResult, StrictModel, VerificationReport
 
 
@@ -79,6 +80,17 @@ class DFMInput(StrictModel):
     features: tuple[Feature, ...]
     layer_count: int = Field(ge=2)
     thickness_mm: float = Field(gt=0)
+    assembly: AssemblyPlan | None = None
+
+    def audit(self) -> VerificationReport:
+        fabrication = check_dfm(
+            self.profile,
+            self.features,
+            layer_count=self.layer_count,
+            thickness_mm=self.thickness_mm,
+        )
+        assembly = self.assembly.audit(self.profile).results if self.assembly else ()
+        return VerificationReport(results=(*fabrication.results, *assembly))
 
 
 # name -> (validated input, pure callable, scope description)
@@ -161,9 +173,7 @@ CHECKS = {
     ),
     "check_manufacturability": (
         DFMInput,
-        lambda x: check_dfm(
-            x.profile, x.features, layer_count=x.layer_count, thickness_mm=x.thickness_mm
-        ),
+        lambda x: x.audit(),
         "Declared measured DFM features and profile",
     ),
 }

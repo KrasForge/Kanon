@@ -1,0 +1,13 @@
+{
+  "provider_commit": "5dbfe2c80b53c3102bff0723951676e16edf2d84",
+  "inventory_digest": "cf6eacaaa228e241cd497e8abf1a323c3f7a6fe24fe2aaff114fa4a53de24166",
+  "native": {
+    "volume_mm3": 160.00000000000003,
+    "valid": true
+  },
+  "artifacts": {
+    "board.FCStd": "302657278e1c606d972413fd1b33eae14d03ecfa017d1d5d28a33e07c75fc929",
+    "board.step": "7696abd1b88291bf4aa16fd2ffb4d525e405dd74fbb4d8bb78e67dc55e248c1b"
+  },
+  "notice": "Disposable synthetic box qualification; not a PCB or enclosure approval."
+}

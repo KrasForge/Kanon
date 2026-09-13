@@ -57,7 +57,9 @@ If input gates pass, prepare exports Gerbers, Excellon drills, STEP and optional
 pick-and-place CSV to fresh paths. It checks receipts, hashes, expected layers, X2 layer
 identity, file envelopes and current source identity. It writes a **candidate-manifest.json**
 and returns WARN/exit 2 pending review of the actual generated artifacts. A STEP envelope
-check proves file identity/existence, not collision freedom or completeness of 3D models.
+check validates file identity, millimetre units and explicit zero origin. A separate mandatory
+model inventory rejects missing/hidden/non-STEP geometry; explicitly reviewed per-reference
+omissions are recorded in project configuration. Neither check proves collision freedom.
 
 Inspect the actual Gerbers, drills, PnP, STEP and all release evidence. The candidate's
 approval identity is `canonical_digest(candidate.model_dump(mode="json"))` using the
@@ -88,12 +90,20 @@ Vision supplements connectivity, electrical calculations, ERC/DRC and BOM checks
 
 `MechanicalConstraints` records outline, keep-outs, mounting holes, connector locations,
 height limits, enclosure hashes and coordinate frame. The optional FreeCAD MCP profile
-selects neka-nat/freecad-mcp and remains disabled/unqualified until its addon and FreeCAD
-are available. Fedora's configured repositories on this host had no `freecad` package.
-The Reviewer never receives that mutation-capable server. STEP export has been exercised
-through actual KiCad; a FreeCAD session or collision analysis is not claimed by M4.
+selects the pinned and locally qualified neka-nat subset described in [FreeCAD setup](freecad.md).
+Reviewer never receives that mutation-capable transport. Optional OpenCascade collision
+checks inspect actual STEP solids independently.
 
-The minimal-board example deliberately lacks native board/schematic/BOM files. Its spec
-validates, but its release command fails. Unit tests use explicitly synthetic exporters
-and signing keys to test successful package/finalization transactions; separate integration
-tests exercise real KiCad exports and Gerber rendering. Neither fixture is a product PCB.
+Assembly declarations (`manufacturing.assembly.AssemblyPlan`, or `assembly` within the
+`check_manufacturability` verifier request) reconcile fitted references and check BGA/0402
+policy, sidedness preference, measured courtyard clearance, required fiducials, polarity
+and placement rotation evidence. Missing measurements remain SKIP; package-family labels
+must come from reviewed data, not guessed footprint names. These declarations supplement
+native DRC and independent DFM review; they do not perform automatic assembly-image analysis.
+Drill categories in `expected_drills` must match exactly (default combined Excellon); separate
+PTH/NPTH output must also have matching plating metadata. Extra/duplicate Gerber layers fail.
+
+The original minimal-board example still demonstrates blocked release without native files.
+The [populated fixture](../examples/populated-fixture/README.md) adds a real native two-phase
+integration test with synthetic BOM/capability/approval evidence. All exports and ERC/DRC/parity
+are actual KiCad operations. No fixture is a manufacturing-authorized product PCB.

@@ -1,0 +1,17 @@
+bom: bom.json
+critical_net_plan: nets.yaml
+design_author: test-designer
+gerber_layers:
+- F.Cu
+- B.Cu
+- F.Mask
+- B.Mask
+- F.Paste
+- B.Paste
+- Edge.Cuts
+manufacturing_profile: profile.yaml
+parity: true
+pcb: board.kicad_pcb
+pick_and_place: true
+schematic: board.kicad_sch
+spec: design-spec.yaml
