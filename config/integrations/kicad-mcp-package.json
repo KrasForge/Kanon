@@ -1,0 +1,32 @@
+{
+  "name": "kicad-mcp",
+  "version": "2.7.0",
+  "description": "AI-assisted PCB design with KiCAD via Model Context Protocol",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "kicad",
+    "mcp",
+    "model-context-protocol",
+    "pcb-design",
+    "ai",
+    "claude"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.21.0",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/node": "^20.19.0",
+    "typescript": "^5.9.3"
+  }
+}

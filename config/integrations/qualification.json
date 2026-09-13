@@ -23,9 +23,9 @@
     "schematic_mutation": "NOT QUALIFIED",
     "other_tools": "NOT QUALIFIED"
   },
-  "dependency_changes": "npm audit fix --ignore-scripts; runtime audit zero findings at qualification",
-  "npm_lock_sha256": "f94faad03043a3871a4c27e6a57cc9b331b9fa9df94541f3e92dd4df33c29e99",
-  "python_requirements_sha256": "73da5a8f611805bfea3d6c2a38b8caf02bf59d4243cb91d54fcf4eed8014ce0e",
+  "dependency_changes": "Compatible runtime security updates; deployment manifest retains only runtime and TypeScript build dependencies. npm audit: zero findings.",
+  "npm_lock_sha256": "da588dd8a167f910221df64a91e4e02aba6cb44b983ac3d0bcac5b410ea1d4a0",
+  "python_requirements_sha256": "36634cd52a80b0a871a83377de6e2784583be8b5873f23cfd9c04c4ba46f6efc",
   "source_lookup": {
     "endpoint": "https://jlcsearch.tscircuit.com/components/list.json",
     "implementation_revision": "ba23a0a53a615ecd23ebe6eb8e6140c716f75302",
@@ -39,5 +39,6 @@
       "Price currency not supplied",
       "No order or purchase capability"
     ]
-  }
+  },
+  "npm_manifest_sha256": "45d37122ebfdbc30904c6f999aa5ae8cc848f0b59ee8a19c20e907416d0ab0dd"
 }
