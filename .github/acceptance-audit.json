@@ -51,8 +51,12 @@
       "number": 5,
       "title": "P1 \u2014 Define engineering decision record model",
       "milestone": "M0 \u2013 Foundation",
-      "assessment": "partial",
-      "reason": "Decision records and Markdown round trips work, but decision evidence/calculation link resolution and link-validation failure fixtures are missing."
+      "assessment": "implemented",
+      "reason": "Decision citations resolve against exact registered document identity and SHA-256; local calculation links are checked for missing files and path escape. Markdown round trips preserve links and failures have structured reports.",
+      "evidence": [
+        "src/astra_pcb/models/decision_links.py",
+        "tests/test_decision_links.py"
+      ]
     },
     {
       "number": 6,
