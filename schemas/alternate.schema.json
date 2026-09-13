@@ -1,0 +1,176 @@
+{
+  "$defs": {
+    "Compatibility": {
+      "additionalProperties": false,
+      "properties": {
+        "criterion": {
+          "enum": [
+            "pinout",
+            "electrical",
+            "footprint",
+            "thermal",
+            "firmware",
+            "assembly",
+            "lifecycle"
+          ],
+          "title": "Criterion",
+          "type": "string"
+        },
+        "compatible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Compatible"
+        },
+        "explanation": {
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/DatasheetEvidence"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "criterion",
+        "compatible",
+        "explanation",
+        "evidence"
+      ],
+      "title": "Compatibility",
+      "type": "object"
+    },
+    "DatasheetEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "minLength": 1,
+          "title": "Document",
+          "type": "string"
+        },
+        "manufacturer": {
+          "minLength": 1,
+          "title": "Manufacturer",
+          "type": "string"
+        },
+        "revision": {
+          "minLength": 1,
+          "title": "Revision",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "extracted_constraint": {
+          "minLength": 1,
+          "title": "Extracted Constraint",
+          "type": "string"
+        },
+        "source_location": {
+          "minLength": 1,
+          "title": "Source Location",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "document",
+        "manufacturer",
+        "revision",
+        "extracted_constraint",
+        "source_location"
+      ],
+      "title": "DatasheetEvidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "original_mpn": {
+      "minLength": 1,
+      "title": "Original Mpn",
+      "type": "string"
+    },
+    "original_manufacturer": {
+      "minLength": 1,
+      "title": "Original Manufacturer",
+      "type": "string"
+    },
+    "candidate_mpn": {
+      "minLength": 1,
+      "title": "Candidate Mpn",
+      "type": "string"
+    },
+    "candidate_manufacturer": {
+      "minLength": 1,
+      "title": "Candidate Manufacturer",
+      "type": "string"
+    },
+    "assessments": {
+      "items": {
+        "$ref": "#/$defs/Compatibility"
+      },
+      "title": "Assessments",
+      "type": "array"
+    },
+    "design_context": {
+      "minLength": 1,
+      "title": "Design Context",
+      "type": "string"
+    }
+  },
+  "required": [
+    "original_mpn",
+    "original_manufacturer",
+    "candidate_mpn",
+    "candidate_manufacturer",
+    "assessments",
+    "design_context"
+  ],
+  "title": "Alternate",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

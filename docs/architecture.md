@@ -3,7 +3,7 @@
 The target lifecycle is SPEC → ARCHITECTURE → COMPONENT_SELECTION → SCHEMATIC →
 SCHEMATIC_REVIEW → FLOORPLAN → CRITICAL_ROUTING → GENERAL_ROUTING → PCB_REVIEW → DFM →
 MECHANICAL → RELEASE_REVIEW → RELEASED. PCB_REVIEW includes power/return-path review;
-RELEASE_REVIEW includes Gerber inspection. Lifecycle enforcement is backlog work.
+RELEASE_REVIEW includes Gerber inspection. The lifecycle state machine enforces ordered gates and invalidates prior evidence when inputs change.
 
 Architect decomposes requirements, power/signal/clock trees and risks. Designer owns source
 mutations via a selectable KiCad MCP implementation. Reviewer tries to invalidate a frozen

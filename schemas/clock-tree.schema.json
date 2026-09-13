@@ -1,0 +1,209 @@
+{
+  "$defs": {
+    "ClockNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "frequency_hz": {
+          "exclusiveMinimum": 0,
+          "title": "Frequency Hz",
+          "type": "number"
+        },
+        "ratio": {
+          "default": 1,
+          "exclusiveMinimum": 0,
+          "title": "Ratio",
+          "type": "number"
+        },
+        "maximum_fanout": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Maximum Fanout",
+          "type": "integer"
+        },
+        "domain": {
+          "title": "Domain",
+          "type": "string"
+        },
+        "domain_relation": {
+          "default": "same",
+          "enum": [
+            "same",
+            "derived"
+          ],
+          "title": "Domain Relation",
+          "type": "string"
+        },
+        "termination": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Termination"
+        },
+        "expected_termination": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Termination"
+        },
+        "jitter_ps_rms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Jitter Ps Rms"
+        },
+        "jitter_limit_ps_rms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Jitter Limit Ps Rms"
+        },
+        "evidence": {
+          "$ref": "#/$defs/DatasheetEvidence"
+        }
+      },
+      "required": [
+        "id",
+        "frequency_hz",
+        "domain",
+        "evidence"
+      ],
+      "title": "ClockNode",
+      "type": "object"
+    },
+    "DatasheetEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "minLength": 1,
+          "title": "Document",
+          "type": "string"
+        },
+        "manufacturer": {
+          "minLength": 1,
+          "title": "Manufacturer",
+          "type": "string"
+        },
+        "revision": {
+          "minLength": 1,
+          "title": "Revision",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "extracted_constraint": {
+          "minLength": 1,
+          "title": "Extracted Constraint",
+          "type": "string"
+        },
+        "source_location": {
+          "minLength": 1,
+          "title": "Source Location",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "document",
+        "manufacturer",
+        "revision",
+        "extracted_constraint",
+        "source_location"
+      ],
+      "title": "DatasheetEvidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/ClockNode"
+      },
+      "minItems": 1,
+      "title": "Nodes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "nodes"
+  ],
+  "title": "ClockTree",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

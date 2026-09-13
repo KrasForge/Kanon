@@ -32,3 +32,5 @@ For each blocker/major/minor/observation include ID, evidence, affected subsyste
 Record evidence in hardware/reviews/ or hardware/decisions/ using the templates. Include
 source revision/page, units, assumptions, calculations, affected objects and remaining
 unknowns. This Skill guides engineering work; it does not implement a deterministic check.
+
+For rendered evidence, apply [the visual review rubric](references/visual-review.md).

@@ -1,0 +1,223 @@
+{
+  "$defs": {
+    "DatasheetEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "minLength": 1,
+          "title": "Document",
+          "type": "string"
+        },
+        "manufacturer": {
+          "minLength": 1,
+          "title": "Manufacturer",
+          "type": "string"
+        },
+        "revision": {
+          "minLength": 1,
+          "title": "Revision",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "extracted_constraint": {
+          "minLength": 1,
+          "title": "Extracted Constraint",
+          "type": "string"
+        },
+        "source_location": {
+          "minLength": 1,
+          "title": "Source Location",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "document",
+        "manufacturer",
+        "revision",
+        "extracted_constraint",
+        "source_location"
+      ],
+      "title": "DatasheetEvidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reference": {
+      "title": "Reference",
+      "type": "string"
+    },
+    "supply_minimum_v": {
+      "exclusiveMinimum": 0,
+      "title": "Supply Minimum V",
+      "type": "number"
+    },
+    "supply_maximum_v": {
+      "exclusiveMinimum": 0,
+      "title": "Supply Maximum V",
+      "type": "number"
+    },
+    "supply_v": {
+      "exclusiveMinimum": 0,
+      "title": "Supply V",
+      "type": "number"
+    },
+    "common_mode_minimum_v": {
+      "title": "Common Mode Minimum V",
+      "type": "number"
+    },
+    "common_mode_maximum_v": {
+      "title": "Common Mode Maximum V",
+      "type": "number"
+    },
+    "input_minimum_v": {
+      "title": "Input Minimum V",
+      "type": "number"
+    },
+    "input_maximum_v": {
+      "title": "Input Maximum V",
+      "type": "number"
+    },
+    "output_limit_minimum_v": {
+      "title": "Output Limit Minimum V",
+      "type": "number"
+    },
+    "output_limit_maximum_v": {
+      "title": "Output Limit Maximum V",
+      "type": "number"
+    },
+    "output_minimum_v": {
+      "title": "Output Minimum V",
+      "type": "number"
+    },
+    "output_maximum_v": {
+      "title": "Output Maximum V",
+      "type": "number"
+    },
+    "noise_gain": {
+      "minimum": 1,
+      "title": "Noise Gain",
+      "type": "number"
+    },
+    "minimum_stable_gain": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Stable Gain"
+    },
+    "gbw_hz": {
+      "exclusiveMinimum": 0,
+      "title": "Gbw Hz",
+      "type": "number"
+    },
+    "signal_bandwidth_hz": {
+      "exclusiveMinimum": 0,
+      "title": "Signal Bandwidth Hz",
+      "type": "number"
+    },
+    "bandwidth_margin": {
+      "minimum": 1,
+      "title": "Bandwidth Margin",
+      "type": "number"
+    },
+    "capacitive_load_f": {
+      "minimum": 0,
+      "title": "Capacitive Load F",
+      "type": "number"
+    },
+    "documented_capacitive_limit_f": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Documented Capacitive Limit F"
+    },
+    "topology": {
+      "minLength": 1,
+      "title": "Topology",
+      "type": "string"
+    },
+    "applicability": {
+      "minLength": 1,
+      "title": "Applicability",
+      "type": "string"
+    },
+    "evidence": {
+      "$ref": "#/$defs/DatasheetEvidence"
+    }
+  },
+  "required": [
+    "reference",
+    "supply_minimum_v",
+    "supply_maximum_v",
+    "supply_v",
+    "common_mode_minimum_v",
+    "common_mode_maximum_v",
+    "input_minimum_v",
+    "input_maximum_v",
+    "output_limit_minimum_v",
+    "output_limit_maximum_v",
+    "output_minimum_v",
+    "output_maximum_v",
+    "noise_gain",
+    "gbw_hz",
+    "signal_bandwidth_hz",
+    "bandwidth_margin",
+    "capacitive_load_f",
+    "topology",
+    "applicability",
+    "evidence"
+  ],
+  "title": "OpAmpEnvelope",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

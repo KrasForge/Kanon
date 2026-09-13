@@ -197,6 +197,13 @@
             "jtag",
             "uart"
           ]
+        },
+        "dedicated_pins": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       },
       "required": [

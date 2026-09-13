@@ -10,7 +10,9 @@ independent KiCad ERC/DRC and export receipts; a qualified external MCP board-ed
 real ngspice assertions and ideal circuit workflows; BOM import and public sourcing lookup;
 a local datasheet registry; declared power, FPGA-bank and rule-driven electrical audits;
 role-isolated lifecycle/review orchestration and quantified placement constraints;
-a two-phase release coordinator with content-addressed manifests and Gerber rendering.
+a two-phase release coordinator with content-addressed manifests and Gerber rendering;
+advanced audio/FPGA/clock checks, optional solid collision analysis, PCB renders and a
+read-only verifier MCP exposing 17 implemented checks.
 
 ```sh
 uv sync --extra dev
@@ -26,6 +28,7 @@ pending mandatory gates. Release requires an explicit project; package preparati
 A schema-valid specification is not an electrically validated design.
 
 See [capability status](docs/capabilities.md), [architecture](docs/architecture.md), [development](docs/development.md),
-[engineering checks](docs/engineering-verification.md), [integrations](docs/integrations.md),
+[engineering checks](docs/engineering-verification.md), [advanced checks](docs/advanced-engineering.md),
+[verifier MCP](docs/pcb-verifier.md), [integrations](docs/integrations.md),
 [walkthrough](docs/walkthrough.md), [backlog](.github/ISSUES.md), and [policy](AGENTS.md).
 The original MIT LICENSE is preserved.
