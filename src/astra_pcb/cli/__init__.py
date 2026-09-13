@@ -12,6 +12,7 @@ from astra_pcb.bom import check_bom
 from astra_pcb.bom.importer import import_bom
 from astra_pcb.bom.jlcsearch import JLCSearch
 from astra_pcb.config import load_yaml, validate_document
+from astra_pcb.datasheets.registry import Registry, SourcedLimit
 from astra_pcb.engineering.power import PowerTree
 from astra_pcb.kicad.verification import verify_design
 from astra_pcb.models import CheckResult, CheckStatus, VerificationReport
@@ -22,11 +23,22 @@ from astra_pcb.release.attestations import Attestation, TrustedSigner
 from astra_pcb.release.coordinator import ReleaseProject, finalize_release, identify, release
 from astra_pcb.simulation.workflow import SimulationJob, run_job
 from astra_pcb.verification.environment import diagnose
+from astra_pcb.verifier.__main__ import check as bounded_check
+from astra_pcb.verifier.catalog import CHECKS
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="astra-pcb")
     sub = parser.add_subparsers(dest="command", required=True)
+    checking = sub.add_parser(
+        "check", help="Run an implemented pure-data check in a bounded worker"
+    )
+    checking.add_argument("tool", choices=sorted(CHECKS))
+    checking.add_argument("document", type=Path)
+    limits = sub.add_parser("check-datasheet-limits")
+    limits.add_argument("document", type=Path)
+    limits.add_argument("--registry", type=Path, required=True)
+    limits.add_argument("--root", type=Path, required=True)
     environment = sub.add_parser("environment")
     environment.add_argument("--probe-mcp", action="store_true")
     validate = sub.add_parser("validate")
@@ -66,7 +78,24 @@ def main(argv: list[str] | None = None) -> int:
     releasing.add_argument("--finalize", action="store_true")
     args = parser.parse_args(argv)
     try:
-        if args.command == "simulate":
+        if args.command == "check":
+            report = VerificationReport.model_validate(
+                bounded_check(args.tool, load_yaml(args.document))["structuredContent"]
+            )
+        elif args.command == "check-datasheet-limits":
+            registry = Registry.load(args.root, args.registry)
+            observations = load_yaml(args.document)
+            if not isinstance(observations, list):
+                raise ValueError("Expected a list of limit/value/unit observations")
+            report = VerificationReport(
+                results=tuple(
+                    SourcedLimit.model_validate(item["limit"]).check(
+                        float(item["value"]), item["unit"], registry
+                    )
+                    for item in observations
+                )
+            )
+        elif args.command == "simulate":
             report = run_job(
                 SimulationJob.model_validate(load_yaml(args.job)), args.job.parent, args.output
             )
@@ -169,6 +198,14 @@ def main(argv: list[str] | None = None) -> int:
                 )
         print(report.model_dump_json(indent=2))
         return report.exit_code
-    except (OSError, ValueError, ValidationError, SchemaError, YAMLError) as exc:
+    except (
+        OSError,
+        KeyError,
+        TypeError,
+        ValueError,
+        ValidationError,
+        SchemaError,
+        YAMLError,
+    ) as exc:
         print(json.dumps({"status": "ERROR", "message": str(exc)}))
         return 1

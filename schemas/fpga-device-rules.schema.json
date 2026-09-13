@@ -1,0 +1,395 @@
+{
+  "$defs": {
+    "DatasheetEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "minLength": 1,
+          "title": "Document",
+          "type": "string"
+        },
+        "manufacturer": {
+          "minLength": 1,
+          "title": "Manufacturer",
+          "type": "string"
+        },
+        "revision": {
+          "minLength": 1,
+          "title": "Revision",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "extracted_constraint": {
+          "minLength": 1,
+          "title": "Extracted Constraint",
+          "type": "string"
+        },
+        "source_location": {
+          "minLength": 1,
+          "title": "Source Location",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "document",
+        "manufacturer",
+        "revision",
+        "extracted_constraint",
+        "source_location"
+      ],
+      "title": "DatasheetEvidence",
+      "type": "object"
+    },
+    "DecouplingRule": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "title": "Component",
+          "type": "string"
+        },
+        "power_pin": {
+          "title": "Power Pin",
+          "type": "string"
+        },
+        "rail": {
+          "title": "Rail",
+          "type": "string"
+        },
+        "minimum_effective_f": {
+          "exclusiveMinimum": 0,
+          "title": "Minimum Effective F",
+          "type": "number"
+        },
+        "minimum_count": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Minimum Count",
+          "type": "integer"
+        },
+        "maximum_distance_mm": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum Distance Mm"
+        },
+        "evidence": {
+          "$ref": "#/$defs/DatasheetEvidence"
+        }
+      },
+      "required": [
+        "component",
+        "power_pin",
+        "rail",
+        "minimum_effective_f",
+        "evidence"
+      ],
+      "title": "DecouplingRule",
+      "type": "object"
+    },
+    "FamilyRules": {
+      "additionalProperties": false,
+      "properties": {
+        "part": {
+          "title": "Part",
+          "type": "string"
+        },
+        "package": {
+          "title": "Package",
+          "type": "string"
+        },
+        "standards": {
+          "additionalProperties": {
+            "$ref": "#/$defs/IOStandard"
+          },
+          "title": "Standards",
+          "type": "object"
+        },
+        "pin_banks": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Pin Banks",
+          "type": "object"
+        }
+      },
+      "required": [
+        "part",
+        "package",
+        "standards",
+        "pin_banks"
+      ],
+      "title": "FamilyRules",
+      "type": "object"
+    },
+    "IOStandard": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "allowed_vcco_v": {
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1,
+          "title": "Allowed Vcco V",
+          "type": "array"
+        },
+        "evidence": {
+          "$ref": "#/$defs/DatasheetEvidence"
+        }
+      },
+      "required": [
+        "name",
+        "allowed_vcco_v",
+        "evidence"
+      ],
+      "title": "IOStandard",
+      "type": "object"
+    },
+    "Pin": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "io",
+            "clock",
+            "configuration",
+            "jtag",
+            "power",
+            "ground",
+            "reserved",
+            "no-connect"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "clock_capable": {
+          "default": false,
+          "title": "Clock Capable",
+          "type": "boolean"
+        },
+        "function": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Function"
+        },
+        "differential_partner": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Differential Partner"
+        },
+        "evidence": {
+          "$ref": "#/$defs/DatasheetEvidence"
+        }
+      },
+      "required": [
+        "role",
+        "evidence"
+      ],
+      "title": "Pin",
+      "type": "object"
+    },
+    "Sequence": {
+      "additionalProperties": false,
+      "properties": {
+        "before": {
+          "title": "Before",
+          "type": "string"
+        },
+        "after": {
+          "title": "After",
+          "type": "string"
+        },
+        "minimum_delay_ms": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Minimum Delay Ms",
+          "type": "number"
+        },
+        "maximum_delay_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum Delay Ms"
+        }
+      },
+      "required": [
+        "before",
+        "after"
+      ],
+      "title": "Sequence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "banks": {
+      "$ref": "#/$defs/FamilyRules"
+    },
+    "pins": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Pin"
+      },
+      "minProperties": 1,
+      "title": "Pins",
+      "type": "object"
+    },
+    "vref_by_standard": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {},
+      "title": "Vref By Standard",
+      "type": "object"
+    },
+    "differential_standards": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Differential Standards",
+      "type": "array"
+    },
+    "boot_interfaces": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Boot Interfaces",
+      "type": "array"
+    },
+    "required_configuration_pins": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Required Configuration Pins",
+      "type": "object"
+    },
+    "required_boot_straps": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "enum": [
+            "high",
+            "low"
+          ],
+          "type": "string"
+        },
+        "type": "object"
+      },
+      "default": {},
+      "title": "Required Boot Straps",
+      "type": "object"
+    },
+    "qualified_boot_mpns": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualified Boot Mpns",
+      "type": "array"
+    },
+    "reserved_pins": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Reserved Pins",
+      "type": "array"
+    },
+    "sequencing": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Sequence"
+      },
+      "title": "Sequencing",
+      "type": "array"
+    },
+    "decoupling": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DecouplingRule"
+      },
+      "title": "Decoupling",
+      "type": "array"
+    },
+    "evidence": {
+      "$ref": "#/$defs/DatasheetEvidence"
+    }
+  },
+  "required": [
+    "banks",
+    "pins",
+    "boot_interfaces",
+    "required_configuration_pins",
+    "evidence"
+  ],
+  "title": "DeviceRules",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

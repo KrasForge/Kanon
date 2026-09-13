@@ -139,3 +139,22 @@ class KiCadCLI:
         if kind == "gerbers":
             args.append("--no-protel-ext")
         return self._execute(args, design, output)
+
+    def render(self, design: Path, output: Path, *, view: str = "top") -> ProcessResult:
+        if view not in {"top", "bottom", "isometric"}:
+            raise ValueError("Unknown PCB render view")
+        args = [
+            "pcb",
+            "render",
+            "--width",
+            "800",
+            "--height",
+            "600",
+            "--quality",
+            "basic",
+            "--side",
+            "bottom" if view == "bottom" else "top",
+        ]
+        if view == "isometric":
+            args.extend(["--rotate", "315,0,45", "--perspective"])
+        return self._execute(args, design, output)

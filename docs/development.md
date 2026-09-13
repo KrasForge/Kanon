@@ -11,16 +11,18 @@ not certify supported versions or functional correctness. MCP endpoint presence 
 without contacting endpoints or printing credentials. Copy .env.example for your harness;
 this CLI does not automatically load .env. Never commit credentials.
 
-Select/audit an MCP implementation, map its capabilities in config/mcp.example.json, then
-implement the runtime boundary before using it with live boards. No server installation is
-implied by the example. No tests call OpenAI or supplier services. Run commands from the
+The selected KiCad MCP installation and five-tool SWIG qualification are recorded in
+[integrations.md](integrations.md). The implementation-neutral runtime boundary enforces
+explicit tool inventory/capabilities; switching servers requires separate qualification. No tests call OpenAI or supplier services. Run commands from the
 repository root; schema/config files are repository assets, not bundled wheel resources.
 
 Unit tests mock process failures or use Python child processes. Integration tests explicitly
-skip when external binaries are absent; KiCad integration fixture coverage is backlog work.
+skip when external binaries are absent; the separate Fedora CI job installs real KiCad/ngspice and optional rendering/geometry
+extras and exercises parser/export/simulation/visual/collision fixtures.
 Keep input artifacts separate from outputs. Use disposable directories for export tests.
 
 GitHub CI runs Python 3.12/3.13 unit tests and Ruff; no manufacturing release runs in CI.
+Use `uv sync --extra dev --extra visual --extra geometry` for all local integration tests.
 See .github/ISSUES.md for exact follow-up scope and dependencies.
 
 ## Foundation acceptance

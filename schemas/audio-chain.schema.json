@@ -1,0 +1,228 @@
+{
+  "$defs": {
+    "AudioStage": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "gain_db": {
+          "title": "Gain Db",
+          "type": "number"
+        },
+        "input_maximum_vrms": {
+          "exclusiveMinimum": 0,
+          "title": "Input Maximum Vrms",
+          "type": "number"
+        },
+        "output_maximum_vrms": {
+          "exclusiveMinimum": 0,
+          "title": "Output Maximum Vrms",
+          "type": "number"
+        },
+        "input_impedance_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Input Impedance Ohm",
+          "type": "number"
+        },
+        "output_impedance_ohm": {
+          "minimum": 0,
+          "title": "Output Impedance Ohm",
+          "type": "number"
+        },
+        "input_mode": {
+          "enum": [
+            "balanced",
+            "unbalanced"
+          ],
+          "title": "Input Mode",
+          "type": "string"
+        },
+        "output_mode": {
+          "enum": [
+            "balanced",
+            "unbalanced"
+          ],
+          "title": "Output Mode",
+          "type": "string"
+        },
+        "coupling": {
+          "enum": [
+            "ac",
+            "dc"
+          ],
+          "title": "Coupling",
+          "type": "string"
+        },
+        "filtering": {
+          "minLength": 1,
+          "title": "Filtering",
+          "type": "string"
+        },
+        "adc_full_scale_vrms": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adc Full Scale Vrms"
+        },
+        "dac_full_scale_vrms": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dac Full Scale Vrms"
+        },
+        "evidence": {
+          "$ref": "#/$defs/DatasheetEvidence"
+        }
+      },
+      "required": [
+        "id",
+        "gain_db",
+        "input_maximum_vrms",
+        "output_maximum_vrms",
+        "input_impedance_ohm",
+        "output_impedance_ohm",
+        "input_mode",
+        "output_mode",
+        "coupling",
+        "filtering",
+        "evidence"
+      ],
+      "title": "AudioStage",
+      "type": "object"
+    },
+    "DatasheetEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "minLength": 1,
+          "title": "Document",
+          "type": "string"
+        },
+        "manufacturer": {
+          "minLength": 1,
+          "title": "Manufacturer",
+          "type": "string"
+        },
+        "revision": {
+          "minLength": 1,
+          "title": "Revision",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "extracted_constraint": {
+          "minLength": 1,
+          "title": "Extracted Constraint",
+          "type": "string"
+        },
+        "source_location": {
+          "minLength": 1,
+          "title": "Source Location",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "document",
+        "manufacturer",
+        "revision",
+        "extracted_constraint",
+        "source_location"
+      ],
+      "title": "DatasheetEvidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "nominal_input_vrms": {
+      "exclusiveMinimum": 0,
+      "title": "Nominal Input Vrms",
+      "type": "number"
+    },
+    "maximum_input_vrms": {
+      "exclusiveMinimum": 0,
+      "title": "Maximum Input Vrms",
+      "type": "number"
+    },
+    "required_headroom_db": {
+      "minimum": 0,
+      "title": "Required Headroom Db",
+      "type": "number"
+    },
+    "stages": {
+      "items": {
+        "$ref": "#/$defs/AudioStage"
+      },
+      "minItems": 1,
+      "title": "Stages",
+      "type": "array"
+    },
+    "level_convention": {
+      "minLength": 1,
+      "title": "Level Convention",
+      "type": "string"
+    }
+  },
+  "required": [
+    "nominal_input_vrms",
+    "maximum_input_vrms",
+    "required_headroom_db",
+    "stages",
+    "level_convention"
+  ],
+  "title": "AudioChain",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

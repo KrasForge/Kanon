@@ -1,0 +1,202 @@
+{
+  "$defs": {
+    "DatasheetEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "minLength": 1,
+          "title": "Document",
+          "type": "string"
+        },
+        "manufacturer": {
+          "minLength": 1,
+          "title": "Manufacturer",
+          "type": "string"
+        },
+        "revision": {
+          "minLength": 1,
+          "title": "Revision",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "extracted_constraint": {
+          "minLength": 1,
+          "title": "Extracted Constraint",
+          "type": "string"
+        },
+        "source_location": {
+          "minLength": 1,
+          "title": "Source Location",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "document",
+        "manufacturer",
+        "revision",
+        "extracted_constraint",
+        "source_location"
+      ],
+      "title": "DatasheetEvidence",
+      "type": "object"
+    },
+    "NoiseSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "resistor",
+            "amplifier-white",
+            "converter"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "output_gain": {
+          "exclusiveMinimum": 0,
+          "title": "Output Gain",
+          "type": "number"
+        },
+        "resistance_ohm": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Resistance Ohm",
+          "type": "number"
+        },
+        "temperature_k": {
+          "default": 293.15,
+          "minimum": 0,
+          "title": "Temperature K",
+          "type": "number"
+        },
+        "voltage_density_v_sqrt_hz": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Voltage Density V Sqrt Hz",
+          "type": "number"
+        },
+        "current_density_a_sqrt_hz": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Current Density A Sqrt Hz",
+          "type": "number"
+        },
+        "converter_noise_vrms": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Converter Noise Vrms"
+        },
+        "evidence": {
+          "$ref": "#/$defs/DatasheetEvidence"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "output_gain",
+        "evidence"
+      ],
+      "title": "NoiseSource",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "equivalent_noise_bandwidth_hz": {
+      "exclusiveMinimum": 0,
+      "title": "Equivalent Noise Bandwidth Hz",
+      "type": "number"
+    },
+    "signal_vrms": {
+      "exclusiveMinimum": 0,
+      "title": "Signal Vrms",
+      "type": "number"
+    },
+    "maximum_noise_vrms": {
+      "exclusiveMinimum": 0,
+      "title": "Maximum Noise Vrms",
+      "type": "number"
+    },
+    "independent_sources": {
+      "const": true,
+      "title": "Independent Sources",
+      "type": "boolean"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/NoiseSource"
+      },
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "assumptions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Assumptions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "equivalent_noise_bandwidth_hz",
+    "signal_vrms",
+    "maximum_noise_vrms",
+    "independent_sources",
+    "sources",
+    "assumptions"
+  ],
+  "title": "NoiseBudget",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

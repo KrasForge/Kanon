@@ -1,0 +1,11 @@
+{
+  "description": "Optional read-only structured-data verifier; launch from the installed project environment",
+  "transport": "stdio",
+  "command": "python",
+  "args": ["-B", "-m", "astra_pcb.verifier"],
+  "protocol_version": "2025-06-18",
+  "source_file_access": false,
+  "network_access": false,
+  "mutation_tools": [],
+  "note": "Harness must supply frozen inputs and retain provenance. Deployment filesystem restrictions are external."
+}

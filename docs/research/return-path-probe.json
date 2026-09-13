@@ -1,0 +1,20 @@
+[
+  {
+    "case": "continuous",
+    "ground_at_endpoints": true,
+    "minimum_grid_path_steps": 16,
+    "straight_path_steps": 16
+  },
+  {
+    "case": "slot-with-detour",
+    "ground_at_endpoints": true,
+    "minimum_grid_path_steps": 24,
+    "straight_path_steps": 16
+  },
+  {
+    "case": "disconnected-islands",
+    "ground_at_endpoints": true,
+    "minimum_grid_path_steps": null,
+    "straight_path_steps": 16
+  }
+]

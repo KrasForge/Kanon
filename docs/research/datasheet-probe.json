@@ -1,0 +1,41 @@
+{
+  "document_sha256": "4243b58e553e6f27274858637c596596dbb89bba94d05b44fedd32877d988e9d",
+  "pymupdf_version": "1.28.2",
+  "pages": [
+    {
+      "page": 2,
+      "text_characters": 3785,
+      "word_boxes": 240,
+      "detected_tables": 0,
+      "table_shapes": [],
+      "empty_cells": 0
+    },
+    {
+      "page": 6,
+      "text_characters": 6803,
+      "word_boxes": 461,
+      "detected_tables": 1,
+      "table_shapes": [
+        [
+          47,
+          8
+        ]
+      ],
+      "empty_cells": 228
+    },
+    {
+      "page": 7,
+      "text_characters": 1924,
+      "word_boxes": 166,
+      "detected_tables": 1,
+      "table_shapes": [
+        [
+          9,
+          7
+        ]
+      ],
+      "empty_cells": 31
+    }
+  ],
+  "conclusion": "Structural extraction only; no electrical constraint accepted automatically"
+}

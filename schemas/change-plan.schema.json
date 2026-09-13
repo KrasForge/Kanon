@@ -1,0 +1,123 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "input_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Input Digest",
+      "type": "string"
+    },
+    "rationale": {
+      "minLength": 1,
+      "title": "Rationale",
+      "type": "string"
+    },
+    "affected_objects": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Affected Objects",
+      "type": "array"
+    },
+    "operations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Operations",
+      "type": "array"
+    },
+    "expected_effects": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Expected Effects",
+      "type": "array"
+    },
+    "risks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Risks",
+      "type": "array"
+    },
+    "verification_checks": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Verification Checks",
+      "type": "array"
+    },
+    "rollback_strategy": {
+      "minLength": 1,
+      "title": "Rollback Strategy",
+      "type": "string"
+    },
+    "rollback_artifacts": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Rollback Artifacts",
+      "type": "array"
+    },
+    "substitutions": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Substitutions",
+      "type": "array"
+    },
+    "bank_voltage_changes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Bank Voltage Changes",
+      "type": "array"
+    },
+    "stackup_changes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Stackup Changes",
+      "type": "array"
+    },
+    "explicit_user_intent": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Explicit User Intent"
+    }
+  },
+  "required": [
+    "id",
+    "input_digest",
+    "rationale",
+    "affected_objects",
+    "operations",
+    "expected_effects",
+    "risks",
+    "verification_checks",
+    "rollback_strategy",
+    "rollback_artifacts"
+  ],
+  "title": "ChangePlan",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
