@@ -11,7 +11,7 @@ from astra_pcb.models import CheckResult, CheckStatus, StrictModel, Verification
 
 class MutationResult(StrictModel):
     before: Snapshot
-    after: Snapshot
+    after: Snapshot | None
     verification: VerificationReport
     prior_evidence_invalidated: bool
 
@@ -36,7 +36,26 @@ def mutate_verify(
             status=CheckStatus.ERROR,
             message=str(exc),
         )
-    after = capture(root, sources, revision)
+    try:
+        after = capture(root, sources, revision)
+    except (OSError, ValueError) as exc:
+        checks = ([failure] if failure else []) + [
+            CheckResult(
+                check_id="mutation.readback",
+                name="Mutation readback",
+                status=CheckStatus.ERROR,
+                message=f"Persisted state cannot be read: {type(exc).__name__}: {exc}",
+                remediation=(
+                    "Restore or repair source before continuing; prior approvals invalidated"
+                ),
+            )
+        ]
+        report = VerificationReport(results=tuple(checks))
+        (output / "verification.json").write_text(report.model_dump_json(indent=2))
+        (output / "before-snapshot.json").write_text(before.model_dump_json(indent=2))
+        return MutationResult(
+            before=before, after=None, verification=report, prior_evidence_invalidated=True
+        )
     checks = [failure] if failure else []
     adapter = adapter or KiCadCLI()
     # An exception can occur after a partial edit: still run independent checks.

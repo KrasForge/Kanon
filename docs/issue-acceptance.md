@@ -1,7 +1,7 @@
 # Issue acceptance audit
 
 Acceptance is based on source, tests and qualification, not the presence of milestone scaffolding.
-Current audit: 47 implemented leaf issues; 29 partial.
+Current audit: 49 implemented leaf issues; 27 partial.
 
 Issue comments retain the exact acceptance evidence and remaining work. OS, electrical and manufacturing guarantees are limited to each documented check scope.
 
@@ -20,7 +20,9 @@ Issue comments retain the exact acceptance evidence and remaining work. OS, elec
 | [#9](https://github.com/KrasForge/Kanon/issues/9) | Persisted-board DRC and unconnected/parity reporting are independent of MCP; verification does not save/fill source zones. [src/astra_pcb/kicad/verification.py](../src/astra_pcb/kicad/verification.py) [tests/test_m1.py](../tests/test_m1.py) |
 | [#10](https://github.com/KrasForge/Kanon/issues/10) | Fresh Gerber, drill and STEP exports retain source identity, process output and artifact hashes; actual native export tests pass. [src/astra_pcb/kicad/__init__.py](../src/astra_pcb/kicad/__init__.py) [tests/test_m1.py](../tests/test_m1.py) |
 | [#11](https://github.com/KrasForge/Kanon/issues/11) | Selectable stdio adapter configuration, explicit read/write mappings and denied unknown tools; IPC remains optional. [src/astra_pcb/kicad/mcp.py](../src/astra_pcb/kicad/mcp.py) [tests/test_m1.py](../tests/test_m1.py) |
+| [#12](https://github.com/KrasForge/Kanon/issues/12) | Linux bubblewrap and libseccomp runtime enforces read-only frozen evidence, no host credentials/network or child execution; actual adversarial OS tests and dedicated CI cover the boundary, with no unsandboxed fallback. [src/astra_pcb/agents/sandbox.py](../src/astra_pcb/agents/sandbox.py) [tests/test_sandbox.py](../tests/test_sandbox.py) |
 | [#13](https://github.com/KrasForge/Kanon/issues/13) | Lossless saved native S-expression snapshots retain all native objects, content identity and stable diffs; normalized electrical extraction is separate. [src/astra_pcb/kicad/snapshot.py](../src/astra_pcb/kicad/snapshot.py) [tests/test_m1.py](../tests/test_m1.py) |
+| [#14](https://github.com/KrasForge/Kanon/issues/14) | Deleted or malformed persisted native state now emits a structured failure report and preserves the before snapshot while invalidating prior approvals; valid readback still invokes independent checks. [src/astra_pcb/kicad/workflow.py](../src/astra_pcb/kicad/workflow.py) [tests/test_sandbox.py](../tests/test_sandbox.py) |
 | [#15](https://github.com/KrasForge/Kanon/issues/15) | Canonical per-reference BOM plus JSON/CSV grouped-reference import and explicit column mappings preserve unknown metadata. [src/astra_pcb/bom/importer.py](../src/astra_pcb/bom/importer.py) [tests/test_engineering.py](../tests/test_engineering.py) |
 | [#18](https://github.com/KrasForge/Kanon/issues/18) | Working optional normalized supplier and public JLCSearch adapters expose available sourcing fields and explicit offline/unknown results; live mirror lookup qualified. [src/astra_pcb/bom/jlcsearch.py](../src/astra_pcb/bom/jlcsearch.py) [tests/test_engineering.py](../tests/test_engineering.py) |
 | [#19](https://github.com/KrasForge/Kanon/issues/19) | Explicit lifecycle, stock age/quantity and source-diversity risks retain provenance without inventing missing supplier facts. [src/astra_pcb/bom/sourcing.py](../src/astra_pcb/bom/sourcing.py) [tests/test_engineering.py](../tests/test_engineering.py) |
@@ -61,8 +63,6 @@ Issue comments retain the exact acceptance evidence and remaining work. OS, elec
 
 | Issue | Evidence / remaining work |
 |---|---|
-| [#12](https://github.com/KrasForge/Kanon/issues/12) | Tool facades deny mutations, but there is no deployable reviewer runtime enforcing read-only OS mounts, credentials and shell isolation. Role flags alone do not enforce mounts. |
-| [#14](https://github.com/KrasForge/Kanon/issues/14) | Mutation/readback/check flow works for parseable sources; deletion or malformed native files during mutation can escape before a structured failure report is persisted. |
 | [#16](https://github.com/KrasForge/Kanon/issues/16) | Missing/ambiguous text MPN checks exist; ordering-suffix rules and explicit policy-controlled non-populated/mechanical exclusions are incomplete. |
 | [#17](https://github.com/KrasForge/Kanon/issues/17) | Whitespace/grouped-reference and value/package checks exist; manufacturer conflict/alias normalization policy and its fixtures are incomplete. |
 | [#20](https://github.com/KrasForge/Kanon/issues/20) | Compatibility evidence exists for seven criteria; explicit timing compatibility/differences and timing-specific qualification checks are absent. |
