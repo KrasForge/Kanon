@@ -9,6 +9,7 @@ from pydantic import ValidationError
 from yaml import YAMLError
 
 from astra_pcb.config import load_yaml, validate_document
+from astra_pcb.kicad.verification import verify_design
 from astra_pcb.models import CheckResult, CheckStatus, VerificationReport
 from astra_pcb.models.provenance import InputIdentity
 from astra_pcb.release import GateConfig, evaluate
@@ -31,6 +32,11 @@ def main(argv: list[str] | None = None) -> int:
     verify.add_argument("--root", type=Path, default=Path.cwd())
     verify.add_argument("--attestations", type=Path)
     verify.add_argument("--trusted-signers", type=Path)
+    kicad = sub.add_parser("check-kicad")
+    kicad.add_argument("--schematic", type=Path)
+    kicad.add_argument("--board", type=Path)
+    kicad.add_argument("--output", type=Path, required=True)
+    kicad.add_argument("--parity", action="store_true")
     sub.add_parser("release")
     args = parser.parse_args(argv)
     try:
@@ -50,6 +56,10 @@ def main(argv: list[str] | None = None) -> int:
                         ),
                     ),
                 )
+            )
+        elif args.command == "check-kicad":
+            report = verify_design(
+                schematic=args.schematic, board=args.board, output=args.output, parity=args.parity
             )
         elif args.command == "verify":
             inputs = (
