@@ -1,4 +1,5 @@
 import json
+import os
 import shutil
 
 import pytest
@@ -9,6 +10,8 @@ from astra_pcb.agents.sandbox import isolated_call
 @pytest.mark.integration
 def test_reviewer_os_denies_writes_credentials_network_and_exec(tmp_path, monkeypatch):
     if not shutil.which("bwrap"):
+        if os.getenv("KANON_REQUIRE_REVIEWER_ISOLATION") == "1":
+            pytest.fail("Required isolation runtime is absent")
         pytest.skip("Required Linux bubblewrap unavailable")
     evidence = tmp_path / "evidence"
     evidence.mkdir()
@@ -30,6 +33,11 @@ print(json.dumps(checks))
 """)
     monkeypatch.setenv("KANON_TEST_SECRET", "must not reach reviewer")
     result = isolated_call(worker, {}, evidence=evidence)
+    if (
+        "No permissions to create a new namespace" in result.stderr
+        and os.getenv("KANON_REQUIRE_REVIEWER_ISOLATION") != "1"
+    ):
+        pytest.skip("Host/container disallows namespaces; dedicated isolation CI is mandatory")
     assert result.exit_code == 0, result.stderr
     assert all(json.loads(result.stdout).values())
     assert (evidence / "board.txt").read_text() == "Frozen source"
