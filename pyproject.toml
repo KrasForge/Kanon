@@ -11,7 +11,7 @@ dependencies = [
     "pydantic>=2.10,<3",
     "PyYAML>=6,<7",
     "jsonschema>=4.23,<5",
-    "cryptography>=44,<47",
+    "cryptography>=44,<51",
 ]
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
