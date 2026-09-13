@@ -1,0 +1,19 @@
+# Harness-neutral contract; not a working orchestrator configuration.
+model: ${ASTRA_MODEL:-gpt-6-astra}
+roles:
+  architect:
+    reasoning: high
+    tools: []
+    intended_capabilities: [design.read, documents.read]
+  designer:
+    tools: []
+    intended_capabilities: [design.read, design.write]
+  reviewer:
+    tools: []
+    intended_capabilities: [snapshot.read, evidence.read]
+    source_mount: read-only
+    mutation_tools: []
+    shell: false
+  release-gate:
+    model: null
+    intended_capabilities: [checks.execute, artifacts.write]

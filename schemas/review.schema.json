@@ -1,0 +1,157 @@
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "blocker",
+            "major",
+            "minor",
+            "observation"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "affected_subsystems": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Subsystems",
+          "type": "array"
+        },
+        "affected_nets": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Nets",
+          "type": "array"
+        },
+        "affected_components": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Components",
+          "type": "array"
+        },
+        "explanation": {
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "suggested_remediation": {
+          "minLength": 1,
+          "title": "Suggested Remediation",
+          "type": "string"
+        },
+        "status": {
+          "default": "open",
+          "enum": [
+            "open",
+            "in_progress",
+            "resolved",
+            "accepted"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "resolution_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Resolution Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "severity",
+        "evidence",
+        "explanation",
+        "suggested_remediation"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "reviewer": {
+      "minLength": 1,
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "design_revision": {
+      "minLength": 1,
+      "title": "Design Revision",
+      "type": "string"
+    },
+    "snapshot_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Snapshot Sha256",
+      "type": "string"
+    },
+    "scope": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Scope",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviewer",
+    "design_revision",
+    "snapshot_sha256",
+    "scope",
+    "findings",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,41 @@
+schema_version: '1.0'
+project:
+  name: minimal-board
+  revision: draft-1
+  status: draft
+  description: Passive connector breakout specification; no completed board.
+functional_requirements:
+  - id: FUNC-001
+    description: Expose supplied low-voltage rail and ground on accessible test points.
+    status: draft
+interfaces:
+  - id: J1
+    type: power-input
+    voltage_domain: VIN
+power_inputs:
+  - id: VIN
+    source: external-regulated-supply
+    voltage: {min_v: 3.1, nominal_v: 3.3, max_v: 3.5}
+    current_max_a: 0.1
+rails: []
+clocks: []
+devices: []
+audio_requirements: []
+environmental_limits:
+  temperature_min_c: 0
+  temperature_max_c: 40
+mechanical_constraints:
+  - id: MECH-001
+    description: Outline and connector orientation require definition before layout.
+    status: unresolved
+manufacturing_constraints:
+  profile: config/manufacturing/jlcpcb-4layer.yaml
+sourcing_rules: []
+cost_targets: {currency: EUR, unit_cost_max: 5, quantity: 10}
+test_requirements:
+  - id: TEST-001
+    description: Verify continuity and absence of rail-to-ground short before energizing.
+    status: draft
+forbidden_parts: []
+forbidden_packages: [BGA]
+required_debug_interfaces: []

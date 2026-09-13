@@ -1,0 +1,19 @@
+name: Engineering implementation
+description: Propose a scoped, testable capability
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Motivation and scope
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and tests
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies, evidence and non-goals

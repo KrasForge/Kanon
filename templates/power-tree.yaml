@@ -1,0 +1,9 @@
+# Draft input contract; power-tree semantic validator is pending.
+schema_version: '1.0'
+sources: []
+regulators: []
+rails: []
+loads: []
+sequencing: []
+# Every regulator needs input/output ranges, load corners, efficiency/loss model,
+# package thermal evidence, dependencies and power-up/down requirements.

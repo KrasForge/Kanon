@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "component",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "reference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "value": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manufacturer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mpn": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "document": {
+            "type": "string",
+            "minLength": 1
+          },
+          "manufacturer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "revision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "page": {
+            "type": "string",
+            "minLength": 1
+          },
+          "section": {
+            "type": "string",
+            "minLength": 1
+          },
+          "extracted_constraint": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_location": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "document",
+          "manufacturer",
+          "revision",
+          "extracted_constraint",
+          "source_location"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "page"
+            ]
+          },
+          {
+            "required": [
+              "section"
+            ]
+          }
+        ]
+      }
+    },
+    "supplier": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supplier_part_number": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lifecycle": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stock": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unit_cost": {
+      "type": "number",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assembly_classification": {
+      "type": "string",
+      "minLength": 1
+    },
+    "alternates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "notes": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "reference",
+    "quantity",
+    "value",
+    "manufacturer",
+    "mpn",
+    "package"
+  ]
+}

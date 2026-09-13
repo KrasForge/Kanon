@@ -1,0 +1,1469 @@
+{
+  "milestones": [
+    "M0 \u2013 Foundation",
+    "M1 \u2013 KiCad Closed Loop",
+    "M2 \u2013 Engineering Verification",
+    "M3 \u2013 Agentic PCB Designer",
+    "M4 \u2013 Manufacturing Release",
+    "M5 \u2013 Advanced Engineering"
+  ],
+  "issues": [
+    {
+      "id": 1,
+      "title": "P0 \u2014 Define canonical PCB design specification schema",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "priority:P0",
+        "type:feature"
+      ],
+      "scope": "Validate complete project metadata, functional requirements, interfaces, inputs/rails, clocks, devices/FPGA, audio, environment, mechanical/manufacturing constraints, sourcing, cost, tests, forbidden parts/packages and debug; add version migration and semantic cross-reference/unit/range validation beyond initial structural schema.",
+      "dependencies": [],
+      "body": "## Motivation\n\nDefine canonical PCB design specification schema is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nValidate complete project metadata, functional requirements, interfaces, inputs/rails, clocks, devices/FPGA, audio, environment, mechanical/manufacturing constraints, sourcing, cost, tests, forbidden parts/packages and debug; add version migration and semantic cross-reference/unit/range validation beyond initial structural schema.\n\n## Acceptance criteria\n\n- [ ] Validate complete project metadata, functional requirements, interfaces, inputs/rails, clocks, devices/FPGA, audio, environment, mechanical/manufacturing constraints, sourcing, cost, tests, forbidden parts/packages and debug; add version migration and semantic cross-reference/unit/range validation beyond initial structural schema.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- No prerequisite implementation issue.\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #77\n",
+      "number": 1,
+      "url": "https://github.com/KrasForge/Kanon/issues/1"
+    },
+    {
+      "id": 2,
+      "title": "P0 \u2014 Implement verification result and report model",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "priority:P0",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Harden typed PASS/FAIL/WARN/SKIP/ERROR, severity, evidence, affected objects, remediation and source; add report identity, schema evolution and round-trip compatibility fixtures to the initial model.",
+      "dependencies": [],
+      "body": "## Motivation\n\nImplement verification result and report model is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nHarden typed PASS/FAIL/WARN/SKIP/ERROR, severity, evidence, affected objects, remediation and source; add report identity, schema evolution and round-trip compatibility fixtures to the initial model.\n\n## Acceptance criteria\n\n- [ ] Harden typed PASS/FAIL/WARN/SKIP/ERROR, severity, evidence, affected objects, remediation and source; add report identity, schema evolution and round-trip compatibility fixtures to the initial model.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- No prerequisite implementation issue.\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #77\n",
+      "number": 2,
+      "url": "https://github.com/KrasForge/Kanon/issues/2"
+    },
+    {
+      "id": 3,
+      "title": "P0 \u2014 Implement configurable release-gate engine",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "priority:P0",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Extend current conservative aggregation with validated policy, revision-bound evidence, authenticated manual approvals and explicit human waiver audit; missing mandatory evidence must block and no LLM override is accepted.",
+      "dependencies": [
+        2
+      ],
+      "body": "## Motivation\n\nImplement configurable release-gate engine is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nExtend current conservative aggregation with validated policy, revision-bound evidence, authenticated manual approvals and explicit human waiver audit; missing mandatory evidence must block and no LLM override is accepted.\n\n## Acceptance criteria\n\n- [ ] Extend current conservative aggregation with validated policy, revision-bound evidence, authenticated manual approvals and explicit human waiver audit; missing mandatory evidence must block and no LLM override is accepted.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #77\n",
+      "number": 3,
+      "url": "https://github.com/KrasForge/Kanon/issues/3"
+    },
+    {
+      "id": 4,
+      "title": "P0 \u2014 Implement environment diagnostics",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "priority:P0",
+        "type:feature"
+      ],
+      "scope": "Qualify Python, KiCad CLI, ngspice and Git versions; distinguish configured MCP endpoints from successful protocol handshakes and report optional FreeCAD accurately without exposing secrets.",
+      "dependencies": [
+        2
+      ],
+      "body": "## Motivation\n\nImplement environment diagnostics is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nQualify Python, KiCad CLI, ngspice and Git versions; distinguish configured MCP endpoints from successful protocol handshakes and report optional FreeCAD accurately without exposing secrets.\n\n## Acceptance criteria\n\n- [ ] Qualify Python, KiCad CLI, ngspice and Git versions; distinguish configured MCP endpoints from successful protocol handshakes and report optional FreeCAD accurately without exposing secrets.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #77\n",
+      "number": 4,
+      "url": "https://github.com/KrasForge/Kanon/issues/4"
+    },
+    {
+      "id": 5,
+      "title": "P1 \u2014 Define engineering decision record model",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "priority:P1",
+        "type:feature"
+      ],
+      "scope": "Align machine-readable and Markdown hardware decisions with alternatives, evidence, calculations, risks, chosen solution, consequences and invalidation conditions; validate links and round-trip without losing information.",
+      "dependencies": [
+        1
+      ],
+      "body": "## Motivation\n\nDefine engineering decision record model is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nAlign machine-readable and Markdown hardware decisions with alternatives, evidence, calculations, risks, chosen solution, consequences and invalidation conditions; validate links and round-trip without losing information.\n\n## Acceptance criteria\n\n- [ ] Align machine-readable and Markdown hardware decisions with alternatives, evidence, calculations, risks, chosen solution, consequences and invalidation conditions; validate links and round-trip without losing information.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #77\n",
+      "number": 5,
+      "url": "https://github.com/KrasForge/Kanon/issues/5"
+    },
+    {
+      "id": 6,
+      "title": "P1 \u2014 Define structured engineering review/finding schema",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Version blocker/major/minor/observation findings with stable IDs, source hashes, affected objects, evidence and resolution status; reject invalid transitions and preserve review limitations.",
+      "dependencies": [
+        2
+      ],
+      "body": "## Motivation\n\nDefine structured engineering review/finding schema is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nVersion blocker/major/minor/observation findings with stable IDs, source hashes, affected objects, evidence and resolution status; reject invalid transitions and preserve review limitations.\n\n## Acceptance criteria\n\n- [ ] Version blocker/major/minor/observation findings with stable IDs, source hashes, affected objects, evidence and resolution status; reject invalid transitions and preserve review limitations.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #77\n",
+      "number": 6,
+      "url": "https://github.com/KrasForge/Kanon/issues/6"
+    },
+    {
+      "id": 7,
+      "title": "P0 \u2014 Implement robust `kicad-cli` adapter",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "priority:P0",
+        "area:kicad",
+        "type:integration"
+      ],
+      "scope": "Qualify initial command hooks against KiCad 10; preserve diagnostics including timeout output, validate inputs/version, isolate output directories and capture exact artifacts with hashes and tool identity.",
+      "dependencies": [
+        2,
+        4
+      ],
+      "body": "## Motivation\n\nImplement robust `kicad-cli` adapter is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nQualify initial command hooks against KiCad 10; preserve diagnostics including timeout output, validate inputs/version, isolate output directories and capture exact artifacts with hashes and tool identity.\n\n## Acceptance criteria\n\n- [ ] Qualify initial command hooks against KiCad 10; preserve diagnostics including timeout output, validate inputs/version, isolate output directories and capture exact artifacts with hashes and tool identity.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #2: P0 \u2014 Implement verification result and report model\n- #4: P0 \u2014 Implement environment diagnostics\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #78\n",
+      "number": 7,
+      "url": "https://github.com/KrasForge/Kanon/issues/7"
+    },
+    {
+      "id": 8,
+      "title": "P0 \u2014 Implement schematic ERC verification",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "priority:P0",
+        "area:kicad",
+        "area:verification",
+        "type:integration"
+      ],
+      "scope": "Invoke independent KiCad ERC and parse actual JSON sheets/violations into structured results; distinguish warnings, exclusions, violations, tool errors and malformed/missing output.",
+      "dependencies": [
+        7,
+        2
+      ],
+      "body": "## Motivation\n\nImplement schematic ERC verification is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nInvoke independent KiCad ERC and parse actual JSON sheets/violations into structured results; distinguish warnings, exclusions, violations, tool errors and malformed/missing output.\n\n## Acceptance criteria\n\n- [ ] Invoke independent KiCad ERC and parse actual JSON sheets/violations into structured results; distinguish warnings, exclusions, violations, tool errors and malformed/missing output.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #7: P0 \u2014 Implement robust `kicad-cli` adapter\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #78\n",
+      "number": 8,
+      "url": "https://github.com/KrasForge/Kanon/issues/8"
+    },
+    {
+      "id": 9,
+      "title": "P0 \u2014 Implement PCB DRC verification",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "priority:P0",
+        "area:kicad",
+        "area:verification",
+        "type:integration"
+      ],
+      "scope": "Run DRC from persisted PCB independently of MCP; interpret violations and unconnected items, document zone-fill behavior and schematic parity availability without mutating reviewer input.",
+      "dependencies": [
+        7,
+        2
+      ],
+      "body": "## Motivation\n\nImplement PCB DRC verification is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRun DRC from persisted PCB independently of MCP; interpret violations and unconnected items, document zone-fill behavior and schematic parity availability without mutating reviewer input.\n\n## Acceptance criteria\n\n- [ ] Run DRC from persisted PCB independently of MCP; interpret violations and unconnected items, document zone-fill behavior and schematic parity availability without mutating reviewer input.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #7: P0 \u2014 Implement robust `kicad-cli` adapter\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #78\n",
+      "number": 9,
+      "url": "https://github.com/KrasForge/Kanon/issues/9"
+    },
+    {
+      "id": 10,
+      "title": "P0 \u2014 Implement deterministic manufacturing exports",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "priority:P0",
+        "area:kicad",
+        "area:manufacturing",
+        "type:integration"
+      ],
+      "scope": "Generate Gerbers, drills and STEP in fresh output directories; capture tool/version/exit output and verify expected artifacts with hashes, rejecting stale or incomplete results.",
+      "dependencies": [
+        7
+      ],
+      "body": "## Motivation\n\nImplement deterministic manufacturing exports is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nGenerate Gerbers, drills and STEP in fresh output directories; capture tool/version/exit output and verify expected artifacts with hashes, rejecting stale or incomplete results.\n\n## Acceptance criteria\n\n- [ ] Generate Gerbers, drills and STEP in fresh output directories; capture tool/version/exit output and verify expected artifacts with hashes, rejecting stale or incomplete results.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #7: P0 \u2014 Implement robust `kicad-cli` adapter\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #78\n",
+      "number": 10,
+      "url": "https://github.com/KrasForge/Kanon/issues/10"
+    },
+    {
+      "id": 11,
+      "title": "P0 \u2014 Define KiCad MCP abstraction boundary",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "priority:P0",
+        "area:kicad",
+        "area:mcp",
+        "type:feature"
+      ],
+      "scope": "Implement selectable server adapters with explicit READ/WRITE capability mappings, deny unknown tools and test protocol/error behavior; keep IPC optional and avoid provider-specific core assumptions.",
+      "dependencies": [
+        4
+      ],
+      "body": "## Motivation\n\nDefine KiCad MCP abstraction boundary is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nImplement selectable server adapters with explicit READ/WRITE capability mappings, deny unknown tools and test protocol/error behavior; keep IPC optional and avoid provider-specific core assumptions.\n\n## Acceptance criteria\n\n- [ ] Implement selectable server adapters with explicit READ/WRITE capability mappings, deny unknown tools and test protocol/error behavior; keep IPC optional and avoid provider-specific core assumptions.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #4: P0 \u2014 Implement environment diagnostics\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #78\n",
+      "number": 11,
+      "url": "https://github.com/KrasForge/Kanon/issues/11"
+    },
+    {
+      "id": 12,
+      "title": "P0 \u2014 Enforce read-only reviewer tool policy",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "priority:P0",
+        "area:agents",
+        "area:mcp",
+        "type:feature"
+      ],
+      "scope": "Enforce absence of mutation-capable KiCad tools, shell and write mounts in runtime; fail startup for unclassified tools or unsafe proxy access, using separate reviewer credentials/snapshots.",
+      "dependencies": [
+        11
+      ],
+      "body": "## Motivation\n\nEnforce read-only reviewer tool policy is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nEnforce absence of mutation-capable KiCad tools, shell and write mounts in runtime; fail startup for unclassified tools or unsafe proxy access, using separate reviewer credentials/snapshots.\n\n## Acceptance criteria\n\n- [ ] Enforce absence of mutation-capable KiCad tools, shell and write mounts in runtime; fail startup for unclassified tools or unsafe proxy access, using separate reviewer credentials/snapshots.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #11: P0 \u2014 Define KiCad MCP abstraction boundary\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #78\n",
+      "number": 12,
+      "url": "https://github.com/KrasForge/Kanon/issues/12"
+    },
+    {
+      "id": 13,
+      "title": "P1 \u2014 Implement board/schematic state snapshot abstraction",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "priority:P1",
+        "area:kicad",
+        "type:feature"
+      ],
+      "scope": "Capture connectivity, symbols, footprints, pads, routes, zones, stackup and provenance from saved state; produce stable content hashes/diffs and invalidate evidence on relevant changes.",
+      "dependencies": [
+        7,
+        11
+      ],
+      "body": "## Motivation\n\nImplement board/schematic state snapshot abstraction is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nCapture connectivity, symbols, footprints, pads, routes, zones, stackup and provenance from saved state; produce stable content hashes/diffs and invalidate evidence on relevant changes.\n\n## Acceptance criteria\n\n- [ ] Capture connectivity, symbols, footprints, pads, routes, zones, stackup and provenance from saved state; produce stable content hashes/diffs and invalidate evidence on relevant changes.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #7: P0 \u2014 Implement robust `kicad-cli` adapter\n- #11: P0 \u2014 Define KiCad MCP abstraction boundary\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #78\n",
+      "number": 13,
+      "url": "https://github.com/KrasForge/Kanon/issues/13"
+    },
+    {
+      "id": 14,
+      "title": "P1 \u2014 Add design mutation \u2192 verify workflow",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "priority:P1",
+        "area:kicad",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Persist mutation, read back state, run applicable ERC/DRC, emit structured report and invalidate old approvals; stop on failed persistence, verification or mismatched state.",
+      "dependencies": [
+        8,
+        9,
+        13
+      ],
+      "body": "## Motivation\n\nAdd design mutation \u2192 verify workflow is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nPersist mutation, read back state, run applicable ERC/DRC, emit structured report and invalidate old approvals; stop on failed persistence, verification or mismatched state.\n\n## Acceptance criteria\n\n- [ ] Persist mutation, read back state, run applicable ERC/DRC, emit structured report and invalidate old approvals; stop on failed persistence, verification or mismatched state.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #8: P0 \u2014 Implement schematic ERC verification\n- #9: P0 \u2014 Implement PCB DRC verification\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #78\n",
+      "number": 14,
+      "url": "https://github.com/KrasForge/Kanon/issues/14"
+    },
+    {
+      "id": 15,
+      "title": "P0 \u2014 Implement canonical BOM model and importer",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P0",
+        "area:bom",
+        "type:feature"
+      ],
+      "scope": "Extend initial per-reference model with validated CSV/KiCad import, quantity/reference semantics, manufacturer/MPN, supplier number, package, lifecycle, stock, currency/cost, assembly class and alternates; preserve unknowns.",
+      "dependencies": [
+        1
+      ],
+      "body": "## Motivation\n\nImplement canonical BOM model and importer is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nExtend initial per-reference model with validated CSV/KiCad import, quantity/reference semantics, manufacturer/MPN, supplier number, package, lifecycle, stock, currency/cost, assembly class and alternates; preserve unknowns.\n\n## Acceptance criteria\n\n- [ ] Extend initial per-reference model with validated CSV/KiCad import, quantity/reference semantics, manufacturer/MPN, supplier number, package, lifecycle, stock, currency/cost, assembly class and alternates; preserve unknowns.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 15,
+      "url": "https://github.com/KrasForge/Kanon/issues/15"
+    },
+    {
+      "id": 16,
+      "title": "P0 \u2014 Validate manufacturer part-number completeness",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P0",
+        "area:bom",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Extend initial missing-MPN checks to ambiguous ordering suffixes and policy-controlled non-populated/mechanical exclusions; identify affected references and evidence without guessing parts.",
+      "dependencies": [
+        15,
+        2
+      ],
+      "body": "## Motivation\n\nValidate manufacturer part-number completeness is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nExtend initial missing-MPN checks to ambiguous ordering suffixes and policy-controlled non-populated/mechanical exclusions; identify affected references and evidence without guessing parts.\n\n## Acceptance criteria\n\n- [ ] Extend initial missing-MPN checks to ambiguous ordering suffixes and policy-controlled non-populated/mechanical exclusions; identify affected references and evidence without guessing parts.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #15: P0 \u2014 Implement canonical BOM model and importer\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 16,
+      "url": "https://github.com/KrasForge/Kanon/issues/16"
+    },
+    {
+      "id": 17,
+      "title": "P1 \u2014 Implement BOM normalization and inconsistency checks",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:bom",
+        "type:feature"
+      ],
+      "scope": "Normalize declared metadata without corrupting case-sensitive MPNs; detect conflicting values/packages/manufacturers and duplicate references with actionable diagnostics and provenance.",
+      "dependencies": [
+        15
+      ],
+      "body": "## Motivation\n\nImplement BOM normalization and inconsistency checks is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nNormalize declared metadata without corrupting case-sensitive MPNs; detect conflicting values/packages/manufacturers and duplicate references with actionable diagnostics and provenance.\n\n## Acceptance criteria\n\n- [ ] Normalize declared metadata without corrupting case-sensitive MPNs; detect conflicting values/packages/manufacturers and duplicate references with actionable diagnostics and provenance.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #15: P0 \u2014 Implement canonical BOM model and importer\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 17,
+      "url": "https://github.com/KrasForge/Kanon/issues/17"
+    },
+    {
+      "id": 18,
+      "title": "P1 \u2014 Add JLCPCB/LCSC sourcing adapter",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:bom",
+        "area:mcp",
+        "type:integration"
+      ],
+      "scope": "Optional live adapter exposes timestamped stock, currency/quantity price, LCSC number, package and Basic/Extended status when available; offline/unconfigured/rate-limited states never fabricate data.",
+      "dependencies": [
+        15,
+        11
+      ],
+      "body": "## Motivation\n\nAdd JLCPCB/LCSC sourcing adapter is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nOptional live adapter exposes timestamped stock, currency/quantity price, LCSC number, package and Basic/Extended status when available; offline/unconfigured/rate-limited states never fabricate data.\n\n## Acceptance criteria\n\n- [ ] Optional live adapter exposes timestamped stock, currency/quantity price, LCSC number, package and Basic/Extended status when available; offline/unconfigured/rate-limited states never fabricate data.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #15: P0 \u2014 Implement canonical BOM model and importer\n- #11: P0 \u2014 Define KiCad MCP abstraction boundary\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 18,
+      "url": "https://github.com/KrasForge/Kanon/issues/18"
+    },
+    {
+      "id": 19,
+      "title": "P1 \u2014 Add part lifecycle and sourcing-risk model",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:bom",
+        "type:feature"
+      ],
+      "scope": "Represent lifecycle, stock age, sole-source risk and evidence provenance with transparent policy scoring; unknown data remains explicit and manufacturer lifecycle outranks unsupported inference.",
+      "dependencies": [
+        15,
+        18
+      ],
+      "body": "## Motivation\n\nAdd part lifecycle and sourcing-risk model is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent lifecycle, stock age, sole-source risk and evidence provenance with transparent policy scoring; unknown data remains explicit and manufacturer lifecycle outranks unsupported inference.\n\n## Acceptance criteria\n\n- [ ] Represent lifecycle, stock age, sole-source risk and evidence provenance with transparent policy scoring; unknown data remains explicit and manufacturer lifecycle outranks unsupported inference.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #15: P0 \u2014 Implement canonical BOM model and importer\n- #18: P1 \u2014 Add JLCPCB/LCSC sourcing adapter\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 19,
+      "url": "https://github.com/KrasForge/Kanon/issues/19"
+    },
+    {
+      "id": 20,
+      "title": "P2 \u2014 Implement alternate-part compatibility representation",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:bom",
+        "type:feature"
+      ],
+      "scope": "Represent electrical, pinout, package, timing, thermal, firmware and assembly differences plus qualification evidence; matching value/package never implies automatic interchangeability.",
+      "dependencies": [
+        15,
+        34
+      ],
+      "body": "## Motivation\n\nImplement alternate-part compatibility representation is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent electrical, pinout, package, timing, thermal, firmware and assembly differences plus qualification evidence; matching value/package never implies automatic interchangeability.\n\n## Acceptance criteria\n\n- [ ] Represent electrical, pinout, package, timing, thermal, firmware and assembly differences plus qualification evidence; matching value/package never implies automatic interchangeability.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #15: P0 \u2014 Implement canonical BOM model and importer\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 20,
+      "url": "https://github.com/KrasForge/Kanon/issues/20"
+    },
+    {
+      "id": 21,
+      "title": "P0 \u2014 Implement FPGA bank-voltage validator",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P0",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Validate declared bank supply versus device-specific I/O standard voltage requirements; detect conflicting assignments, unknown standards and missing bank evidence without silently changing voltages.",
+      "dependencies": [
+        1,
+        34
+      ],
+      "body": "## Motivation\n\nImplement FPGA bank-voltage validator is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nValidate declared bank supply versus device-specific I/O standard voltage requirements; detect conflicting assignments, unknown standards and missing bank evidence without silently changing voltages.\n\n## Acceptance criteria\n\n- [ ] Validate declared bank supply versus device-specific I/O standard voltage requirements; detect conflicting assignments, unknown standards and missing bank evidence without silently changing voltages.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 21,
+      "url": "https://github.com/KrasForge/Kanon/issues/21"
+    },
+    {
+      "id": 22,
+      "title": "P0 \u2014 Implement power-tree model",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P0",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Model sources, regulators, rails, loads, expected and peak currents, dependencies and sequencing; reject cycles, duplicate rails, invalid ranges and dangling supply references.",
+      "dependencies": [
+        1
+      ],
+      "body": "## Motivation\n\nImplement power-tree model is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nModel sources, regulators, rails, loads, expected and peak currents, dependencies and sequencing; reject cycles, duplicate rails, invalid ranges and dangling supply references.\n\n## Acceptance criteria\n\n- [ ] Model sources, regulators, rails, loads, expected and peak currents, dependencies and sequencing; reject cycles, duplicate rails, invalid ranges and dangling supply references.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 22,
+      "url": "https://github.com/KrasForge/Kanon/issues/22"
+    },
+    {
+      "id": 23,
+      "title": "P1 \u2014 Implement regulator power/thermal calculation checks",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Compute input/output/load corners, dissipation, evidence-backed efficiency and thermal margin with explicit units; missing package thermal parameters produce unresolved results, never invented estimates.",
+      "dependencies": [
+        22,
+        34
+      ],
+      "body": "## Motivation\n\nImplement regulator power/thermal calculation checks is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nCompute input/output/load corners, dissipation, evidence-backed efficiency and thermal margin with explicit units; missing package thermal parameters produce unresolved results, never invented estimates.\n\n## Acceptance criteria\n\n- [ ] Compute input/output/load corners, dissipation, evidence-backed efficiency and thermal margin with explicit units; missing package thermal parameters produce unresolved results, never invented estimates.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #22: P0 \u2014 Implement power-tree model\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 23,
+      "url": "https://github.com/KrasForge/Kanon/issues/23"
+    },
+    {
+      "id": 24,
+      "title": "P1 \u2014 Implement decoupling audit framework",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Associate IC power pins/rails with evidence-backed local decoupling rules; flag missing coverage and unresolved data, separating schematic rules from geometric/electromagnetic claims.",
+      "dependencies": [
+        13,
+        34
+      ],
+      "body": "## Motivation\n\nImplement decoupling audit framework is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nAssociate IC power pins/rails with evidence-backed local decoupling rules; flag missing coverage and unresolved data, separating schematic rules from geometric/electromagnetic claims.\n\n## Acceptance criteria\n\n- [ ] Associate IC power pins/rails with evidence-backed local decoupling rules; flag missing coverage and unresolved data, separating schematic rules from geometric/electromagnetic claims.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 24,
+      "url": "https://github.com/KrasForge/Kanon/issues/24"
+    },
+    {
+      "id": 25,
+      "title": "P1 \u2014 Implement connector protection audit",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Represent ESD, overvoltage, current limiting and termination expectations per interface; trace protection strategy to connector nets and report unsupported applicability.",
+      "dependencies": [
+        1,
+        13,
+        34
+      ],
+      "body": "## Motivation\n\nImplement connector protection audit is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent ESD, overvoltage, current limiting and termination expectations per interface; trace protection strategy to connector nets and report unsupported applicability.\n\n## Acceptance criteria\n\n- [ ] Represent ESD, overvoltage, current limiting and termination expectations per interface; trace protection strategy to connector nets and report unsupported applicability.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 25,
+      "url": "https://github.com/KrasForge/Kanon/issues/25"
+    },
+    {
+      "id": 26,
+      "title": "P1 \u2014 Implement test-point coverage audit",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Validate project-required rails/signals against accessible test points and declared probe constraints; distinguish missing point from unverified physical accessibility.",
+      "dependencies": [
+        1,
+        13
+      ],
+      "body": "## Motivation\n\nImplement test-point coverage audit is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nValidate project-required rails/signals against accessible test points and declared probe constraints; distinguish missing point from unverified physical accessibility.\n\n## Acceptance criteria\n\n- [ ] Validate project-required rails/signals against accessible test points and declared probe constraints; distinguish missing point from unverified physical accessibility.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 26,
+      "url": "https://github.com/KrasForge/Kanon/issues/26"
+    },
+    {
+      "id": 27,
+      "title": "P2 \u2014 Implement clock-topology checker",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Validate sources/destinations, frequencies, clock domains, expected termination and documented fanout rules; detect unresolved clock references without pretending to calculate signal integrity.",
+      "dependencies": [
+        1,
+        13,
+        34
+      ],
+      "body": "## Motivation\n\nImplement clock-topology checker is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nValidate sources/destinations, frequencies, clock domains, expected termination and documented fanout rules; detect unresolved clock references without pretending to calculate signal integrity.\n\n## Acceptance criteria\n\n- [ ] Validate sources/destinations, frequencies, clock domains, expected termination and documented fanout rules; detect unresolved clock references without pretending to calculate signal integrity.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 27,
+      "url": "https://github.com/KrasForge/Kanon/issues/27"
+    },
+    {
+      "id": 28,
+      "title": "P0 \u2014 Implement ngspice process adapter",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P0",
+        "area:simulation",
+        "type:integration"
+      ],
+      "scope": "Qualify initial batch adapter with real ngspice fixtures, timeouts, model include resolution, diagnostics and artifact identity; failed simulations must not yield passing assertions.",
+      "dependencies": [
+        2,
+        4
+      ],
+      "body": "## Motivation\n\nImplement ngspice process adapter is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nQualify initial batch adapter with real ngspice fixtures, timeouts, model include resolution, diagnostics and artifact identity; failed simulations must not yield passing assertions.\n\n## Acceptance criteria\n\n- [ ] Qualify initial batch adapter with real ngspice fixtures, timeouts, model include resolution, diagnostics and artifact identity; failed simulations must not yield passing assertions.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #2: P0 \u2014 Implement verification result and report model\n- #4: P0 \u2014 Implement environment diagnostics\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 28,
+      "url": "https://github.com/KrasForge/Kanon/issues/28"
+    },
+    {
+      "id": 29,
+      "title": "P1 \u2014 Add declarative simulation assertions",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:simulation",
+        "type:feature"
+      ],
+      "scope": "Validate named measurements with min/max ranges such as gain_db 5.8\u20136.2 and cutoff_hz 19500\u201320500; define units, missing/nonfinite handling and link assertions to successful simulation inputs.",
+      "dependencies": [
+        28,
+        2
+      ],
+      "body": "## Motivation\n\nAdd declarative simulation assertions is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nValidate named measurements with min/max ranges such as gain_db 5.8\u20136.2 and cutoff_hz 19500\u201320500; define units, missing/nonfinite handling and link assertions to successful simulation inputs.\n\n## Acceptance criteria\n\n- [ ] Validate named measurements with min/max ranges such as gain_db 5.8\u20136.2 and cutoff_hz 19500\u201320500; define units, missing/nonfinite handling and link assertions to successful simulation inputs.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #28: P0 \u2014 Implement ngspice process adapter\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 29,
+      "url": "https://github.com/KrasForge/Kanon/issues/29"
+    },
+    {
+      "id": 30,
+      "title": "P1 \u2014 Add audio filter simulation workflow",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:simulation",
+        "type:feature"
+      ],
+      "scope": "Provide reproducible representative anti-alias/reconstruction circuits with source/load impedances, corners, gain/cutoff assertions and documented model validity limits.",
+      "dependencies": [
+        28,
+        29
+      ],
+      "body": "## Motivation\n\nAdd audio filter simulation workflow is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nProvide reproducible representative anti-alias/reconstruction circuits with source/load impedances, corners, gain/cutoff assertions and documented model validity limits.\n\n## Acceptance criteria\n\n- [ ] Provide reproducible representative anti-alias/reconstruction circuits with source/load impedances, corners, gain/cutoff assertions and documented model validity limits.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #28: P0 \u2014 Implement ngspice process adapter\n- #29: P1 \u2014 Add declarative simulation assertions\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 30,
+      "url": "https://github.com/KrasForge/Kanon/issues/30"
+    },
+    {
+      "id": 31,
+      "title": "P1 \u2014 Add power-circuit simulation workflow",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:simulation",
+        "type:feature"
+      ],
+      "scope": "Add reusable power-circuit harness with approved models, startup/load-transient assertions and limitations; reject unavailable models and avoid assuming regulator topologies are SPICE-equivalent.",
+      "dependencies": [
+        28,
+        29,
+        22
+      ],
+      "body": "## Motivation\n\nAdd power-circuit simulation workflow is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nAdd reusable power-circuit harness with approved models, startup/load-transient assertions and limitations; reject unavailable models and avoid assuming regulator topologies are SPICE-equivalent.\n\n## Acceptance criteria\n\n- [ ] Add reusable power-circuit harness with approved models, startup/load-transient assertions and limitations; reject unavailable models and avoid assuming regulator topologies are SPICE-equivalent.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #28: P0 \u2014 Implement ngspice process adapter\n- #29: P1 \u2014 Add declarative simulation assertions\n- #22: P0 \u2014 Implement power-tree model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 31,
+      "url": "https://github.com/KrasForge/Kanon/issues/31"
+    },
+    {
+      "id": 32,
+      "title": "P0 \u2014 Implement datasheet evidence model",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P0",
+        "area:datasheets",
+        "type:feature"
+      ],
+      "scope": "Harden current document/manufacturer/revision/page/section/constraint/source identity with content hash and serialization compatibility; validate exact locators and distinguish extracted claims from verified limits.",
+      "dependencies": [
+        2
+      ],
+      "body": "## Motivation\n\nImplement datasheet evidence model is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nHarden current document/manufacturer/revision/page/section/constraint/source identity with content hash and serialization compatibility; validate exact locators and distinguish extracted claims from verified limits.\n\n## Acceptance criteria\n\n- [ ] Harden current document/manufacturer/revision/page/section/constraint/source identity with content hash and serialization compatibility; validate exact locators and distinguish extracted claims from verified limits.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 32,
+      "url": "https://github.com/KrasForge/Kanon/issues/32"
+    },
+    {
+      "id": 33,
+      "title": "P1 \u2014 Build local datasheet registry",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:datasheets",
+        "type:feature"
+      ],
+      "scope": "Index component, manufacturer, document revision, local path, content hash and canonical URL; detect stale/missing/duplicate documents and preserve redistribution restrictions.",
+      "dependencies": [
+        32
+      ],
+      "body": "## Motivation\n\nBuild local datasheet registry is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nIndex component, manufacturer, document revision, local path, content hash and canonical URL; detect stale/missing/duplicate documents and preserve redistribution restrictions.\n\n## Acceptance criteria\n\n- [ ] Index component, manufacturer, document revision, local path, content hash and canonical URL; detect stale/missing/duplicate documents and preserve redistribution restrictions.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #32: P0 \u2014 Implement datasheet evidence model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 33,
+      "url": "https://github.com/KrasForge/Kanon/issues/33"
+    },
+    {
+      "id": 34,
+      "title": "P1 \u2014 Associate verified constraints with evidence",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:datasheets",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Bind numerical limits and applicability/corners to revision/page/section evidence; checks report the rule source and become unresolved when evidence is missing or invalidated.",
+      "dependencies": [
+        32,
+        33
+      ],
+      "body": "## Motivation\n\nAssociate verified constraints with evidence is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nBind numerical limits and applicability/corners to revision/page/section evidence; checks report the rule source and become unresolved when evidence is missing or invalidated.\n\n## Acceptance criteria\n\n- [ ] Bind numerical limits and applicability/corners to revision/page/section evidence; checks report the rule source and become unresolved when evidence is missing or invalidated.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #32: P0 \u2014 Implement datasheet evidence model\n- #33: P1 \u2014 Build local datasheet registry\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 34,
+      "url": "https://github.com/KrasForge/Kanon/issues/34"
+    },
+    {
+      "id": 35,
+      "title": "P2 \u2014 Research reliable datasheet ingestion/extraction pipeline",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:datasheets",
+        "type:research"
+      ],
+      "scope": "Evaluate representative PDFs, tables, scanned pages, structured citations and revision changes using an annotated corpus; publish extraction accuracy/error taxonomy and go/no-go recommendation, not an OCR-only production claim.",
+      "dependencies": [
+        33
+      ],
+      "body": "## Motivation\n\nResearch reliable datasheet ingestion/extraction pipeline is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nEvaluate representative PDFs, tables, scanned pages, structured citations and revision changes using an annotated corpus; publish extraction accuracy/error taxonomy and go/no-go recommendation, not an OCR-only production claim.\n\n## Acceptance criteria\n\n- [ ] Evaluate representative PDFs, tables, scanned pages, structured citations and revision changes using an annotated corpus; publish extraction accuracy/error taxonomy and go/no-go recommendation, not an OCR-only production claim.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nUse a documented evaluation corpus, baselines and counterexamples; publish reproducible results, failure cases and a justified recommendation.\n\n## Dependencies\n\n- #33: P1 \u2014 Build local datasheet registry\n\n## Non-goals\n\nNo production integration is implied by research results.\n\nMilestone tracker: #82\n",
+      "number": 35,
+      "url": "https://github.com/KrasForge/Kanon/issues/35"
+    },
+    {
+      "id": 36,
+      "title": "P0 \u2014 Implement design lifecycle state machine",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "labels": [
+        "priority:P0",
+        "area:agents",
+        "type:feature"
+      ],
+      "scope": "Enforce SPEC\u2192ARCHITECTURE\u2192COMPONENT_SELECTION\u2192SCHEMATIC\u2192SCHEMATIC_REVIEW\u2192FLOORPLAN\u2192CRITICAL_ROUTING\u2192GENERAL_ROUTING\u2192PCB_REVIEW\u2192DFM\u2192MECHANICAL\u2192RELEASE_REVIEW\u2192RELEASED with gate prerequisites and invalidation on edits.",
+      "dependencies": [
+        3,
+        13
+      ],
+      "body": "## Motivation\n\nImplement design lifecycle state machine is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nEnforce SPEC\u2192ARCHITECTURE\u2192COMPONENT_SELECTION\u2192SCHEMATIC\u2192SCHEMATIC_REVIEW\u2192FLOORPLAN\u2192CRITICAL_ROUTING\u2192GENERAL_ROUTING\u2192PCB_REVIEW\u2192DFM\u2192MECHANICAL\u2192RELEASE_REVIEW\u2192RELEASED with gate prerequisites and invalidation on edits.\n\n## Acceptance criteria\n\n- [ ] Enforce SPEC\u2192ARCHITECTURE\u2192COMPONENT_SELECTION\u2192SCHEMATIC\u2192SCHEMATIC_REVIEW\u2192FLOORPLAN\u2192CRITICAL_ROUTING\u2192GENERAL_ROUTING\u2192PCB_REVIEW\u2192DFM\u2192MECHANICAL\u2192RELEASE_REVIEW\u2192RELEASED with gate prerequisites and invalidation on edits.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #3: P0 \u2014 Implement configurable release-gate engine\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #80\n",
+      "number": 36,
+      "url": "https://github.com/KrasForge/Kanon/issues/36"
+    },
+    {
+      "id": 37,
+      "title": "P0 \u2014 Implement Architect/Designer/Reviewer role definitions",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "labels": [
+        "priority:P0",
+        "area:agents",
+        "type:feature"
+      ],
+      "scope": "Load and validate machine-readable model/tool capability contracts; architect plans, designer edits, reviewer has no mutations, deterministic release has no model authority; configuration alone is insufficient.",
+      "dependencies": [
+        11,
+        12
+      ],
+      "body": "## Motivation\n\nImplement Architect/Designer/Reviewer role definitions is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nLoad and validate machine-readable model/tool capability contracts; architect plans, designer edits, reviewer has no mutations, deterministic release has no model authority; configuration alone is insufficient.\n\n## Acceptance criteria\n\n- [ ] Load and validate machine-readable model/tool capability contracts; architect plans, designer edits, reviewer has no mutations, deterministic release has no model authority; configuration alone is insufficient.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #11: P0 \u2014 Define KiCad MCP abstraction boundary\n- #12: P0 \u2014 Enforce read-only reviewer tool policy\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #80\n",
+      "number": 37,
+      "url": "https://github.com/KrasForge/Kanon/issues/37"
+    },
+    {
+      "id": 38,
+      "title": "P0 \u2014 Implement independent reviewer workflow",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "labels": [
+        "priority:P0",
+        "area:agents",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Supply a frozen design snapshot and evidence to an isolated reviewer; emit structured adversarial findings, track identity/scope and never approve solely because ERC/DRC pass.",
+      "dependencies": [
+        6,
+        12,
+        13,
+        37
+      ],
+      "body": "## Motivation\n\nImplement independent reviewer workflow is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nSupply a frozen design snapshot and evidence to an isolated reviewer; emit structured adversarial findings, track identity/scope and never approve solely because ERC/DRC pass.\n\n## Acceptance criteria\n\n- [ ] Supply a frozen design snapshot and evidence to an isolated reviewer; emit structured adversarial findings, track identity/scope and never approve solely because ERC/DRC pass.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #6: P1 \u2014 Define structured engineering review/finding schema\n- #12: P0 \u2014 Enforce read-only reviewer tool policy\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #37: P0 \u2014 Implement Architect/Designer/Reviewer role definitions\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #80\n",
+      "number": 38,
+      "url": "https://github.com/KrasForge/Kanon/issues/38"
+    },
+    {
+      "id": 39,
+      "title": "P1 \u2014 Implement review \u2192 remediation loop",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "labels": [
+        "priority:P1",
+        "area:agents",
+        "type:feature"
+      ],
+      "scope": "Designer consumes stable finding IDs, records changes and re-verifies, then independent reviewer rechecks resolution; preserve iteration history and stop on repeated unresolved blockers.",
+      "dependencies": [
+        14,
+        38
+      ],
+      "body": "## Motivation\n\nImplement review \u2192 remediation loop is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nDesigner consumes stable finding IDs, records changes and re-verifies, then independent reviewer rechecks resolution; preserve iteration history and stop on repeated unresolved blockers.\n\n## Acceptance criteria\n\n- [ ] Designer consumes stable finding IDs, records changes and re-verifies, then independent reviewer rechecks resolution; preserve iteration history and stop on repeated unresolved blockers.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #14: P1 \u2014 Add design mutation \u2192 verify workflow\n- #38: P0 \u2014 Implement independent reviewer workflow\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #80\n",
+      "number": 39,
+      "url": "https://github.com/KrasForge/Kanon/issues/39"
+    },
+    {
+      "id": 40,
+      "title": "P1 \u2014 Add critical-net classification",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "labels": [
+        "priority:P1",
+        "area:agents",
+        "area:kicad",
+        "type:feature"
+      ],
+      "scope": "Represent power, clock, differential, high-speed, analog input/output, reference, switch-node, feedback, ordinary digital and control classes with explicit rationale and overrides.",
+      "dependencies": [
+        1,
+        13
+      ],
+      "body": "## Motivation\n\nAdd critical-net classification is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent power, clock, differential, high-speed, analog input/output, reference, switch-node, feedback, ordinary digital and control classes with explicit rationale and overrides.\n\n## Acceptance criteria\n\n- [ ] Represent power, clock, differential, high-speed, analog input/output, reference, switch-node, feedback, ordinary digital and control classes with explicit rationale and overrides.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #80\n",
+      "number": 40,
+      "url": "https://github.com/KrasForge/Kanon/issues/40"
+    },
+    {
+      "id": 41,
+      "title": "P1 \u2014 Enforce critical-net review before release",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Require class-appropriate review evidence for each critical net, tied to current geometry/connectivity and constraints; missing or stale class reviews block release.",
+      "dependencies": [
+        40,
+        38,
+        3
+      ],
+      "body": "## Motivation\n\nEnforce critical-net review before release is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRequire class-appropriate review evidence for each critical net, tied to current geometry/connectivity and constraints; missing or stale class reviews block release.\n\n## Acceptance criteria\n\n- [ ] Require class-appropriate review evidence for each critical net, tied to current geometry/connectivity and constraints; missing or stale class reviews block release.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #40: P1 \u2014 Add critical-net classification\n- #38: P0 \u2014 Implement independent reviewer workflow\n- #3: P0 \u2014 Implement configurable release-gate engine\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #80\n",
+      "number": 41,
+      "url": "https://github.com/KrasForge/Kanon/issues/41"
+    },
+    {
+      "id": 42,
+      "title": "P2 \u2014 Add engineering change-plan representation",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:agents",
+        "type:feature"
+      ],
+      "scope": "Represent planned large mutations, affected objects, rationale, anticipated checks and rollback considerations; bind plan to starting snapshot and identify scope deviations.",
+      "dependencies": [
+        13,
+        36
+      ],
+      "body": "## Motivation\n\nAdd engineering change-plan representation is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent planned large mutations, affected objects, rationale, anticipated checks and rollback considerations; bind plan to starting snapshot and identify scope deviations.\n\n## Acceptance criteria\n\n- [ ] Represent planned large mutations, affected objects, rationale, anticipated checks and rollback considerations; bind plan to starting snapshot and identify scope deviations.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #36: P0 \u2014 Implement design lifecycle state machine\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 42,
+      "url": "https://github.com/KrasForge/Kanon/issues/42"
+    },
+    {
+      "id": 43,
+      "title": "P1 \u2014 Define PCB floorplanning model",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "labels": [
+        "priority:P1",
+        "area:kicad",
+        "type:feature"
+      ],
+      "scope": "Represent approximate power, FPGA/MCU, converter, analog input/output, connector, memory and clock regions plus hard/soft constraints and mechanical anchors.",
+      "dependencies": [
+        1,
+        13
+      ],
+      "body": "## Motivation\n\nDefine PCB floorplanning model is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent approximate power, FPGA/MCU, converter, analog input/output, connector, memory and clock regions plus hard/soft constraints and mechanical anchors.\n\n## Acceptance criteria\n\n- [ ] Represent approximate power, FPGA/MCU, converter, analog input/output, connector, memory and clock regions plus hard/soft constraints and mechanical anchors.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #80\n",
+      "number": 43,
+      "url": "https://github.com/KrasForge/Kanon/issues/43"
+    },
+    {
+      "id": 44,
+      "title": "P1 \u2014 Implement placement-rule checks",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "labels": [
+        "priority:P1",
+        "area:kicad",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Quantify declared decoupling distance, connector-to-edge, crystal proximity, switching-loop component and feedback-network locality rules; define units/geometry and mark unsupported analyses unresolved.",
+      "dependencies": [
+        13,
+        24,
+        43
+      ],
+      "body": "## Motivation\n\nImplement placement-rule checks is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nQuantify declared decoupling distance, connector-to-edge, crystal proximity, switching-loop component and feedback-network locality rules; define units/geometry and mark unsupported analyses unresolved.\n\n## Acceptance criteria\n\n- [ ] Quantify declared decoupling distance, connector-to-edge, crystal proximity, switching-loop component and feedback-network locality rules; define units/geometry and mark unsupported analyses unresolved.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #24: P1 \u2014 Implement decoupling audit framework\n- #43: P1 \u2014 Define PCB floorplanning model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #80\n",
+      "number": 44,
+      "url": "https://github.com/KrasForge/Kanon/issues/44"
+    },
+    {
+      "id": 45,
+      "title": "P2 \u2014 Research return-path analysis",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:kicad",
+        "type:research"
+      ],
+      "scope": "Evaluate board/plane geometry, reference transitions and frequency-dependent return-path methods against counterexamples; publish feasibility and limits beyond simplistic ground-nearby heuristics.",
+      "dependencies": [
+        13,
+        40
+      ],
+      "body": "## Motivation\n\nResearch return-path analysis is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nEvaluate board/plane geometry, reference transitions and frequency-dependent return-path methods against counterexamples; publish feasibility and limits beyond simplistic ground-nearby heuristics.\n\n## Acceptance criteria\n\n- [ ] Evaluate board/plane geometry, reference transitions and frequency-dependent return-path methods against counterexamples; publish feasibility and limits beyond simplistic ground-nearby heuristics.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nUse a documented evaluation corpus, baselines and counterexamples; publish reproducible results, failure cases and a justified recommendation.\n\n## Dependencies\n\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #40: P1 \u2014 Add critical-net classification\n\n## Non-goals\n\nNo production integration is implied by research results.\n\nMilestone tracker: #82\n",
+      "number": 45,
+      "url": "https://github.com/KrasForge/Kanon/issues/45"
+    },
+    {
+      "id": 46,
+      "title": "P2 \u2014 Research automatic critical-net routing strategies",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:kicad",
+        "type:research"
+      ],
+      "scope": "Compare agent-directed and general routing on clocks, analog, power, switch nodes, feedback and differential pairs using reproducible boards and electrical/geometric metrics.",
+      "dependencies": [
+        14,
+        40,
+        43
+      ],
+      "body": "## Motivation\n\nResearch automatic critical-net routing strategies is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nCompare agent-directed and general routing on clocks, analog, power, switch nodes, feedback and differential pairs using reproducible boards and electrical/geometric metrics.\n\n## Acceptance criteria\n\n- [ ] Compare agent-directed and general routing on clocks, analog, power, switch nodes, feedback and differential pairs using reproducible boards and electrical/geometric metrics.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nUse a documented evaluation corpus, baselines and counterexamples; publish reproducible results, failure cases and a justified recommendation.\n\n## Dependencies\n\n- #14: P1 \u2014 Add design mutation \u2192 verify workflow\n- #40: P1 \u2014 Add critical-net classification\n- #43: P1 \u2014 Define PCB floorplanning model\n\n## Non-goals\n\nNo production integration is implied by research results.\n\nMilestone tracker: #82\n",
+      "number": 46,
+      "url": "https://github.com/KrasForge/Kanon/issues/46"
+    },
+    {
+      "id": 47,
+      "title": "P1 \u2014 Implement STEP-export verification pipeline",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P1",
+        "area:mechanical",
+        "area:kicad",
+        "type:integration"
+      ],
+      "scope": "Confirm STEP is newly generated, nonempty and associated with current design/model revision; record missing 3D models and units/origin limitations instead of claiming full mechanical fidelity.",
+      "dependencies": [
+        10,
+        13
+      ],
+      "body": "## Motivation\n\nImplement STEP-export verification pipeline is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nConfirm STEP is newly generated, nonempty and associated with current design/model revision; record missing 3D models and units/origin limitations instead of claiming full mechanical fidelity.\n\n## Acceptance criteria\n\n- [ ] Confirm STEP is newly generated, nonempty and associated with current design/model revision; record missing 3D models and units/origin limitations instead of claiming full mechanical fidelity.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #10: P0 \u2014 Implement deterministic manufacturing exports\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 47,
+      "url": "https://github.com/KrasForge/Kanon/issues/47"
+    },
+    {
+      "id": 48,
+      "title": "P1 \u2014 Add FreeCAD MCP integration profile",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P1",
+        "area:mechanical",
+        "area:mcp",
+        "type:integration"
+      ],
+      "scope": "Implement optional selectable FreeCAD profile with read/write separation, isolated reviewer access and explicit offline behavior; document supported operations and qualification tests.",
+      "dependencies": [
+        11,
+        12
+      ],
+      "body": "## Motivation\n\nAdd FreeCAD MCP integration profile is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nImplement optional selectable FreeCAD profile with read/write separation, isolated reviewer access and explicit offline behavior; document supported operations and qualification tests.\n\n## Acceptance criteria\n\n- [ ] Implement optional selectable FreeCAD profile with read/write separation, isolated reviewer access and explicit offline behavior; document supported operations and qualification tests.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #11: P0 \u2014 Define KiCad MCP abstraction boundary\n- #12: P0 \u2014 Enforce read-only reviewer tool policy\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 48,
+      "url": "https://github.com/KrasForge/Kanon/issues/48"
+    },
+    {
+      "id": 49,
+      "title": "P1 \u2014 Implement mechanical constraint representation",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P1",
+        "area:mechanical",
+        "type:feature"
+      ],
+      "scope": "Represent outline, keep-outs, mounting holes, connector positions, maximum component height and enclosure references with coordinate systems, units and tolerances.",
+      "dependencies": [
+        1
+      ],
+      "body": "## Motivation\n\nImplement mechanical constraint representation is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent outline, keep-outs, mounting holes, connector positions, maximum component height and enclosure references with coordinate systems, units and tolerances.\n\n## Acceptance criteria\n\n- [ ] Represent outline, keep-outs, mounting holes, connector positions, maximum component height and enclosure references with coordinate systems, units and tolerances.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 49,
+      "url": "https://github.com/KrasForge/Kanon/issues/49"
+    },
+    {
+      "id": 50,
+      "title": "P2 \u2014 Implement mechanical collision review",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:mechanical",
+        "type:feature"
+      ],
+      "scope": "Detect board/enclosure/connector collisions where models permit, respecting transforms/tolerances; incomplete or missing geometry yields limited/unresolved review rather than passing.",
+      "dependencies": [
+        47,
+        48,
+        49
+      ],
+      "body": "## Motivation\n\nImplement mechanical collision review is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nDetect board/enclosure/connector collisions where models permit, respecting transforms/tolerances; incomplete or missing geometry yields limited/unresolved review rather than passing.\n\n## Acceptance criteria\n\n- [ ] Detect board/enclosure/connector collisions where models permit, respecting transforms/tolerances; incomplete or missing geometry yields limited/unresolved review rather than passing.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #47: P1 \u2014 Implement STEP-export verification pipeline\n- #48: P1 \u2014 Add FreeCAD MCP integration profile\n- #49: P1 \u2014 Implement mechanical constraint representation\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 50,
+      "url": "https://github.com/KrasForge/Kanon/issues/50"
+    },
+    {
+      "id": 51,
+      "title": "P0 \u2014 Implement manufacturing profile schema",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P0",
+        "area:manufacturing",
+        "type:feature"
+      ],
+      "scope": "Validate layer count, stackup/thickness/copper, trace/space, via/annular/edge/mask limits, package/assembly policies and sourcing with current capability evidence and qualification date.",
+      "dependencies": [
+        1,
+        32
+      ],
+      "body": "## Motivation\n\nImplement manufacturing profile schema is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nValidate layer count, stackup/thickness/copper, trace/space, via/annular/edge/mask limits, package/assembly policies and sourcing with current capability evidence and qualification date.\n\n## Acceptance criteria\n\n- [ ] Validate layer count, stackup/thickness/copper, trace/space, via/annular/edge/mask limits, package/assembly policies and sourcing with current capability evidence and qualification date.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n- #32: P0 \u2014 Implement datasheet evidence model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 51,
+      "url": "https://github.com/KrasForge/Kanon/issues/51"
+    },
+    {
+      "id": 52,
+      "title": "P0 \u2014 Build release artifact manifest",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P0",
+        "area:manufacturing",
+        "type:feature"
+      ],
+      "scope": "List schematic, PCB, Gerbers, drills, BOM, placement when required, STEP, reviews, verification, manufacturing profile and Git revision plus dirty-content hashes/tool versions; reject stale/missing artifacts.",
+      "dependencies": [
+        10,
+        13,
+        51
+      ],
+      "body": "## Motivation\n\nBuild release artifact manifest is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nList schematic, PCB, Gerbers, drills, BOM, placement when required, STEP, reviews, verification, manufacturing profile and Git revision plus dirty-content hashes/tool versions; reject stale/missing artifacts.\n\n## Acceptance criteria\n\n- [ ] List schematic, PCB, Gerbers, drills, BOM, placement when required, STEP, reviews, verification, manufacturing profile and Git revision plus dirty-content hashes/tool versions; reject stale/missing artifacts.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #10: P0 \u2014 Implement deterministic manufacturing exports\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #51: P0 \u2014 Implement manufacturing profile schema\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 52,
+      "url": "https://github.com/KrasForge/Kanon/issues/52"
+    },
+    {
+      "id": 53,
+      "title": "P0 \u2014 Implement release command",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P0",
+        "area:manufacturing",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Run mandatory gates, stop on failure, generate and validate outputs, create hashed manifest and final report; ensure evidence remains current throughout invocation and never upload/order PCBs.",
+      "dependencies": [
+        3,
+        8,
+        9,
+        10,
+        38,
+        52,
+        54,
+        55
+      ],
+      "body": "## Motivation\n\nImplement release command is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRun mandatory gates, stop on failure, generate and validate outputs, create hashed manifest and final report; ensure evidence remains current throughout invocation and never upload/order PCBs.\n\n## Acceptance criteria\n\n- [ ] Run mandatory gates, stop on failure, generate and validate outputs, create hashed manifest and final report; ensure evidence remains current throughout invocation and never upload/order PCBs.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #3: P0 \u2014 Implement configurable release-gate engine\n- #8: P0 \u2014 Implement schematic ERC verification\n- #9: P0 \u2014 Implement PCB DRC verification\n- #10: P0 \u2014 Implement deterministic manufacturing exports\n- #38: P0 \u2014 Implement independent reviewer workflow\n- #52: P0 \u2014 Build release artifact manifest\n- #54: P1 \u2014 Implement configurable DFM rules\n- #55: P1 \u2014 Add fabrication-output consistency tests\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 53,
+      "url": "https://github.com/KrasForge/Kanon/issues/53"
+    },
+    {
+      "id": 54,
+      "title": "P1 \u2014 Implement configurable DFM rules",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P1",
+        "area:manufacturing",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Evaluate measurable fabrication/assembly constraints against qualified manufacturing profile; distinguish errors/warnings/unsupported checks and retain geometry evidence.",
+      "dependencies": [
+        13,
+        51
+      ],
+      "body": "## Motivation\n\nImplement configurable DFM rules is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nEvaluate measurable fabrication/assembly constraints against qualified manufacturing profile; distinguish errors/warnings/unsupported checks and retain geometry evidence.\n\n## Acceptance criteria\n\n- [ ] Evaluate measurable fabrication/assembly constraints against qualified manufacturing profile; distinguish errors/warnings/unsupported checks and retain geometry evidence.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #51: P0 \u2014 Implement manufacturing profile schema\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 54,
+      "url": "https://github.com/KrasForge/Kanon/issues/54"
+    },
+    {
+      "id": 55,
+      "title": "P1 \u2014 Add fabrication-output consistency tests",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P1",
+        "area:manufacturing",
+        "type:test"
+      ],
+      "scope": "Verify exact expected Gerber layers/drill categories and current-invocation identity; exercise stale, missing, empty, extra-layer and mismatched-revision outputs.",
+      "dependencies": [
+        10,
+        52
+      ],
+      "body": "## Motivation\n\nAdd fabrication-output consistency tests is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nVerify exact expected Gerber layers/drill categories and current-invocation identity; exercise stale, missing, empty, extra-layer and mismatched-revision outputs.\n\n## Acceptance criteria\n\n- [ ] Verify exact expected Gerber layers/drill categories and current-invocation identity; exercise stale, missing, empty, extra-layer and mismatched-revision outputs.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #10: P0 \u2014 Implement deterministic manufacturing exports\n- #52: P0 \u2014 Build release artifact manifest\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 55,
+      "url": "https://github.com/KrasForge/Kanon/issues/55"
+    },
+    {
+      "id": 56,
+      "title": "P1 \u2014 Add visual Gerber review workflow",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P1",
+        "area:manufacturing",
+        "type:feature"
+      ],
+      "scope": "Generate/integrate render artifacts with layer/origin metadata and recorded independent review; clearly supplement DRC and output consistency rather than replacing them.",
+      "dependencies": [
+        10,
+        38,
+        55
+      ],
+      "body": "## Motivation\n\nAdd visual Gerber review workflow is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nGenerate/integrate render artifacts with layer/origin metadata and recorded independent review; clearly supplement DRC and output consistency rather than replacing them.\n\n## Acceptance criteria\n\n- [ ] Generate/integrate render artifacts with layer/origin metadata and recorded independent review; clearly supplement DRC and output consistency rather than replacing them.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #10: P0 \u2014 Implement deterministic manufacturing exports\n- #38: P0 \u2014 Implement independent reviewer workflow\n- #55: P1 \u2014 Add fabrication-output consistency tests\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 56,
+      "url": "https://github.com/KrasForge/Kanon/issues/56"
+    },
+    {
+      "id": 57,
+      "title": "P1 \u2014 Implement audio signal-chain specification model",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Represent nominal/max levels with RMS/peak conventions, gain stages, impedance, coupling, filtering, ADC/DAC full scale and headroom requirements with units and evidence.",
+      "dependencies": [
+        1,
+        34
+      ],
+      "body": "## Motivation\n\nImplement audio signal-chain specification model is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent nominal/max levels with RMS/peak conventions, gain stages, impedance, coupling, filtering, ADC/DAC full scale and headroom requirements with units and evidence.\n\n## Acceptance criteria\n\n- [ ] Represent nominal/max levels with RMS/peak conventions, gain stages, impedance, coupling, filtering, ADC/DAC full scale and headroom requirements with units and evidence.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 57,
+      "url": "https://github.com/KrasForge/Kanon/issues/57"
+    },
+    {
+      "id": 58,
+      "title": "P1 \u2014 Implement gain/headroom audit",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Propagate declared signal-chain levels through gains and tolerances; identify clipping, common-mode and headroom incompatibilities with clear stage/corner diagnostics.",
+      "dependencies": [
+        57,
+        34
+      ],
+      "body": "## Motivation\n\nImplement gain/headroom audit is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nPropagate declared signal-chain levels through gains and tolerances; identify clipping, common-mode and headroom incompatibilities with clear stage/corner diagnostics.\n\n## Acceptance criteria\n\n- [ ] Propagate declared signal-chain levels through gains and tolerances; identify clipping, common-mode and headroom incompatibilities with clear stage/corner diagnostics.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #57: P1 \u2014 Implement audio signal-chain specification model\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 58,
+      "url": "https://github.com/KrasForge/Kanon/issues/58"
+    },
+    {
+      "id": 59,
+      "title": "P2 \u2014 Implement audio noise-budget model",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Calculate first-order thermal/op-amp/converter noise with bandwidth, integration and correlation assumptions; identify unsupported sources and compare against documented reference calculations.",
+      "dependencies": [
+        57,
+        34
+      ],
+      "body": "## Motivation\n\nImplement audio noise-budget model is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nCalculate first-order thermal/op-amp/converter noise with bandwidth, integration and correlation assumptions; identify unsupported sources and compare against documented reference calculations.\n\n## Acceptance criteria\n\n- [ ] Calculate first-order thermal/op-amp/converter noise with bandwidth, integration and correlation assumptions; identify unsupported sources and compare against documented reference calculations.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #57: P1 \u2014 Implement audio signal-chain specification model\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 59,
+      "url": "https://github.com/KrasForge/Kanon/issues/59"
+    },
+    {
+      "id": 60,
+      "title": "P2 \u2014 Implement op-amp configuration checks",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Check declared topology against supply range, common-mode, output swing, gain-bandwidth and evidenced capacitive-load/stability constraints; unsupported stability claims remain unresolved.",
+      "dependencies": [
+        57,
+        34
+      ],
+      "body": "## Motivation\n\nImplement op-amp configuration checks is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nCheck declared topology against supply range, common-mode, output swing, gain-bandwidth and evidenced capacitive-load/stability constraints; unsupported stability claims remain unresolved.\n\n## Acceptance criteria\n\n- [ ] Check declared topology against supply range, common-mode, output swing, gain-bandwidth and evidenced capacitive-load/stability constraints; unsupported stability claims remain unresolved.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #57: P1 \u2014 Implement audio signal-chain specification model\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 60,
+      "url": "https://github.com/KrasForge/Kanon/issues/60"
+    },
+    {
+      "id": 61,
+      "title": "P0 \u2014 Complete FPGA pin-plan validator",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P0",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Extend bank checks to dedicated, clock-capable, configuration, differential pair, reserved pins and VREF; use device-family data adapters with package-specific provenance.",
+      "dependencies": [
+        21,
+        34
+      ],
+      "body": "## Motivation\n\nComplete FPGA pin-plan validator is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nExtend bank checks to dedicated, clock-capable, configuration, differential pair, reserved pins and VREF; use device-family data adapters with package-specific provenance.\n\n## Acceptance criteria\n\n- [ ] Extend bank checks to dedicated, clock-capable, configuration, differential pair, reserved pins and VREF; use device-family data adapters with package-specific provenance.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #21: P0 \u2014 Implement FPGA bank-voltage validator\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 61,
+      "url": "https://github.com/KrasForge/Kanon/issues/61"
+    },
+    {
+      "id": 62,
+      "title": "P1 \u2014 Add FPGA power-sequencing representation",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Represent device-specific rail order, ramp windows, delays, discharge and partial-power constraints with evidence; detect contradictory sequencing declarations.",
+      "dependencies": [
+        22,
+        34
+      ],
+      "body": "## Motivation\n\nAdd FPGA power-sequencing representation is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent device-specific rail order, ramp windows, delays, discharge and partial-power constraints with evidence; detect contradictory sequencing declarations.\n\n## Acceptance criteria\n\n- [ ] Represent device-specific rail order, ramp windows, delays, discharge and partial-power constraints with evidence; detect contradictory sequencing declarations.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #22: P0 \u2014 Implement power-tree model\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 62,
+      "url": "https://github.com/KrasForge/Kanon/issues/62"
+    },
+    {
+      "id": 63,
+      "title": "P1 \u2014 Add FPGA configuration/boot audit",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Check boot device, straps, configuration interface, programming header, pull resistors and flash compatibility against device-specific constraints and pin plan.",
+      "dependencies": [
+        61,
+        34
+      ],
+      "body": "## Motivation\n\nAdd FPGA configuration/boot audit is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nCheck boot device, straps, configuration interface, programming header, pull resistors and flash compatibility against device-specific constraints and pin plan.\n\n## Acceptance criteria\n\n- [ ] Check boot device, straps, configuration interface, programming header, pull resistors and flash compatibility against device-specific constraints and pin plan.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #61: P0 \u2014 Complete FPGA pin-plan validator\n- #34: P1 \u2014 Associate verified constraints with evidence\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 63,
+      "url": "https://github.com/KrasForge/Kanon/issues/63"
+    },
+    {
+      "id": 64,
+      "title": "P1 \u2014 Add FPGA decoupling-rule framework",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P1",
+        "area:verification",
+        "area:datasheets",
+        "type:feature"
+      ],
+      "scope": "Represent family/device-specific decoupling requirements with source revision, package/rail applicability and placement limitations; missing rules cannot imply complete coverage.",
+      "dependencies": [
+        24,
+        34,
+        61
+      ],
+      "body": "## Motivation\n\nAdd FPGA decoupling-rule framework is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRepresent family/device-specific decoupling requirements with source revision, package/rail applicability and placement limitations; missing rules cannot imply complete coverage.\n\n## Acceptance criteria\n\n- [ ] Represent family/device-specific decoupling requirements with source revision, package/rail applicability and placement limitations; missing rules cannot imply complete coverage.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #24: P1 \u2014 Implement decoupling audit framework\n- #34: P1 \u2014 Associate verified constraints with evidence\n- #61: P0 \u2014 Complete FPGA pin-plan validator\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 64,
+      "url": "https://github.com/KrasForge/Kanon/issues/64"
+    },
+    {
+      "id": 65,
+      "title": "P2 \u2014 Build PCB visual-review artifact pipeline",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:kicad",
+        "type:feature"
+      ],
+      "scope": "Produce consistent top, bottom and 3D views with source hash, layer visibility, camera/origin and tool versions; flag incomplete 3D models and unavailable renderers.",
+      "dependencies": [
+        13,
+        47
+      ],
+      "body": "## Motivation\n\nBuild PCB visual-review artifact pipeline is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nProduce consistent top, bottom and 3D views with source hash, layer visibility, camera/origin and tool versions; flag incomplete 3D models and unavailable renderers.\n\n## Acceptance criteria\n\n- [ ] Produce consistent top, bottom and 3D views with source hash, layer visibility, camera/origin and tool versions; flag incomplete 3D models and unavailable renderers.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n- #47: P1 \u2014 Implement STEP-export verification pipeline\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 65,
+      "url": "https://github.com/KrasForge/Kanon/issues/65"
+    },
+    {
+      "id": 66,
+      "title": "P2 \u2014 Define visual PCB review rubric",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P2",
+        "area:skills",
+        "type:feature"
+      ],
+      "scope": "Evaluate backwards connectors, bizarre placement, unreadable silkscreen, overlap, mechanical obstruction and obvious routing anomalies using known-defect fixtures; record occlusion and require nonvisual corroboration.",
+      "dependencies": [
+        65,
+        6
+      ],
+      "body": "## Motivation\n\nDefine visual PCB review rubric is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nEvaluate backwards connectors, bizarre placement, unreadable silkscreen, overlap, mechanical obstruction and obvious routing anomalies using known-defect fixtures; record occlusion and require nonvisual corroboration.\n\n## Acceptance criteria\n\n- [ ] Evaluate backwards connectors, bizarre placement, unreadable silkscreen, overlap, mechanical obstruction and obvious routing anomalies using known-defect fixtures; record occlusion and require nonvisual corroboration.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #65: P2 \u2014 Build PCB visual-review artifact pipeline\n- #6: P1 \u2014 Define structured engineering review/finding schema\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 66,
+      "url": "https://github.com/KrasForge/Kanon/issues/66"
+    },
+    {
+      "id": 67,
+      "title": "P1 \u2014 Design read-only `pcb-verifier` MCP API",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P1",
+        "area:mcp",
+        "area:verification",
+        "type:feature"
+      ],
+      "scope": "Specify check_power_tree, check_decoupling, check_pin_electrical_types, check_fpga_banks, check_connector_protection, check_clock_topology, check_testpoint_coverage, check_bom_lifecycle, check_bom_stock, check_footprint_datasheet_match, check_mounting_clearance, check_high_current_paths, check_audio_signal_chain and check_manufacturability with provenance/errors and read-only source contract.",
+      "dependencies": [
+        2,
+        11,
+        13
+      ],
+      "body": "## Motivation\n\nDesign read-only `pcb-verifier` MCP API is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nSpecify check_power_tree, check_decoupling, check_pin_electrical_types, check_fpga_banks, check_connector_protection, check_clock_topology, check_testpoint_coverage, check_bom_lifecycle, check_bom_stock, check_footprint_datasheet_match, check_mounting_clearance, check_high_current_paths, check_audio_signal_chain and check_manufacturability with provenance/errors and read-only source contract.\n\n## Acceptance criteria\n\n- [ ] Specify check_power_tree, check_decoupling, check_pin_electrical_types, check_fpga_banks, check_connector_protection, check_clock_topology, check_testpoint_coverage, check_bom_lifecycle, check_bom_stock, check_footprint_datasheet_match, check_mounting_clearance, check_high_current_paths, check_audio_signal_chain and check_manufacturability with provenance/errors and read-only source contract.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #2: P0 \u2014 Implement verification result and report model\n- #11: P0 \u2014 Define KiCad MCP abstraction boundary\n- #13: P1 \u2014 Implement board/schematic state snapshot abstraction\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 67,
+      "url": "https://github.com/KrasForge/Kanon/issues/67"
+    },
+    {
+      "id": 68,
+      "title": "P1 \u2014 Implement initial `pcb-verifier` MCP server",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "priority:P1",
+        "area:mcp",
+        "area:verification",
+        "type:integration"
+      ],
+      "scope": "Expose only checks backed by working implementations via the approved API; enforce read-only design access, bounded execution and explicit unavailable/error results. Add tools incrementally after check qualification.",
+      "dependencies": [
+        67,
+        12,
+        16
+      ],
+      "body": "## Motivation\n\nImplement initial `pcb-verifier` MCP server is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nExpose only checks backed by working implementations via the approved API; enforce read-only design access, bounded execution and explicit unavailable/error results. Add tools incrementally after check qualification.\n\n## Acceptance criteria\n\n- [ ] Expose only checks backed by working implementations via the approved API; enforce read-only design access, bounded execution and explicit unavailable/error results. Add tools incrementally after check qualification.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #67: P1 \u2014 Design read-only `pcb-verifier` MCP API\n- #12: P0 \u2014 Enforce read-only reviewer tool policy\n- #16: P0 \u2014 Validate manufacturer part-number completeness\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #82\n",
+      "number": 68,
+      "url": "https://github.com/KrasForge/Kanon/issues/68"
+    },
+    {
+      "id": 69,
+      "title": "P0 \u2014 Add unit-test and Ruff CI",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "priority:P0",
+        "area:ci",
+        "type:test"
+      ],
+      "scope": "Harden initial Python >=3.12 pytest/Ruff workflow, dependency reproducibility and failure reporting; tests run without KiCad/ngspice and integration omissions are explicit.",
+      "dependencies": [
+        2
+      ],
+      "body": "## Motivation\n\nAdd unit-test and Ruff CI is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nHarden initial Python >=3.12 pytest/Ruff workflow, dependency reproducibility and failure reporting; tests run without KiCad/ngspice and integration omissions are explicit.\n\n## Acceptance criteria\n\n- [ ] Harden initial Python >=3.12 pytest/Ruff workflow, dependency reproducibility and failure reporting; tests run without KiCad/ngspice and integration omissions are explicit.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #77\n",
+      "number": 69,
+      "url": "https://github.com/KrasForge/Kanon/issues/69"
+    },
+    {
+      "id": 70,
+      "title": "P1 \u2014 Add KiCad integration-test job",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "priority:P1",
+        "area:ci",
+        "area:kicad",
+        "type:test"
+      ],
+      "scope": "Provide a reliable pinned/qualified KiCad 10 environment and valid schematic/PCB fixtures for ERC/DRC/export success and known failures; never label mocked execution as integration coverage.",
+      "dependencies": [
+        7,
+        8,
+        9,
+        10,
+        69
+      ],
+      "body": "## Motivation\n\nAdd KiCad integration-test job is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nProvide a reliable pinned/qualified KiCad 10 environment and valid schematic/PCB fixtures for ERC/DRC/export success and known failures; never label mocked execution as integration coverage.\n\n## Acceptance criteria\n\n- [ ] Provide a reliable pinned/qualified KiCad 10 environment and valid schematic/PCB fixtures for ERC/DRC/export success and known failures; never label mocked execution as integration coverage.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #7: P0 \u2014 Implement robust `kicad-cli` adapter\n- #8: P0 \u2014 Implement schematic ERC verification\n- #9: P0 \u2014 Implement PCB DRC verification\n- #10: P0 \u2014 Implement deterministic manufacturing exports\n- #69: P0 \u2014 Add unit-test and Ruff CI\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #78\n",
+      "number": 70,
+      "url": "https://github.com/KrasForge/Kanon/issues/70"
+    },
+    {
+      "id": 71,
+      "title": "P1 \u2014 Add ngspice integration tests",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:ci",
+        "area:simulation",
+        "type:test"
+      ],
+      "scope": "Run real batch simulation with representative measure success/failure fixtures, include errors and limit violations; skip explicitly only when tool is unavailable outside qualified CI.",
+      "dependencies": [
+        28,
+        29,
+        69
+      ],
+      "body": "## Motivation\n\nAdd ngspice integration tests is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nRun real batch simulation with representative measure success/failure fixtures, include errors and limit violations; skip explicitly only when tool is unavailable outside qualified CI.\n\n## Acceptance criteria\n\n- [ ] Run real batch simulation with representative measure success/failure fixtures, include errors and limit violations; skip explicitly only when tool is unavailable outside qualified CI.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #28: P0 \u2014 Implement ngspice process adapter\n- #29: P1 \u2014 Add declarative simulation assertions\n- #69: P0 \u2014 Add unit-test and Ruff CI\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 71,
+      "url": "https://github.com/KrasForge/Kanon/issues/71"
+    },
+    {
+      "id": 72,
+      "title": "P1 \u2014 Add golden verification-report tests",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "priority:P1",
+        "area:ci",
+        "area:verification",
+        "type:test"
+      ],
+      "scope": "Add stable serialized PASS/FAIL/WARN/SKIP/ERROR fixtures, mandatory/optional/manual aggregation and stale/duplicate evidence cases with deliberate schema migration review.",
+      "dependencies": [
+        2,
+        3,
+        69
+      ],
+      "body": "## Motivation\n\nAdd golden verification-report tests is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nAdd stable serialized PASS/FAIL/WARN/SKIP/ERROR fixtures, mandatory/optional/manual aggregation and stale/duplicate evidence cases with deliberate schema migration review.\n\n## Acceptance criteria\n\n- [ ] Add stable serialized PASS/FAIL/WARN/SKIP/ERROR fixtures, mandatory/optional/manual aggregation and stale/duplicate evidence cases with deliberate schema migration review.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #2: P0 \u2014 Implement verification result and report model\n- #3: P0 \u2014 Implement configurable release-gate engine\n- #69: P0 \u2014 Add unit-test and Ruff CI\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #79\n",
+      "number": 72,
+      "url": "https://github.com/KrasForge/Kanon/issues/72"
+    },
+    {
+      "id": 73,
+      "title": "P1 \u2014 Add end-to-end minimal-board test",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P1",
+        "area:ci",
+        "type:test"
+      ],
+      "scope": "Reproducibly exercise spec validation, real qualified checks and release report; distinguish spec-only foundation test from completed schematic/PCB/release path and assert blocked incomplete inputs.",
+      "dependencies": [
+        53,
+        70,
+        72
+      ],
+      "body": "## Motivation\n\nAdd end-to-end minimal-board test is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nReproducibly exercise spec validation, real qualified checks and release report; distinguish spec-only foundation test from completed schematic/PCB/release path and assert blocked incomplete inputs.\n\n## Acceptance criteria\n\n- [ ] Reproducibly exercise spec validation, real qualified checks and release report; distinguish spec-only foundation test from completed schematic/PCB/release path and assert blocked incomplete inputs.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #53: P0 \u2014 Implement release command\n- #70: P1 \u2014 Add KiCad integration-test job\n- #72: P1 \u2014 Add golden verification-report tests\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 73,
+      "url": "https://github.com/KrasForge/Kanon/issues/73"
+    },
+    {
+      "id": 74,
+      "title": "P0 \u2014 Write architecture documentation",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "priority:P0",
+        "area:docs",
+        "type:feature"
+      ],
+      "scope": "Maintain trust-boundary/lifecycle/evidence diagrams, capability matrix and current implementation status; explain why generative success and export success are not verification.",
+      "dependencies": [
+        1,
+        2
+      ],
+      "body": "## Motivation\n\nWrite architecture documentation is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nMaintain trust-boundary/lifecycle/evidence diagrams, capability matrix and current implementation status; explain why generative success and export success are not verification.\n\n## Acceptance criteria\n\n- [ ] Maintain trust-boundary/lifecycle/evidence diagrams, capability matrix and current implementation status; explain why generative success and export success are not verification.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #1: P0 \u2014 Define canonical PCB design specification schema\n- #2: P0 \u2014 Implement verification result and report model\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #77\n",
+      "number": 74,
+      "url": "https://github.com/KrasForge/Kanon/issues/74"
+    },
+    {
+      "id": 75,
+      "title": "P0 \u2014 Document local development setup",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "priority:P0",
+        "area:docs",
+        "type:feature"
+      ],
+      "scope": "Validate clean Python/KiCad/ngspice/Git/MCP and optional FreeCAD setup, tests and missing-dependency behavior; distinguish repository contracts from deployable harness configuration.",
+      "dependencies": [
+        4,
+        69
+      ],
+      "body": "## Motivation\n\nDocument local development setup is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nValidate clean Python/KiCad/ngspice/Git/MCP and optional FreeCAD setup, tests and missing-dependency behavior; distinguish repository contracts from deployable harness configuration.\n\n## Acceptance criteria\n\n- [ ] Validate clean Python/KiCad/ngspice/Git/MCP and optional FreeCAD setup, tests and missing-dependency behavior; distinguish repository contracts from deployable harness configuration.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #4: P0 \u2014 Implement environment diagnostics\n- #69: P0 \u2014 Add unit-test and Ruff CI\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #77\n",
+      "number": 75,
+      "url": "https://github.com/KrasForge/Kanon/issues/75"
+    },
+    {
+      "id": 76,
+      "title": "P1 \u2014 Write \u201cDesign a board with Astra\u201d walkthrough",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "priority:P1",
+        "area:docs",
+        "type:feature"
+      ],
+      "scope": "Demonstrate spec\u2192architecture\u2192schematic\u2192PCB\u2192independent review\u2192release using reproducible artifacts only after dependencies work; keep current spec-only path explicitly limited.",
+      "dependencies": [
+        14,
+        38,
+        53,
+        73
+      ],
+      "body": "## Motivation\n\nWrite \u201cDesign a board with Astra\u201d walkthrough is needed to make the PCB workflow evidence-driven and reviewable. The initialization provides only the capabilities documented in README; this issue tracks the complete acceptance scope.\n\n## Scope\n\nDemonstrate spec\u2192architecture\u2192schematic\u2192PCB\u2192independent review\u2192release using reproducible artifacts only after dependencies work; keep current spec-only path explicitly limited.\n\n## Acceptance criteria\n\n- [ ] Demonstrate spec\u2192architecture\u2192schematic\u2192PCB\u2192independent review\u2192release using reproducible artifacts only after dependencies work; keep current spec-only path explicitly limited.\n- [ ] Document supported inputs, limitations and explicit unknown/error behavior.\n- [ ] Attach reproducible evidence satisfying this issue; scaffolding alone does not close it.\n\n## Tests/verification\n\nAdd valid, invalid, boundary and unavailable-input fixtures for this scope. Assert structured diagnostics and provenance; run pytest and Ruff. External tool tests must use qualified versions and explicit integration markers, with mocks identified as unit tests.\n\n## Dependencies\n\n- #14: P1 \u2014 Add design mutation \u2192 verify workflow\n- #38: P0 \u2014 Implement independent reviewer workflow\n- #53: P0 \u2014 Implement release command\n- #73: P1 \u2014 Add end-to-end minimal-board test\n\n## Non-goals\n\nNo fabrication ordering, silent design changes, or success responses for unimplemented analysis. Unrelated domain checks remain separate issues.\n\nMilestone tracker: #81\n",
+      "number": 76,
+      "url": "https://github.com/KrasForge/Kanon/issues/76"
+    }
+  ],
+  "tracking": [
+    {
+      "title": "M0 tracking \u2014 Foundation",
+      "number": 77,
+      "url": "https://github.com/KrasForge/Kanon/issues/77",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #1 \u2014 P0 \u2014 Define canonical PCB design specification schema\n- [ ] #2 \u2014 P0 \u2014 Implement verification result and report model\n- [ ] #3 \u2014 P0 \u2014 Implement configurable release-gate engine\n- [ ] #4 \u2014 P0 \u2014 Implement environment diagnostics\n- [ ] #5 \u2014 P1 \u2014 Define engineering decision record model\n- [ ] #6 \u2014 P1 \u2014 Define structured engineering review/finding schema\n- [ ] #69 \u2014 P0 \u2014 Add unit-test and Ruff CI\n- [ ] #74 \u2014 P0 \u2014 Write architecture documentation\n- [ ] #75 \u2014 P0 \u2014 Document local development setup\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing.",
+      "milestone": "M0 \u2013 Foundation",
+      "labels": [
+        "type:meta"
+      ]
+    },
+    {
+      "title": "M1 tracking \u2014 KiCad Closed Loop",
+      "number": 78,
+      "url": "https://github.com/KrasForge/Kanon/issues/78",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #7 \u2014 P0 \u2014 Implement robust `kicad-cli` adapter\n- [ ] #8 \u2014 P0 \u2014 Implement schematic ERC verification\n- [ ] #9 \u2014 P0 \u2014 Implement PCB DRC verification\n- [ ] #10 \u2014 P0 \u2014 Implement deterministic manufacturing exports\n- [ ] #11 \u2014 P0 \u2014 Define KiCad MCP abstraction boundary\n- [ ] #12 \u2014 P0 \u2014 Enforce read-only reviewer tool policy\n- [ ] #13 \u2014 P1 \u2014 Implement board/schematic state snapshot abstraction\n- [ ] #14 \u2014 P1 \u2014 Add design mutation \u2192 verify workflow\n- [ ] #70 \u2014 P1 \u2014 Add KiCad integration-test job\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing.",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "labels": [
+        "type:meta"
+      ]
+    },
+    {
+      "title": "M2 tracking \u2014 Engineering Verification",
+      "number": 79,
+      "url": "https://github.com/KrasForge/Kanon/issues/79",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #15 \u2014 P0 \u2014 Implement canonical BOM model and importer\n- [ ] #16 \u2014 P0 \u2014 Validate manufacturer part-number completeness\n- [ ] #17 \u2014 P1 \u2014 Implement BOM normalization and inconsistency checks\n- [ ] #18 \u2014 P1 \u2014 Add JLCPCB/LCSC sourcing adapter\n- [ ] #19 \u2014 P1 \u2014 Add part lifecycle and sourcing-risk model\n- [ ] #21 \u2014 P0 \u2014 Implement FPGA bank-voltage validator\n- [ ] #22 \u2014 P0 \u2014 Implement power-tree model\n- [ ] #23 \u2014 P1 \u2014 Implement regulator power/thermal calculation checks\n- [ ] #24 \u2014 P1 \u2014 Implement decoupling audit framework\n- [ ] #25 \u2014 P1 \u2014 Implement connector protection audit\n- [ ] #26 \u2014 P1 \u2014 Implement test-point coverage audit\n- [ ] #28 \u2014 P0 \u2014 Implement ngspice process adapter\n- [ ] #29 \u2014 P1 \u2014 Add declarative simulation assertions\n- [ ] #30 \u2014 P1 \u2014 Add audio filter simulation workflow\n- [ ] #31 \u2014 P1 \u2014 Add power-circuit simulation workflow\n- [ ] #32 \u2014 P0 \u2014 Implement datasheet evidence model\n- [ ] #33 \u2014 P1 \u2014 Build local datasheet registry\n- [ ] #34 \u2014 P1 \u2014 Associate verified constraints with evidence\n- [ ] #71 \u2014 P1 \u2014 Add ngspice integration tests\n- [ ] #72 \u2014 P1 \u2014 Add golden verification-report tests\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing.",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "labels": [
+        "type:meta"
+      ]
+    },
+    {
+      "title": "M3 tracking \u2014 Agentic PCB Designer",
+      "number": 80,
+      "url": "https://github.com/KrasForge/Kanon/issues/80",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #36 \u2014 P0 \u2014 Implement design lifecycle state machine\n- [ ] #37 \u2014 P0 \u2014 Implement Architect/Designer/Reviewer role definitions\n- [ ] #38 \u2014 P0 \u2014 Implement independent reviewer workflow\n- [ ] #39 \u2014 P1 \u2014 Implement review \u2192 remediation loop\n- [ ] #40 \u2014 P1 \u2014 Add critical-net classification\n- [ ] #41 \u2014 P1 \u2014 Enforce critical-net review before release\n- [ ] #43 \u2014 P1 \u2014 Define PCB floorplanning model\n- [ ] #44 \u2014 P1 \u2014 Implement placement-rule checks\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing.",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "labels": [
+        "type:meta"
+      ]
+    },
+    {
+      "title": "M4 tracking \u2014 Manufacturing Release",
+      "number": 81,
+      "url": "https://github.com/KrasForge/Kanon/issues/81",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #47 \u2014 P1 \u2014 Implement STEP-export verification pipeline\n- [ ] #48 \u2014 P1 \u2014 Add FreeCAD MCP integration profile\n- [ ] #49 \u2014 P1 \u2014 Implement mechanical constraint representation\n- [ ] #51 \u2014 P0 \u2014 Implement manufacturing profile schema\n- [ ] #52 \u2014 P0 \u2014 Build release artifact manifest\n- [ ] #53 \u2014 P0 \u2014 Implement release command\n- [ ] #54 \u2014 P1 \u2014 Implement configurable DFM rules\n- [ ] #55 \u2014 P1 \u2014 Add fabrication-output consistency tests\n- [ ] #56 \u2014 P1 \u2014 Add visual Gerber review workflow\n- [ ] #73 \u2014 P1 \u2014 Add end-to-end minimal-board test\n- [ ] #76 \u2014 P1 \u2014 Write \u201cDesign a board with Astra\u201d walkthrough\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing.",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "labels": [
+        "type:meta"
+      ]
+    },
+    {
+      "title": "M5 tracking \u2014 Advanced Engineering",
+      "number": 82,
+      "url": "https://github.com/KrasForge/Kanon/issues/82",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #20 \u2014 P2 \u2014 Implement alternate-part compatibility representation\n- [ ] #27 \u2014 P2 \u2014 Implement clock-topology checker\n- [ ] #35 \u2014 P2 \u2014 Research reliable datasheet ingestion/extraction pipeline\n- [ ] #42 \u2014 P2 \u2014 Add engineering change-plan representation\n- [ ] #45 \u2014 P2 \u2014 Research return-path analysis\n- [ ] #46 \u2014 P2 \u2014 Research automatic critical-net routing strategies\n- [ ] #50 \u2014 P2 \u2014 Implement mechanical collision review\n- [ ] #57 \u2014 P1 \u2014 Implement audio signal-chain specification model\n- [ ] #58 \u2014 P1 \u2014 Implement gain/headroom audit\n- [ ] #59 \u2014 P2 \u2014 Implement audio noise-budget model\n- [ ] #60 \u2014 P2 \u2014 Implement op-amp configuration checks\n- [ ] #61 \u2014 P0 \u2014 Complete FPGA pin-plan validator\n- [ ] #62 \u2014 P1 \u2014 Add FPGA power-sequencing representation\n- [ ] #63 \u2014 P1 \u2014 Add FPGA configuration/boot audit\n- [ ] #64 \u2014 P1 \u2014 Add FPGA decoupling-rule framework\n- [ ] #65 \u2014 P2 \u2014 Build PCB visual-review artifact pipeline\n- [ ] #66 \u2014 P2 \u2014 Define visual PCB review rubric\n- [ ] #67 \u2014 P1 \u2014 Design read-only `pcb-verifier` MCP API\n- [ ] #68 \u2014 P1 \u2014 Implement initial `pcb-verifier` MCP server\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing.",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "labels": [
+        "type:meta"
+      ]
+    }
+  ]
+}

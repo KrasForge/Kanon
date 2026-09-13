@@ -1,0 +1,894 @@
+{
+  "issues": {
+    "1": {
+      "number": 1,
+      "id": 5441558838,
+      "url": "https://github.com/KrasForge/Kanon/issues/1",
+      "linked_body": true,
+      "subissue": true
+    },
+    "2": {
+      "number": 2,
+      "id": 5441559132,
+      "url": "https://github.com/KrasForge/Kanon/issues/2",
+      "linked_body": true,
+      "subissue": true
+    },
+    "3": {
+      "number": 3,
+      "id": 5441559284,
+      "url": "https://github.com/KrasForge/Kanon/issues/3",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        2
+      ]
+    },
+    "4": {
+      "number": 4,
+      "id": 5441559441,
+      "url": "https://github.com/KrasForge/Kanon/issues/4",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        2
+      ]
+    },
+    "5": {
+      "number": 5,
+      "id": 5441559601,
+      "url": "https://github.com/KrasForge/Kanon/issues/5",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1
+      ]
+    },
+    "6": {
+      "number": 6,
+      "id": 5441559770,
+      "url": "https://github.com/KrasForge/Kanon/issues/6",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        2
+      ]
+    },
+    "7": {
+      "number": 7,
+      "id": 5441559935,
+      "url": "https://github.com/KrasForge/Kanon/issues/7",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        2,
+        4
+      ]
+    },
+    "8": {
+      "number": 8,
+      "id": 5441560198,
+      "url": "https://github.com/KrasForge/Kanon/issues/8",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        7,
+        2
+      ]
+    },
+    "9": {
+      "number": 9,
+      "id": 5441560437,
+      "url": "https://github.com/KrasForge/Kanon/issues/9",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        7,
+        2
+      ]
+    },
+    "10": {
+      "number": 10,
+      "id": 5441560602,
+      "url": "https://github.com/KrasForge/Kanon/issues/10",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        7
+      ]
+    },
+    "11": {
+      "number": 11,
+      "id": 5441560783,
+      "url": "https://github.com/KrasForge/Kanon/issues/11",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        4
+      ]
+    },
+    "12": {
+      "number": 12,
+      "id": 5441560943,
+      "url": "https://github.com/KrasForge/Kanon/issues/12",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        11
+      ]
+    },
+    "13": {
+      "number": 13,
+      "id": 5441561095,
+      "url": "https://github.com/KrasForge/Kanon/issues/13",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        7,
+        11
+      ]
+    },
+    "14": {
+      "number": 14,
+      "id": 5441561373,
+      "url": "https://github.com/KrasForge/Kanon/issues/14",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        8,
+        9,
+        13
+      ]
+    },
+    "15": {
+      "number": 15,
+      "id": 5441561566,
+      "url": "https://github.com/KrasForge/Kanon/issues/15",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1
+      ]
+    },
+    "16": {
+      "number": 16,
+      "id": 5441561691,
+      "url": "https://github.com/KrasForge/Kanon/issues/16",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        15,
+        2
+      ]
+    },
+    "17": {
+      "number": 17,
+      "id": 5441561862,
+      "url": "https://github.com/KrasForge/Kanon/issues/17",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        15
+      ]
+    },
+    "18": {
+      "number": 18,
+      "id": 5441562038,
+      "url": "https://github.com/KrasForge/Kanon/issues/18",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        15,
+        11
+      ]
+    },
+    "19": {
+      "number": 19,
+      "id": 5441562190,
+      "url": "https://github.com/KrasForge/Kanon/issues/19",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        15,
+        18
+      ]
+    },
+    "20": {
+      "number": 20,
+      "id": 5441562305,
+      "url": "https://github.com/KrasForge/Kanon/issues/20",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        15,
+        34
+      ]
+    },
+    "21": {
+      "number": 21,
+      "id": 5441562599,
+      "url": "https://github.com/KrasForge/Kanon/issues/21",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1,
+        34
+      ]
+    },
+    "22": {
+      "number": 22,
+      "id": 5441562750,
+      "url": "https://github.com/KrasForge/Kanon/issues/22",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1
+      ]
+    },
+    "23": {
+      "number": 23,
+      "id": 5441562885,
+      "url": "https://github.com/KrasForge/Kanon/issues/23",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        22,
+        34
+      ]
+    },
+    "24": {
+      "number": 24,
+      "id": 5441563033,
+      "url": "https://github.com/KrasForge/Kanon/issues/24",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        13,
+        34
+      ]
+    },
+    "25": {
+      "number": 25,
+      "id": 5441563169,
+      "url": "https://github.com/KrasForge/Kanon/issues/25",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1,
+        13,
+        34
+      ]
+    },
+    "26": {
+      "number": 26,
+      "id": 5441563307,
+      "url": "https://github.com/KrasForge/Kanon/issues/26",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1,
+        13
+      ]
+    },
+    "27": {
+      "number": 27,
+      "id": 5441563601,
+      "url": "https://github.com/KrasForge/Kanon/issues/27",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1,
+        13,
+        34
+      ]
+    },
+    "28": {
+      "number": 28,
+      "id": 5441563740,
+      "url": "https://github.com/KrasForge/Kanon/issues/28",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        2,
+        4
+      ]
+    },
+    "29": {
+      "number": 29,
+      "id": 5441563899,
+      "url": "https://github.com/KrasForge/Kanon/issues/29",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        28,
+        2
+      ]
+    },
+    "30": {
+      "number": 30,
+      "id": 5441564075,
+      "url": "https://github.com/KrasForge/Kanon/issues/30",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        28,
+        29
+      ]
+    },
+    "31": {
+      "number": 31,
+      "id": 5441564213,
+      "url": "https://github.com/KrasForge/Kanon/issues/31",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        28,
+        29,
+        22
+      ]
+    },
+    "32": {
+      "number": 32,
+      "id": 5441564373,
+      "url": "https://github.com/KrasForge/Kanon/issues/32",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        2
+      ]
+    },
+    "33": {
+      "number": 33,
+      "id": 5441564688,
+      "url": "https://github.com/KrasForge/Kanon/issues/33",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        32
+      ]
+    },
+    "34": {
+      "number": 34,
+      "id": 5441564850,
+      "url": "https://github.com/KrasForge/Kanon/issues/34",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        32,
+        33
+      ]
+    },
+    "35": {
+      "number": 35,
+      "id": 5441565016,
+      "url": "https://github.com/KrasForge/Kanon/issues/35",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        33
+      ]
+    },
+    "36": {
+      "number": 36,
+      "id": 5441565183,
+      "url": "https://github.com/KrasForge/Kanon/issues/36",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        3,
+        13
+      ]
+    },
+    "37": {
+      "number": 37,
+      "id": 5441565319,
+      "url": "https://github.com/KrasForge/Kanon/issues/37",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        11,
+        12
+      ]
+    },
+    "38": {
+      "number": 38,
+      "id": 5441565483,
+      "url": "https://github.com/KrasForge/Kanon/issues/38",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        6,
+        12,
+        13,
+        37
+      ]
+    },
+    "39": {
+      "number": 39,
+      "id": 5441565796,
+      "url": "https://github.com/KrasForge/Kanon/issues/39",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        14,
+        38
+      ]
+    },
+    "40": {
+      "number": 40,
+      "id": 5441565939,
+      "url": "https://github.com/KrasForge/Kanon/issues/40",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1,
+        13
+      ]
+    },
+    "41": {
+      "number": 41,
+      "id": 5441566089,
+      "url": "https://github.com/KrasForge/Kanon/issues/41",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        40,
+        38,
+        3
+      ]
+    },
+    "42": {
+      "number": 42,
+      "id": 5441566254,
+      "url": "https://github.com/KrasForge/Kanon/issues/42",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        13,
+        36
+      ]
+    },
+    "43": {
+      "number": 43,
+      "id": 5441566404,
+      "url": "https://github.com/KrasForge/Kanon/issues/43",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1,
+        13
+      ]
+    },
+    "44": {
+      "number": 44,
+      "id": 5441566563,
+      "url": "https://github.com/KrasForge/Kanon/issues/44",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        13,
+        24,
+        43
+      ]
+    },
+    "45": {
+      "number": 45,
+      "id": 5441566866,
+      "url": "https://github.com/KrasForge/Kanon/issues/45",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        13,
+        40
+      ]
+    },
+    "46": {
+      "number": 46,
+      "id": 5441567018,
+      "url": "https://github.com/KrasForge/Kanon/issues/46",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        14,
+        40,
+        43
+      ]
+    },
+    "47": {
+      "number": 47,
+      "id": 5441567168,
+      "url": "https://github.com/KrasForge/Kanon/issues/47",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        10,
+        13
+      ]
+    },
+    "48": {
+      "number": 48,
+      "id": 5441567362,
+      "url": "https://github.com/KrasForge/Kanon/issues/48",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        11,
+        12
+      ]
+    },
+    "49": {
+      "number": 49,
+      "id": 5441567528,
+      "url": "https://github.com/KrasForge/Kanon/issues/49",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1
+      ]
+    },
+    "50": {
+      "number": 50,
+      "id": 5441567682,
+      "url": "https://github.com/KrasForge/Kanon/issues/50",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        47,
+        48,
+        49
+      ]
+    },
+    "51": {
+      "number": 51,
+      "id": 5441568008,
+      "url": "https://github.com/KrasForge/Kanon/issues/51",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1,
+        32
+      ]
+    },
+    "52": {
+      "number": 52,
+      "id": 5441568183,
+      "url": "https://github.com/KrasForge/Kanon/issues/52",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        10,
+        13,
+        51
+      ]
+    },
+    "53": {
+      "number": 53,
+      "id": 5441568346,
+      "url": "https://github.com/KrasForge/Kanon/issues/53",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        3,
+        8,
+        9,
+        10,
+        38,
+        52,
+        54,
+        55
+      ]
+    },
+    "54": {
+      "number": 54,
+      "id": 5441568517,
+      "url": "https://github.com/KrasForge/Kanon/issues/54",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        13,
+        51
+      ]
+    },
+    "55": {
+      "number": 55,
+      "id": 5441568674,
+      "url": "https://github.com/KrasForge/Kanon/issues/55",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        10,
+        52
+      ]
+    },
+    "56": {
+      "number": 56,
+      "id": 5441568820,
+      "url": "https://github.com/KrasForge/Kanon/issues/56",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        10,
+        38,
+        55
+      ]
+    },
+    "57": {
+      "number": 57,
+      "id": 5441569113,
+      "url": "https://github.com/KrasForge/Kanon/issues/57",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1,
+        34
+      ]
+    },
+    "58": {
+      "number": 58,
+      "id": 5441569254,
+      "url": "https://github.com/KrasForge/Kanon/issues/58",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        57,
+        34
+      ]
+    },
+    "59": {
+      "number": 59,
+      "id": 5441569398,
+      "url": "https://github.com/KrasForge/Kanon/issues/59",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        57,
+        34
+      ]
+    },
+    "60": {
+      "number": 60,
+      "id": 5441569556,
+      "url": "https://github.com/KrasForge/Kanon/issues/60",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        57,
+        34
+      ]
+    },
+    "61": {
+      "number": 61,
+      "id": 5441569718,
+      "url": "https://github.com/KrasForge/Kanon/issues/61",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        21,
+        34
+      ]
+    },
+    "62": {
+      "number": 62,
+      "id": 5441569986,
+      "url": "https://github.com/KrasForge/Kanon/issues/62",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        22,
+        34
+      ]
+    },
+    "63": {
+      "number": 63,
+      "id": 5441570203,
+      "url": "https://github.com/KrasForge/Kanon/issues/63",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        61,
+        34
+      ]
+    },
+    "64": {
+      "number": 64,
+      "id": 5441570354,
+      "url": "https://github.com/KrasForge/Kanon/issues/64",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        24,
+        34,
+        61
+      ]
+    },
+    "65": {
+      "number": 65,
+      "id": 5441570500,
+      "url": "https://github.com/KrasForge/Kanon/issues/65",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        13,
+        47
+      ]
+    },
+    "66": {
+      "number": 66,
+      "id": 5441570669,
+      "url": "https://github.com/KrasForge/Kanon/issues/66",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        65,
+        6
+      ]
+    },
+    "67": {
+      "number": 67,
+      "id": 5441570826,
+      "url": "https://github.com/KrasForge/Kanon/issues/67",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        2,
+        11,
+        13
+      ]
+    },
+    "68": {
+      "number": 68,
+      "id": 5441571125,
+      "url": "https://github.com/KrasForge/Kanon/issues/68",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        67,
+        12,
+        16
+      ]
+    },
+    "69": {
+      "number": 69,
+      "id": 5441571290,
+      "url": "https://github.com/KrasForge/Kanon/issues/69",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        2
+      ]
+    },
+    "70": {
+      "number": 70,
+      "id": 5441571437,
+      "url": "https://github.com/KrasForge/Kanon/issues/70",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        7,
+        8,
+        9,
+        10,
+        69
+      ]
+    },
+    "71": {
+      "number": 71,
+      "id": 5441571599,
+      "url": "https://github.com/KrasForge/Kanon/issues/71",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        28,
+        29,
+        69
+      ]
+    },
+    "72": {
+      "number": 72,
+      "id": 5441571764,
+      "url": "https://github.com/KrasForge/Kanon/issues/72",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        2,
+        3,
+        69
+      ]
+    },
+    "73": {
+      "number": 73,
+      "id": 5441571914,
+      "url": "https://github.com/KrasForge/Kanon/issues/73",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        53,
+        70,
+        72
+      ]
+    },
+    "74": {
+      "number": 74,
+      "id": 5441572067,
+      "url": "https://github.com/KrasForge/Kanon/issues/74",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        1,
+        2
+      ]
+    },
+    "75": {
+      "number": 75,
+      "id": 5441572368,
+      "url": "https://github.com/KrasForge/Kanon/issues/75",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        4,
+        69
+      ]
+    },
+    "76": {
+      "number": 76,
+      "id": 5441572542,
+      "url": "https://github.com/KrasForge/Kanon/issues/76",
+      "linked_body": true,
+      "subissue": true,
+      "linked_dependencies": [
+        14,
+        38,
+        53,
+        73
+      ]
+    }
+  },
+  "tracking": {
+    "M0 \u2013 Foundation": {
+      "number": 77,
+      "id": 5441572700,
+      "url": "https://github.com/KrasForge/Kanon/issues/77",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #1 \u2014 P0 \u2014 Define canonical PCB design specification schema\n- [ ] #2 \u2014 P0 \u2014 Implement verification result and report model\n- [ ] #3 \u2014 P0 \u2014 Implement configurable release-gate engine\n- [ ] #4 \u2014 P0 \u2014 Implement environment diagnostics\n- [ ] #5 \u2014 P1 \u2014 Define engineering decision record model\n- [ ] #6 \u2014 P1 \u2014 Define structured engineering review/finding schema\n- [ ] #69 \u2014 P0 \u2014 Add unit-test and Ruff CI\n- [ ] #74 \u2014 P0 \u2014 Write architecture documentation\n- [ ] #75 \u2014 P0 \u2014 Document local development setup\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing."
+    },
+    "M1 \u2013 KiCad Closed Loop": {
+      "number": 78,
+      "id": 5441572881,
+      "url": "https://github.com/KrasForge/Kanon/issues/78",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #7 \u2014 P0 \u2014 Implement robust `kicad-cli` adapter\n- [ ] #8 \u2014 P0 \u2014 Implement schematic ERC verification\n- [ ] #9 \u2014 P0 \u2014 Implement PCB DRC verification\n- [ ] #10 \u2014 P0 \u2014 Implement deterministic manufacturing exports\n- [ ] #11 \u2014 P0 \u2014 Define KiCad MCP abstraction boundary\n- [ ] #12 \u2014 P0 \u2014 Enforce read-only reviewer tool policy\n- [ ] #13 \u2014 P1 \u2014 Implement board/schematic state snapshot abstraction\n- [ ] #14 \u2014 P1 \u2014 Add design mutation \u2192 verify workflow\n- [ ] #70 \u2014 P1 \u2014 Add KiCad integration-test job\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing."
+    },
+    "M2 \u2013 Engineering Verification": {
+      "number": 79,
+      "id": 5441573036,
+      "url": "https://github.com/KrasForge/Kanon/issues/79",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #15 \u2014 P0 \u2014 Implement canonical BOM model and importer\n- [ ] #16 \u2014 P0 \u2014 Validate manufacturer part-number completeness\n- [ ] #17 \u2014 P1 \u2014 Implement BOM normalization and inconsistency checks\n- [ ] #18 \u2014 P1 \u2014 Add JLCPCB/LCSC sourcing adapter\n- [ ] #19 \u2014 P1 \u2014 Add part lifecycle and sourcing-risk model\n- [ ] #21 \u2014 P0 \u2014 Implement FPGA bank-voltage validator\n- [ ] #22 \u2014 P0 \u2014 Implement power-tree model\n- [ ] #23 \u2014 P1 \u2014 Implement regulator power/thermal calculation checks\n- [ ] #24 \u2014 P1 \u2014 Implement decoupling audit framework\n- [ ] #25 \u2014 P1 \u2014 Implement connector protection audit\n- [ ] #26 \u2014 P1 \u2014 Implement test-point coverage audit\n- [ ] #28 \u2014 P0 \u2014 Implement ngspice process adapter\n- [ ] #29 \u2014 P1 \u2014 Add declarative simulation assertions\n- [ ] #30 \u2014 P1 \u2014 Add audio filter simulation workflow\n- [ ] #31 \u2014 P1 \u2014 Add power-circuit simulation workflow\n- [ ] #32 \u2014 P0 \u2014 Implement datasheet evidence model\n- [ ] #33 \u2014 P1 \u2014 Build local datasheet registry\n- [ ] #34 \u2014 P1 \u2014 Associate verified constraints with evidence\n- [ ] #71 \u2014 P1 \u2014 Add ngspice integration tests\n- [ ] #72 \u2014 P1 \u2014 Add golden verification-report tests\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing."
+    },
+    "M3 \u2013 Agentic PCB Designer": {
+      "number": 80,
+      "id": 5441573184,
+      "url": "https://github.com/KrasForge/Kanon/issues/80",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #36 \u2014 P0 \u2014 Implement design lifecycle state machine\n- [ ] #37 \u2014 P0 \u2014 Implement Architect/Designer/Reviewer role definitions\n- [ ] #38 \u2014 P0 \u2014 Implement independent reviewer workflow\n- [ ] #39 \u2014 P1 \u2014 Implement review \u2192 remediation loop\n- [ ] #40 \u2014 P1 \u2014 Add critical-net classification\n- [ ] #41 \u2014 P1 \u2014 Enforce critical-net review before release\n- [ ] #43 \u2014 P1 \u2014 Define PCB floorplanning model\n- [ ] #44 \u2014 P1 \u2014 Implement placement-rule checks\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing."
+    },
+    "M4 \u2013 Manufacturing Release": {
+      "number": 81,
+      "id": 5441573520,
+      "url": "https://github.com/KrasForge/Kanon/issues/81",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #47 \u2014 P1 \u2014 Implement STEP-export verification pipeline\n- [ ] #48 \u2014 P1 \u2014 Add FreeCAD MCP integration profile\n- [ ] #49 \u2014 P1 \u2014 Implement mechanical constraint representation\n- [ ] #51 \u2014 P0 \u2014 Implement manufacturing profile schema\n- [ ] #52 \u2014 P0 \u2014 Build release artifact manifest\n- [ ] #53 \u2014 P0 \u2014 Implement release command\n- [ ] #54 \u2014 P1 \u2014 Implement configurable DFM rules\n- [ ] #55 \u2014 P1 \u2014 Add fabrication-output consistency tests\n- [ ] #56 \u2014 P1 \u2014 Add visual Gerber review workflow\n- [ ] #73 \u2014 P1 \u2014 Add end-to-end minimal-board test\n- [ ] #76 \u2014 P1 \u2014 Write \u201cDesign a board with Astra\u201d walkthrough\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing."
+    },
+    "M5 \u2013 Advanced Engineering": {
+      "number": 82,
+      "id": 5441573677,
+      "url": "https://github.com/KrasForge/Kanon/issues/82",
+      "body": "## Motivation\n\nTrack milestone delivery by demonstrated acceptance, not scaffolding.\n\n## Scope and dependencies\n\n- [ ] #20 \u2014 P2 \u2014 Implement alternate-part compatibility representation\n- [ ] #27 \u2014 P2 \u2014 Implement clock-topology checker\n- [ ] #35 \u2014 P2 \u2014 Research reliable datasheet ingestion/extraction pipeline\n- [ ] #42 \u2014 P2 \u2014 Add engineering change-plan representation\n- [ ] #45 \u2014 P2 \u2014 Research return-path analysis\n- [ ] #46 \u2014 P2 \u2014 Research automatic critical-net routing strategies\n- [ ] #50 \u2014 P2 \u2014 Implement mechanical collision review\n- [ ] #57 \u2014 P1 \u2014 Implement audio signal-chain specification model\n- [ ] #58 \u2014 P1 \u2014 Implement gain/headroom audit\n- [ ] #59 \u2014 P2 \u2014 Implement audio noise-budget model\n- [ ] #60 \u2014 P2 \u2014 Implement op-amp configuration checks\n- [ ] #61 \u2014 P0 \u2014 Complete FPGA pin-plan validator\n- [ ] #62 \u2014 P1 \u2014 Add FPGA power-sequencing representation\n- [ ] #63 \u2014 P1 \u2014 Add FPGA configuration/boot audit\n- [ ] #64 \u2014 P1 \u2014 Add FPGA decoupling-rule framework\n- [ ] #65 \u2014 P2 \u2014 Build PCB visual-review artifact pipeline\n- [ ] #66 \u2014 P2 \u2014 Define visual PCB review rubric\n- [ ] #67 \u2014 P1 \u2014 Design read-only `pcb-verifier` MCP API\n- [ ] #68 \u2014 P1 \u2014 Implement initial `pcb-verifier` MCP server\n\n## Acceptance criteria\n\n- [ ] Every child meets its acceptance criteria with review evidence.\n- [ ] Cross-issue integration is demonstrated and remaining limitations documented.\n\n## Tests/verification\n\nReview child test evidence and run milestone integration checks. No child may be closed solely because an interface or Skill exists.\n\n## Non-goals\n\nThis tracker does not override child dependencies or approve manufacturing."
+    }
+  },
+  "errors": [],
+  "milestones": {
+    "M0 \u2013 Foundation": 1,
+    "M1 \u2013 KiCad Closed Loop": 2,
+    "M2 \u2013 Engineering Verification": 3,
+    "M3 \u2013 Agentic PCB Designer": 4,
+    "M4 \u2013 Manufacturing Release": 5,
+    "M5 \u2013 Advanced Engineering": 6
+  },
+  "complete": true
+}
