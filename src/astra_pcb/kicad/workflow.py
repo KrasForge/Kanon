@@ -39,18 +39,18 @@ def mutate_verify(
     after = capture(root, sources, revision)
     checks = [failure] if failure else []
     adapter = adapter or KiCadCLI()
-    if not failure:
-        for index, path in enumerate(sources):
-            kind = {".kicad_pcb": "drc", ".kicad_sch": "erc"}.get(path.suffix)
-            if not kind:
-                continue
-            report_path = output / f"{index}-{kind}.json"
-            process = adapter.check(kind, root / path, report_path)
-            parsed = interpret(kind, process, report_path, root / path)
-            # Multiple sheets/boards retain unique IDs; project aggregation is explicit.
-            checks.extend(
-                r.model_copy(update={"check_id": f"{index}.{r.check_id}"}) for r in parsed.results
-            )
+    # An exception can occur after a partial edit: still run independent checks.
+    for index, path in enumerate(sources):
+        kind = {".kicad_pcb": "drc", ".kicad_sch": "erc"}.get(path.suffix)
+        if not kind:
+            continue
+        report_path = output / f"{index}-{kind}.json"
+        process = adapter.check(kind, root / path, report_path)
+        parsed = interpret(kind, process, report_path, root / path)
+        # Multiple sheets/boards retain unique IDs; project aggregation is explicit.
+        checks.extend(
+            r.model_copy(update={"check_id": f"{index}.{r.check_id}"}) for r in parsed.results
+        )
     try:
         after.identity.verify(root)
     except ValueError as exc:

@@ -10,7 +10,7 @@
 | BOM | JSON/CSV import, missing MPN/duplicate/conflict checks, public JLCSearch lookup, sourcing risk | Account-gated official supplier API, alternate qualification |
 | Evidence | Content-addressed document registry and cited numeric limits | PDF extraction, authenticity and automatic applicability verification |
 | Electrical checks | Declared FPGA bank, current/thermal, decoupling, connector protection and test-point audits | Automatic native connectivity/geometry extraction for all audits |
-| Agents/MCP | Audited stdio dispatch, pinned inventory, snapshot-only reviewer tools | Model harness and lifecycle orchestration |
+| Agents/MCP | Lifecycle gates, typed roles, frozen review/remediation, critical-net coverage, quantified placement | Live model API transport and OS sandbox for arbitrary agent code |
 | Manufacturing | Unqualified example profile and substantive review guidance | Qualified DFM, output consistency, manifest, release |
 | CI | Passing remote Python and real KiCad/ngspice jobs on M0/M1 PRs; M2 adds simulation/golden regressions | Reproducible live supplier or GUI server in CI |
 

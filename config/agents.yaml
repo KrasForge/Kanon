@@ -1,19 +1,26 @@
-# Harness-neutral contract; not a working orchestrator configuration.
-model: ${ASTRA_MODEL:-gpt-6-astra}
+# Trusted harness role policy. No model API call is made by loading this file.
 roles:
-  architect:
+  - name: architect
+    model: gpt-6-astra
     reasoning: high
-    tools: []
-    intended_capabilities: [design.read, documents.read]
-  designer:
-    tools: []
-    intended_capabilities: [design.read, design.write]
-  reviewer:
-    tools: []
-    intended_capabilities: [snapshot.read, evidence.read]
-    source_mount: read-only
-    mutation_tools: []
+    tools: [snapshot.read, snapshot.objects]
     shell: false
-  release-gate:
+    source_mount: none
+  - name: designer
+    model: gpt-6-astra
+    reasoning: high
+    tools: [board.open, board.read, board.route, board.save, backend.read]
+    shell: false
+    source_mount: read-write
+  - name: reviewer
+    model: gpt-6-astra
+    reasoning: high
+    tools: [snapshot.read, snapshot.objects]
+    shell: false
+    source_mount: none
+  - name: release-gate
     model: null
-    intended_capabilities: [checks.execute, artifacts.write]
+    reasoning: none
+    tools: [checks.execute, artifacts.write]
+    shell: false
+    source_mount: read-only
