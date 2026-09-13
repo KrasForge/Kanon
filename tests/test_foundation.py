@@ -84,14 +84,15 @@ def test_kicad_command_is_independent_and_no_overwrite(monkeypatch, tmp_path):
 
     def fake(command, **kwargs):
         commands.append(command)
-        return ProcessResult(command=tuple(command), exit_code=0)
+        return ProcessResult(command=tuple(command), exit_code=0, stdout="10.0.0")
 
     monkeypatch.setattr("astra_pcb.kicad.run", fake)
+    (tmp_path / "board.kicad_pcb").write_text("fixture")
     output = tmp_path / "drc.json"
     KiCadCLI().check("drc", tmp_path / "board.kicad_pcb", output)
-    assert commands[0][1:3] == ["pcb", "drc"]
-    assert "--exit-code-violations" in commands[0]
-    assert "--save-board" not in commands[0]
+    assert commands[1][1:3] == ["pcb", "drc"]
+    assert "--exit-code-violations" in commands[1]
+    assert "--save-board" not in commands[1]
     output.write_text("{}")
     with pytest.raises(FileExistsError):
         KiCadCLI().check("drc", tmp_path / "board.kicad_pcb", output)

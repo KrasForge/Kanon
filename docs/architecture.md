@@ -17,7 +17,8 @@ and refuse startup when reviewer isolation cannot be enforced. Reviewer allowlis
 empty by default. Do not give reviewer the designer server, generic shell, scripting,
 filesystem-write or MCP passthrough tools. Read-only source mounts and separate credentials
 are required beyond prompt policy. IPC access is optional behind the same adapter boundary.
-No MCP client, proxy enforcement or multi-agent runtime is implemented here.
+M1 adds an audited stdio client and a separate snapshot-only reviewer surface;
+no multi-agent model runtime is implemented yet.
 
 ## Verification semantics
 CheckStatus describes execution/conclusion; severity describes engineering impact. PASS,
@@ -28,8 +29,8 @@ Waivers require an explicitly trusted human signer and per-gate permission (disa
 default). Private signing keys are external to agent tools; see foundation.md. An imported JSON PASS is untrusted aggregation input, not release proof.
 
 KiCad command hooks capture exit status/output/artifacts, refuse existing export targets
-and never turn missing executables into success. JSON violation parsing, exact version
-qualification, complete artifact validation and snapshot binding remain pending. ngspice
+and never turn missing executables into success. M1 parses JSON violations and qualifies KiCad 10, captures export hashes and provides
+persisted-source snapshots. Complete fabrication validation remains in M4. ngspice
 supports process capture and scalar `.measure` parsing; circuit workflows and validated
 models remain pending. BOM checks are offline and do not establish live stock or suitability.
 

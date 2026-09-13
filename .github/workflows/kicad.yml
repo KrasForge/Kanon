@@ -1,0 +1,25 @@
+name: KiCad 10 integration
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  kicad:
+    runs-on: ubuntu-latest
+    container: fedora:44
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install qualification environment
+        run: |
+          dnf -y --setopt=install_weak_deps=False install kicad python3-pip git
+          python3 -m venv /tmp/ci-tools
+          /tmp/ci-tools/bin/pip install uv==0.11.30
+          /tmp/ci-tools/bin/uv sync --locked --extra dev
+      - name: Exercise actual KiCad checks and exports
+        run: |
+          kicad-cli version
+          /tmp/ci-tools/bin/uv run pytest -m integration -ra --basetemp=artifacts/integration-tests
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kicad-integration-evidence
+          path: artifacts/integration-tests/

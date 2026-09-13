@@ -14,6 +14,9 @@ class ProcessResult(StrictModel):
     stderr: str = ""
     error: str | None = None
     artifacts: tuple[str, ...] = ()
+    tool_version: str | None = None
+    input_digest: str | None = None
+    artifact_hashes: dict[str, str] = {}
 
 
 def run(
