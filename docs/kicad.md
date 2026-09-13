@@ -3,10 +3,13 @@
 KiCadCLI supports major version 10 only and invokes the independent executable without a
 shell. Existing output paths (including symlinks) are rejected. Missing inputs/tools,
 unsupported versions, timeouts, mutated source and empty/missing exports are errors.
-Each execution captures command, exit code, stdout/stderr, tool version, source digest,
+Checks and exports execute against a disposable copy of project-native files and models;
+KiCad-created settings remain in that copy. Original input hashes are checked afterward.
+Each execution captures command, exit code, stdout/stderr, tool version, source-bundle digest,
 artifact paths and artifact hashes. Timeout output is retained. Project-level identity
 must additionally include project settings, hierarchies and libraries through Snapshot;
-the command's source digest alone covers only its direct design file.
+the command's source bundle covers native KiCad files and supported 3D models below the
+design directory; externally referenced libraries still need explicit snapshot identity.
 
 `interpret` validates actual KiCad ERC/DRC JSON, source identity, version, report hash and
 all severity categories. Unconnected items and parity findings are included; exclusions

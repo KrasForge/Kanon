@@ -147,6 +147,7 @@ def test_real_kicad_checks_exports_and_mutation(tmp_path):
         output = tmp_path / f"{kind}.json"
         result = adapter.check(kind, design, output)
         assert result.exit_code == 0 and result.error is None
+        assert not list(tmp_path.glob("*.kicad_pro")), "Verifier mutated source project"
         raw = json.loads(output.read_text())
         approved_ignored = frozenset(x["key"] for x in raw["ignored_checks"])
         parsed = interpret(kind, result, output, design, allowed_ignored=approved_ignored)
