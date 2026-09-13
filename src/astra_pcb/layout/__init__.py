@@ -30,6 +30,7 @@ class Region(StrictModel):
         "clocks",
         "other",
     ]
+    strength: Literal["hard", "soft"] = "hard"
     minimum: Point
     maximum: Point
 
@@ -51,12 +52,23 @@ class Placement(StrictModel):
     point: Point
     region: str
     side: Literal["top", "bottom"] = "top"
+    rotation_degrees: float = 0
+
+
+class MechanicalAnchor(StrictModel):
+    reference: str
+    point: Point
+    tolerance_mm: float = Field(ge=0)
+    rotation_degrees: float | None = None
+    rotation_tolerance_degrees: float = Field(default=0, ge=0)
+    evidence: tuple[str, ...] = Field(min_length=1)
 
 
 class Floorplan(StrictModel):
     input_digest: Digest
     regions: tuple[Region, ...] = Field(min_length=1)
     placements: tuple[Placement, ...]
+    anchors: tuple[MechanicalAnchor, ...] = ()
     outline: Region | None = (
         None  # Only a declared rectangular board envelope, not arbitrary Edge.Cuts.
     )
@@ -70,6 +82,8 @@ class Floorplan(StrictModel):
             raise ValueError("Duplicate placement references")
         if any(p.region not in names for p in self.placements):
             raise ValueError("Unknown functional region")
+        if len({a.reference for a in self.anchors}) != len(self.anchors):
+            raise ValueError("Duplicate mechanical anchors")
         return self
 
     def audit(self) -> VerificationReport:
@@ -77,18 +91,49 @@ class Floorplan(StrictModel):
         checks = []
         for placement in self.placements:
             within = regions[placement.region].contains(placement.point)
+            soft = regions[placement.region].strength == "soft"
             if self.outline:
-                within &= self.outline.contains(placement.point)
+                if not self.outline.contains(placement.point):
+                    within = False
+                    soft = False
             checks.append(
                 CheckResult(
                     check_id=f"placement.region.{placement.reference}",
                     name="Functional floorplan placement",
-                    status=CheckStatus.PASS if within else CheckStatus.FAIL,
+                    status=CheckStatus.PASS
+                    if within
+                    else CheckStatus.WARN
+                    if soft
+                    else CheckStatus.FAIL,
                     message="Component anchor inside declared region/outline"
                     if within
                     else "Anchor outside region/outline",
                     affected_objects=(placement.reference, placement.region),
                     evidence=(placement.model_dump_json(),),
+                )
+            )
+        placements = {p.reference: p for p in self.placements}
+        for anchor in self.anchors:
+            placement = placements.get(anchor.reference)
+            position_ok = (
+                placement is not None
+                and placement.point.distance(anchor.point) <= anchor.tolerance_mm
+            )
+            rotation_ok = anchor.rotation_degrees is None or (
+                placement is not None
+                and abs((placement.rotation_degrees - anchor.rotation_degrees + 180) % 360 - 180)
+                <= anchor.rotation_tolerance_degrees
+            )
+            checks.append(
+                CheckResult(
+                    check_id=f"placement.anchor.{anchor.reference}",
+                    name="Mechanical anchor",
+                    status=CheckStatus.PASS if position_ok and rotation_ok else CheckStatus.FAIL,
+                    message="Declared position/orientation tolerances satisfied"
+                    if position_ok and rotation_ok
+                    else "Missing or displaced mechanical anchor",
+                    evidence=(anchor.model_dump_json(),),
+                    affected_objects=(anchor.reference,),
                 )
             )
         if not checks:

@@ -8,6 +8,7 @@ from jsonschema.exceptions import ValidationError as SchemaError
 from pydantic import ValidationError
 from yaml import YAMLError
 
+from astra_pcb.agents.critical_nets import NetReview
 from astra_pcb.bom import check_bom
 from astra_pcb.bom.adafruit import Adafruit
 from astra_pcb.bom.importer import import_bom
@@ -81,6 +82,7 @@ def main(argv: list[str] | None = None) -> int:
     releasing.add_argument("--gates", type=Path, default=Path("config/release-gates.yaml"))
     releasing.add_argument("--output", type=Path)
     releasing.add_argument("--reviews", type=Path)
+    releasing.add_argument("--critical-net-reviews", type=Path)
     releasing.add_argument("--attestations", type=Path)
     releasing.add_argument("--trusted-signers", type=Path)
     releasing.add_argument("--identity-only", action="store_true")
@@ -213,6 +215,14 @@ def main(argv: list[str] | None = None) -> int:
                     attestations,
                     trusted,
                     args.output,
+                    net_reviews=tuple(
+                        NetReview.model_validate(r)
+                        for r in (
+                            load_yaml(args.critical_net_reviews)
+                            if args.critical_net_reviews
+                            else []
+                        )
+                    ),
                 )
         print(report.model_dump_json(indent=2))
         return report.exit_code

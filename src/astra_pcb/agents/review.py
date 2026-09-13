@@ -70,6 +70,8 @@ def remediate(
     designer: str,
     apply: Callable[[tuple[Finding, ...]], None],
     output: Path,
+    history_path: Path | None = None,
+    maximum_blocked_iterations: int = 3,
 ) -> RemediationResult:
     from astra_pcb.kicad.snapshot import capture
 
@@ -83,6 +85,18 @@ def remediate(
         raise ValueError("Select distinct existing finding IDs")
     if any(by_id[key].status not in {"open", "in_progress"} for key in selected):
         raise ValueError("Only open/in-progress findings may be remediated")
+    from astra_pcb.agents.history import ReviewHistory
+    from astra_pcb.models.provenance import canonical_digest
+
+    history_key = canonical_digest({"root": str(root.resolve()), "designer": designer})[:16]
+    history = ReviewHistory(
+        history_path or output.parent / f"review-history-{history_key}.jsonl",
+        designer,
+        maximum_blocked_iterations=maximum_blocked_iterations,
+    )
+    progress = history.append(review)
+    if progress.status == CheckStatus.FAIL:
+        raise RuntimeError(progress.message)
     result = mutate_verify(
         root, sources, revision, lambda: apply(tuple(by_id[k] for k in selected)), output
     )
@@ -110,3 +124,25 @@ def reconcile(previous: Review, current: Review, design_author: str) -> Review:
         if before.status != after.status:
             before.transition(after.status, after.resolution_evidence)
     return current
+
+
+def isolated_review(
+    packet: ReviewPacket, reviewer: str, worker: Path
+) -> tuple[Review, CheckResult]:
+    """Invoke a deployment-owned review adapter under enforced OS isolation."""
+    import json
+
+    from astra_pcb.agents.sandbox import isolated_call
+
+    def invoke(payload):
+        result = isolated_call(worker, payload)
+        if result.error or result.exit_code:
+            raise RuntimeError(
+                "Independent review isolation/execution failed: " + (result.error or "")
+            )
+        response = json.loads(result.stdout)
+        if not isinstance(response, dict):
+            raise ValueError("Reviewer must return one structured review object")
+        return response
+
+    return independent_review(packet, reviewer, invoke)

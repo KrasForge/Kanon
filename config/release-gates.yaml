@@ -53,3 +53,6 @@ gates:
   - check_id: export.step
     mode: AUTOMATED
     mandatory: true
+  - check_id: critical-nets.coverage
+    mode: AUTOMATED
+    mandatory: true

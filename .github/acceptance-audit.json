@@ -406,15 +406,24 @@
       "number": 38,
       "title": "P0 \u2014 Implement independent reviewer workflow",
       "milestone": "M3 \u2013 Agentic PCB Designer",
-      "assessment": "partial",
-      "reason": "Frozen packets, independent identity and structured findings work; isolated reviewer runtime execution is not implemented (#12)."
+      "assessment": "implemented",
+      "reason": "Frozen review packets execute in a required Linux namespace/seccomp boundary; structured independent findings remain separate from signed approval. Deterministic worker qualified, no live-model transport claim.",
+      "evidence": [
+        "src/astra_pcb/agents/review.py",
+        "tests/test_remaining_review.py",
+        "docs/review-enforcement.md"
+      ]
     },
     {
       "number": 39,
       "title": "P1 \u2014 Implement review \u2192 remediation loop",
       "milestone": "M3 \u2013 Agentic PCB Designer",
-      "assessment": "partial",
-      "reason": "Finding IDs, remediation and re-verification work; persistent iteration history and a stop policy for repeated unresolved blockers are missing."
+      "assessment": "implemented",
+      "reason": "Persistent locked review history preserves finding identities across iterations and stops before further mutations after repeated unresolved blockers.",
+      "evidence": [
+        "src/astra_pcb/agents/history.py",
+        "tests/test_remaining_review.py"
+      ]
     },
     {
       "number": 40,
@@ -431,8 +440,13 @@
       "number": 41,
       "title": "P1 \u2014 Enforce critical-net review before release",
       "milestone": "M3 \u2013 Agentic PCB Designer",
-      "assessment": "partial",
-      "reason": "Per-net coverage checks exist, but the release coordinator does not execute/reconcile this full current native inventory; a manual gate alone does not enforce class-specific coverage."
+      "assessment": "implemented",
+      "reason": "Mandatory native net inventory/class-specific coverage gate checks current independent evidence and cryptographically binds supplied review payload to its reviewers approval.",
+      "evidence": [
+        "src/astra_pcb/release/coordinator.py",
+        "tests/test_m4.py",
+        "docs/review-enforcement.md"
+      ]
     },
     {
       "number": 42,
@@ -445,8 +459,12 @@
       "number": 43,
       "title": "P1 \u2014 Define PCB floorplanning model",
       "milestone": "M3 \u2013 Agentic PCB Designer",
-      "assessment": "partial",
-      "reason": "Rectangular regions and anchors exist; hard/soft constraint distinctions and a complete mechanical-anchor floorplan contract are missing."
+      "assessment": "implemented",
+      "reason": "Hard/soft functional regions and hard mechanical position/orientation anchors have explicit quantified findings and negative controls.",
+      "evidence": [
+        "src/astra_pcb/layout/__init__.py",
+        "tests/test_remaining_review.py"
+      ]
     },
     {
       "number": 44,
