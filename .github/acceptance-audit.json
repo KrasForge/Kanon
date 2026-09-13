@@ -1,0 +1,723 @@
+{
+  "audited_at": "2026-09-13",
+  "base_revision": "bda5ef3e3d30d385c103c7ebb3f842cd5bfedbd8",
+  "basis": "Issue acceptance scopes, source inspection, tests and qualification evidence; merged milestone PRs alone do not establish closure.",
+  "issues": [
+    {
+      "number": 1,
+      "title": "P0 \u2014 Define canonical PCB design specification schema",
+      "milestone": "M0 \u2013 Foundation",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/config/__init__.py",
+        "tests/test_m0.py"
+      ],
+      "reason": "Versioned structural and semantic specification validation with migration and invalid cross-reference/range fixtures."
+    },
+    {
+      "number": 2,
+      "title": "P0 \u2014 Implement verification result and report model",
+      "milestone": "M0 \u2013 Foundation",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/models/__init__.py",
+        "tests/test_m0.py"
+      ],
+      "reason": "Typed statuses, severity, source/evidence, report identity and legacy/future serialization checks."
+    },
+    {
+      "number": 3,
+      "title": "P0 \u2014 Implement configurable release-gate engine",
+      "milestone": "M0 \u2013 Foundation",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/release/__init__.py",
+        "tests/test_m0.py"
+      ],
+      "reason": "Mandatory gate aggregation, current input identity, independent Ed25519 approvals and policy-gated human waivers."
+    },
+    {
+      "number": 4,
+      "title": "P0 \u2014 Implement environment diagnostics",
+      "milestone": "M0 \u2013 Foundation",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/verification/environment.py",
+        "tests/test_environment.py"
+      ],
+      "reason": "Version diagnostics and opt-in MCP handshake distinguish missing, configured and reachable tools without leaking credentials."
+    },
+    {
+      "number": 5,
+      "title": "P1 \u2014 Define engineering decision record model",
+      "milestone": "M0 \u2013 Foundation",
+      "assessment": "partial",
+      "reason": "Decision records and Markdown round trips work, but decision evidence/calculation link resolution and link-validation failure fixtures are missing."
+    },
+    {
+      "number": 6,
+      "title": "P1 \u2014 Define structured engineering review/finding schema",
+      "milestone": "M0 \u2013 Foundation",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/models/engineering.py",
+        "tests/test_m0.py"
+      ],
+      "reason": "Versioned findings, stable identities, legal resolution transitions and preserved review limitations."
+    },
+    {
+      "number": 7,
+      "title": "P0 \u2014 Implement robust `kicad-cli` adapter",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/kicad/__init__.py",
+        "tests/test_m1.py"
+      ],
+      "reason": "KiCad 10 process execution, timeout diagnostics, fresh outputs and hashed source/tool/artifact receipts, exercised with actual KiCad."
+    },
+    {
+      "number": 8,
+      "title": "P0 \u2014 Implement schematic ERC verification",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/kicad/reports.py",
+        "tests/test_m1.py"
+      ],
+      "reason": "Independent ERC JSON parsing distinguishes actual violations, exclusions, warnings and malformed or changed reports."
+    },
+    {
+      "number": 9,
+      "title": "P0 \u2014 Implement PCB DRC verification",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/kicad/verification.py",
+        "tests/test_m1.py"
+      ],
+      "reason": "Persisted-board DRC and unconnected/parity reporting are independent of MCP; verification does not save/fill source zones."
+    },
+    {
+      "number": 10,
+      "title": "P0 \u2014 Implement deterministic manufacturing exports",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/kicad/__init__.py",
+        "tests/test_m1.py"
+      ],
+      "reason": "Fresh Gerber, drill and STEP exports retain source identity, process output and artifact hashes; actual native export tests pass."
+    },
+    {
+      "number": 11,
+      "title": "P0 \u2014 Define KiCad MCP abstraction boundary",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/kicad/mcp.py",
+        "tests/test_m1.py"
+      ],
+      "reason": "Selectable stdio adapter configuration, explicit read/write mappings and denied unknown tools; IPC remains optional."
+    },
+    {
+      "number": 12,
+      "title": "P0 \u2014 Enforce read-only reviewer tool policy",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "assessment": "partial",
+      "reason": "Tool facades deny mutations, but there is no deployable reviewer runtime enforcing read-only OS mounts, credentials and shell isolation. Role flags alone do not enforce mounts."
+    },
+    {
+      "number": 13,
+      "title": "P1 \u2014 Implement board/schematic state snapshot abstraction",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/kicad/snapshot.py",
+        "tests/test_m1.py"
+      ],
+      "reason": "Lossless saved native S-expression snapshots retain all native objects, content identity and stable diffs; normalized electrical extraction is separate."
+    },
+    {
+      "number": 14,
+      "title": "P1 \u2014 Add design mutation \u2192 verify workflow",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "assessment": "partial",
+      "reason": "Mutation/readback/check flow works for parseable sources; deletion or malformed native files during mutation can escape before a structured failure report is persisted."
+    },
+    {
+      "number": 15,
+      "title": "P0 \u2014 Implement canonical BOM model and importer",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/bom/importer.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Canonical per-reference BOM plus JSON/CSV grouped-reference import and explicit column mappings preserve unknown metadata."
+    },
+    {
+      "number": 16,
+      "title": "P0 \u2014 Validate manufacturer part-number completeness",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "partial",
+      "reason": "Missing/ambiguous text MPN checks exist; ordering-suffix rules and explicit policy-controlled non-populated/mechanical exclusions are incomplete."
+    },
+    {
+      "number": 17,
+      "title": "P1 \u2014 Implement BOM normalization and inconsistency checks",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "partial",
+      "reason": "Whitespace/grouped-reference and value/package checks exist; manufacturer conflict/alias normalization policy and its fixtures are incomplete."
+    },
+    {
+      "number": 18,
+      "title": "P1 \u2014 Add JLCPCB/LCSC sourcing adapter",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/bom/jlcsearch.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Working optional normalized supplier and public JLCSearch adapters expose available sourcing fields and explicit offline/unknown results; live mirror lookup qualified."
+    },
+    {
+      "number": 19,
+      "title": "P1 \u2014 Add part lifecycle and sourcing-risk model",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/bom/sourcing.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Explicit lifecycle, stock age/quantity and source-diversity risks retain provenance without inventing missing supplier facts."
+    },
+    {
+      "number": 20,
+      "title": "P2 \u2014 Implement alternate-part compatibility representation",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "Compatibility evidence exists for seven criteria; explicit timing compatibility/differences and timing-specific qualification checks are absent."
+    },
+    {
+      "number": 21,
+      "title": "P0 \u2014 Implement FPGA bank-voltage validator",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/fpga.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Device/package-specific bank rules reject incompatible standards, duplicate pins and voltage conflicts; unknown standards remain unresolved."
+    },
+    {
+      "number": 22,
+      "title": "P0 \u2014 Implement power-tree model",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/power.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Rail/load/source and sequencing graph validates references/cycles and propagates declared expected/peak current budgets."
+    },
+    {
+      "number": 23,
+      "title": "P1 \u2014 Implement regulator power/thermal calculation checks",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/power.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Declared voltage/load/dissipation and cited thermal calculations report missing package parameters instead of inventing them."
+    },
+    {
+      "number": 24,
+      "title": "P1 \u2014 Implement decoupling audit framework",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/audits.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Evidence-backed per-power-pin/rail capacitor rules check count/effective capacitance and distinguish unknown geometry."
+    },
+    {
+      "number": 25,
+      "title": "P1 \u2014 Implement connector protection audit",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/audits.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Declared connector protection feature/net coverage identifies missing or unsupported protection coverage."
+    },
+    {
+      "number": 26,
+      "title": "P1 \u2014 Implement test-point coverage audit",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/audits.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Required signal/rail test points are checked against declared accessibility and probe constraints."
+    },
+    {
+      "number": 27,
+      "title": "P2 \u2014 Implement clock-topology checker",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/clocks.py",
+        "tests/test_m5.py"
+      ],
+      "reason": "Cited clock graph checks cover frequencies, ratios, fanout, termination, jitter and declared domains without claiming signal-integrity analysis."
+    },
+    {
+      "number": 28,
+      "title": "P0 \u2014 Implement ngspice process adapter",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "partial",
+      "reason": "Real bounded ngspice execution works, but model include/library resolution is rejected rather than implemented and qualified."
+    },
+    {
+      "number": 29,
+      "title": "P1 \u2014 Add declarative simulation assertions",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "partial",
+      "reason": "Scalar min/max and missing/nonfinite checks work; declarative measurement units and unit-validation contracts are absent."
+    },
+    {
+      "number": 30,
+      "title": "P1 \u2014 Add audio filter simulation workflow",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "partial",
+      "reason": "The fixed ideal RC example runs, but the scoped audio source/load and component-corner workflow is not implemented."
+    },
+    {
+      "number": 31,
+      "title": "P1 \u2014 Add power-circuit simulation workflow",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "partial",
+      "reason": "The ideal supply RC transient example runs; approved external model handling and a reusable startup/load-transient model workflow remain incomplete."
+    },
+    {
+      "number": 32,
+      "title": "P0 \u2014 Implement datasheet evidence model",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/datasheets/__init__.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Document revision, exact locator, extracted constraint and optional content digest serialize through the typed evidence model; verified limits require a digest."
+    },
+    {
+      "number": 33,
+      "title": "P1 \u2014 Build local datasheet registry",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/datasheets/registry.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Content-addressed registry detects missing/changed documents and identity collisions and preserves source/redistribution metadata."
+    },
+    {
+      "number": 34,
+      "title": "P1 \u2014 Associate verified constraints with evidence",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/datasheets/registry.py",
+        "tests/test_engineering.py"
+      ],
+      "reason": "Numeric limits carry units, applicability and exact registered document evidence; stale documents and mismatched units error."
+    },
+    {
+      "number": 35,
+      "title": "P2 \u2014 Research reliable datasheet ingestion/extraction pipeline",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "One native-text datasheet table probe and recommendations exist; annotated multi-document/scanned/revision corpus and extraction-accuracy evaluation are absent."
+    },
+    {
+      "number": 36,
+      "title": "P0 \u2014 Implement design lifecycle state machine",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/agents/lifecycle.py",
+        "tests/test_m3.py"
+      ],
+      "reason": "Ordered lifecycle transitions require current gates and signed evidence; changed inputs invalidate the prior lifecycle state."
+    },
+    {
+      "number": 37,
+      "title": "P0 \u2014 Implement Architect/Designer/Reviewer role definitions",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/agents/roles.py",
+        "tests/test_m3.py"
+      ],
+      "reason": "Machine-readable roles are loaded and validated against actual tool facades; deterministic release has no model authority. OS isolation remains separately open in #12."
+    },
+    {
+      "number": 38,
+      "title": "P0 \u2014 Implement independent reviewer workflow",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "assessment": "partial",
+      "reason": "Frozen packets, independent identity and structured findings work; isolated reviewer runtime execution is not implemented (#12)."
+    },
+    {
+      "number": 39,
+      "title": "P1 \u2014 Implement review \u2192 remediation loop",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "assessment": "partial",
+      "reason": "Finding IDs, remediation and re-verification work; persistent iteration history and a stop policy for repeated unresolved blockers are missing."
+    },
+    {
+      "number": 40,
+      "title": "P1 \u2014 Add critical-net classification",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/agents/critical_nets.py",
+        "tests/test_m3.py"
+      ],
+      "reason": "All requested critical-net classes, explicit rationale and class-specific review topics are represented. Release wiring remains #41."
+    },
+    {
+      "number": 41,
+      "title": "P1 \u2014 Enforce critical-net review before release",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "assessment": "partial",
+      "reason": "Per-net coverage checks exist, but the release coordinator does not execute/reconcile this full current native inventory; a manual gate alone does not enforce class-specific coverage."
+    },
+    {
+      "number": 42,
+      "title": "P2 \u2014 Add engineering change-plan representation",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "Plans bind starting identity and record affected objects/checks/rollback; comparison of actual mutations against planned scope is absent."
+    },
+    {
+      "number": 43,
+      "title": "P1 \u2014 Define PCB floorplanning model",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "assessment": "partial",
+      "reason": "Rectangular regions and anchors exist; hard/soft constraint distinctions and a complete mechanical-anchor floorplan contract are missing."
+    },
+    {
+      "number": 44,
+      "title": "P1 \u2014 Implement placement-rule checks",
+      "milestone": "M3 \u2013 Agentic PCB Designer",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/layout/__init__.py",
+        "tests/test_m3.py"
+      ],
+      "reason": "Quantified native footprint-anchor distance/region and rectangular edge checks retain geometric evidence and explicitly limit unsupported geometry."
+    },
+    {
+      "number": 45,
+      "title": "P2 \u2014 Research return-path analysis",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "Grid counterexamples and a literature discussion exist; evaluation of reference transitions and frequency-dependent geometric methods against real board/plane data remains."
+    },
+    {
+      "number": 46,
+      "title": "P2 \u2014 Research automatic critical-net routing strategies",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "A benchmark design and research recommendation exist; agent-directed versus general-routing experiments on reproducible boards have not been run."
+    },
+    {
+      "number": 47,
+      "title": "P1 \u2014 Implement STEP-export verification pipeline",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "partial",
+      "reason": "STEP envelope/hash/source verification works; required missing-3D-model reporting and explicit unit/origin qualification are incomplete."
+    },
+    {
+      "number": 48,
+      "title": "P1 \u2014 Add FreeCAD MCP integration profile",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "partial",
+      "reason": "Optional configuration and now the installed FreeCAD application exist; the selected FreeCAD MCP provider/addon and its operations remain unqualified."
+    },
+    {
+      "number": 49,
+      "title": "P1 \u2014 Implement mechanical constraint representation",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/mechanical/__init__.py",
+        "tests/test_m4.py"
+      ],
+      "reason": "Mechanical model represents outline/keepouts/holes/connectors/height/enclosure hashes, coordinate frame and declared tolerances."
+    },
+    {
+      "number": 50,
+      "title": "P2 \u2014 Implement mechanical collision review",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/mechanical/collision.py",
+        "tests/test_m5.py"
+      ],
+      "reason": "Actual optional OpenCascade solid intersections and minimum clearances are checked in an evidenced shared frame; missing/invalid geometry cannot pass."
+    },
+    {
+      "number": 51,
+      "title": "P0 \u2014 Implement manufacturing profile schema",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/manufacturing/__init__.py",
+        "tests/test_m4.py"
+      ],
+      "reason": "Typed manufacturing profile validates board/fabrication/assembly fields and requires current dated capability evidence for qualification."
+    },
+    {
+      "number": 52,
+      "title": "P0 \u2014 Build release artifact manifest",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/release/artifacts.py",
+        "tests/test_m4.py"
+      ],
+      "reason": "Release manifest carries required artifact roles, hashes, sizes, source identity and Git revision; stale/changed artifacts are rejected."
+    },
+    {
+      "number": 53,
+      "title": "P0 \u2014 Implement release command",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/release/coordinator.py",
+        "tests/test_m4.py"
+      ],
+      "reason": "Two-phase release runs mandatory gates, stops failed preparation, exports a candidate and requires exact artifact approval before finalization; no ordering."
+    },
+    {
+      "number": 54,
+      "title": "P1 \u2014 Implement configurable DFM rules",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "partial",
+      "reason": "Measured trace/space/via/edge constraints work; the scoped fabrication/assembly rules are incomplete, including package/assembly policy enforcement."
+    },
+    {
+      "number": 55,
+      "title": "P1 \u2014 Add fabrication-output consistency tests",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "partial",
+      "reason": "Fresh hash/layer identity tests exist; exact drill-category and unexpected/extra-layer coverage is incomplete."
+    },
+    {
+      "number": 56,
+      "title": "P1 \u2014 Add visual Gerber review workflow",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/manufacturing/visual.py",
+        "tests/test_m4.py"
+      ],
+      "reason": "Actual Gerbonara layer rendering plus separate signed artifact-review gates supplement DRC and output consistency."
+    },
+    {
+      "number": 57,
+      "title": "P1 \u2014 Implement audio signal-chain specification model",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/audio.py",
+        "tests/test_m5.py"
+      ],
+      "reason": "Declared RMS-level convention, nominal/max levels, loaded gains, impedances/coupling/filtering and ADC/DAC full scale are modeled with evidence."
+    },
+    {
+      "number": 58,
+      "title": "P1 \u2014 Implement gain/headroom audit",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "Loaded-gain/headroom and interface checks work; tolerance/corner propagation and signal-chain common-mode checking are not implemented."
+    },
+    {
+      "number": 59,
+      "title": "P2 \u2014 Implement audio noise-budget model",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/audio.py",
+        "tests/test_m5.py"
+      ],
+      "reason": "First-order Johnson, white amplifier and converter noise uses explicit bandwidth/output gains and independent-source assumptions, with reference-calculation tests."
+    },
+    {
+      "number": 60,
+      "title": "P2 \u2014 Implement op-amp configuration checks",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/audio.py",
+        "tests/test_m5.py"
+      ],
+      "reason": "Cited op-amp operating-envelope checks cover supply, common mode, swing, GBW and known stable-gain/capacitive-load limits; unknown stability is unresolved."
+    },
+    {
+      "number": 61,
+      "title": "P0 \u2014 Complete FPGA pin-plan validator",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/fpga_device.py",
+        "tests/test_m5.py"
+      ],
+      "reason": "Package-specific device adapters validate dedicated/reserved/configuration/clock pins, reciprocal differential pairs and VREF requirements. Vendor datasets are not bundled."
+    },
+    {
+      "number": 62,
+      "title": "P1 \u2014 Add FPGA power-sequencing representation",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "Rail order and observed delays exist; ramp windows, discharge and partial-power constraints plus contradiction fixtures are missing."
+    },
+    {
+      "number": 63,
+      "title": "P1 \u2014 Add FPGA configuration/boot audit",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "Declared flash/interface/strap checks exist; reconciliation against the actual pin plan and boot wiring is missing."
+    },
+    {
+      "number": 64,
+      "title": "P1 \u2014 Add FPGA decoupling-rule framework",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/engineering/fpga_device.py",
+        "tests/test_m5.py"
+      ],
+      "reason": "Exact part/package device decoupling rules carry cited rail/pin requirements and placement limits; absent or mismatched rules do not pass."
+    },
+    {
+      "number": 65,
+      "title": "P2 \u2014 Build PCB visual-review artifact pipeline",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "Top/bottom/isometric PNGs and receipts work; explicit missing-3D-model flags and complete layer/camera/origin metadata remain incomplete."
+    },
+    {
+      "number": 66,
+      "title": "P2 \u2014 Define visual PCB review rubric",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "A substantive supplementary rubric exists; known-defect visual fixtures and evaluation evidence have not been produced."
+    },
+    {
+      "number": 67,
+      "title": "P1 \u2014 Design read-only `pcb-verifier` MCP API",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "partial",
+      "reason": "The 17 implemented tool schemas are documented; complete proposed schemas/contracts for unimplemented pin-type, footprint-match, mounting-clearance and high-current tools are absent."
+    },
+    {
+      "number": 68,
+      "title": "P1 \u2014 Implement initial `pcb-verifier` MCP server",
+      "milestone": "M5 \u2013 Advanced Engineering",
+      "assessment": "implemented",
+      "evidence": [
+        "src/astra_pcb/verifier/__main__.py",
+        "tests/test_m5.py"
+      ],
+      "reason": "Working stdio MCP exposes 17 implemented pure-data checks in bounded workers and denies source-file/mutation operations; broader proposed API design remains #67."
+    },
+    {
+      "number": 69,
+      "title": "P0 \u2014 Add unit-test and Ruff CI",
+      "milestone": "M0 \u2013 Foundation",
+      "assessment": "implemented",
+      "evidence": [
+        ".github/workflows/ci.yml",
+        "tests/test_foundation.py"
+      ],
+      "reason": "Locked Python 3.12/3.13 pytest/Ruff CI runs core tests with explicit optional integration skips."
+    },
+    {
+      "number": 70,
+      "title": "P1 \u2014 Add KiCad integration-test job",
+      "milestone": "M1 \u2013 KiCad Closed Loop",
+      "assessment": "implemented",
+      "evidence": [
+        ".github/workflows/kicad.yml",
+        "tests/test_m1.py"
+      ],
+      "reason": "Fedora CI installs qualified KiCad 10 and exercises actual parser/ERC/DRC/export success and error fixtures; mocks are separate."
+    },
+    {
+      "number": 71,
+      "title": "P1 \u2014 Add ngspice integration tests",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "tests/test_spice_workflows.py",
+        ".github/workflows/kicad.yml"
+      ],
+      "reason": "Real ngspice measurement, limit and aborted-analysis checks run in native CI; unavailable optional tools are explicit skips elsewhere."
+    },
+    {
+      "number": 72,
+      "title": "P1 \u2014 Add golden verification-report tests",
+      "milestone": "M2 \u2013 Engineering Verification",
+      "assessment": "implemented",
+      "evidence": [
+        "tests/fixtures/report-statuses.json",
+        "tests/test_report_golden.py"
+      ],
+      "reason": "Golden status serialization and gate tests cover PASS/FAIL/WARN/SKIP/ERROR, duplicate/stale evidence and schema compatibility."
+    },
+    {
+      "number": 73,
+      "title": "P1 \u2014 Add end-to-end minimal-board test",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "partial",
+      "reason": "Spec validation and blocked release are tested, and release contracts use synthetic approvals/exporters; a reproducible populated-board real-check release path is not demonstrated."
+    },
+    {
+      "number": 74,
+      "title": "P0 \u2014 Write architecture documentation",
+      "milestone": "M0 \u2013 Foundation",
+      "assessment": "implemented",
+      "evidence": [
+        "docs/architecture.md",
+        "docs/capabilities.md"
+      ],
+      "reason": "Architecture now documents the implemented lifecycle, release/evidence trust flow and capability limits with a diagram and current status matrix."
+    },
+    {
+      "number": 75,
+      "title": "P0 \u2014 Document local development setup",
+      "milestone": "M0 \u2013 Foundation",
+      "assessment": "implemented",
+      "evidence": [
+        "docs/development.md",
+        "docs/freecad.md"
+      ],
+      "reason": "Setup documents repository/runtime boundaries and tested Python/KiCad/ngspice/MCP plus official FreeCAD installation and explicit unavailable behavior."
+    },
+    {
+      "number": 76,
+      "title": "P1 \u2014 Write \u201cDesign a board with Astra\u201d walkthrough",
+      "milestone": "M4 \u2013 Manufacturing Release",
+      "assessment": "partial",
+      "reason": "An honest staged walkthrough exists; the full reproducible spec-to-populated-board-to-release artifact walkthrough remains incomplete."
+    }
+  ]
+}

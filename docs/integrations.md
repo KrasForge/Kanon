@@ -68,3 +68,26 @@ Kanon does not pretend this account-gated path was exercised. A normalized suppl
 MCP adapter remains available behind the same canonical record boundary. Credentials
 must be supplied through environment variables in an external launcher. Neither
 adapter orders components, uploads designs or silently substitutes alternates.
+
+## Independent credential-free alternative: Adafruit
+
+`astra-pcb source-part 2821 --provider adafruit --expected-mpn ADA2821` uses the
+[public product API](https://www.adafruit.com/api/products/2821) without an account, token
+or API key. Adafruit documents public catalog access in its
+[product viewer guide](https://learn.adafruit.com/pyportal-new-new-new-product-viewer?view=all).
+This is a different supplier from LCSC/JLCPCB, useful for modules, connectors and stocked
+components. It does not provide the entire LCSC catalog or JLCPCB assembly classifications.
+
+The adapter checks exact supplier product ID and optional expected MPN, preserving the
+manufacturer's returned MPN separately from the product ID. It refuses missing/mismatched
+MPNs and malformed responses. Numeric inventory is retained; text such as `in stock` is
+availability text with unknown quantity. The response does not establish package, lifecycle,
+price currency or inventory update time, so these stay unknown and lookup returns WARN.
+Raw price tiers and lifecycle text are evidence, not qualified purchase data. No HTML
+description is interpreted as instructions or automatically extracted electrical limits.
+
+The source-neutral SourcingRecord accepts different supplier IDs while retaining the
+C-prefixed-ID requirement for LCSC/JLCPCB. Existing JLCSearch commands remain compatible.
+All network reads are bounded, reject redirects and have explicit failure results.
+Contract tests use a reduced response observed on 2026-09-13; live stock is never a CI
+assertion. Neither provider requires credentials, substitutes parts, uploads designs or orders.

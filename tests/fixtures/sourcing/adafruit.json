@@ -1,0 +1,9 @@
+{
+  "product_id": "2821",
+  "product_mpn": "ADA2821",
+  "product_manufacturer": "Adafruit",
+  "product_stock": "27",
+  "product_price": "14.95",
+  "discount_pricing": [{"min_qty": 1, "discounted_price": "14.95"}],
+  "discontinue_status": "None"
+}

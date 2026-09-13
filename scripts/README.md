@@ -17,3 +17,7 @@ fresh `--output` directory, just like `astra-pcb simulate`. Use the ideal exampl
 examples/simulation as reproducible controls. A topology-specific vendor model needs
 separate model/licensing/physics qualification. These scripts never return fabricated
 success when a tool or required input is unavailable.
+
+`qualify_freecad.py` is executed by the optional integration test through FreeCADCmd,
+not ordinary Python. Its fresh output directory comes from KANON_FREECAD_SMOKE_ROOT.
+See [FreeCAD qualification](../docs/freecad.md).
