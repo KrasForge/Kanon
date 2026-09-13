@@ -1,0 +1,34 @@
+{
+  "command": [
+    "node",
+    "${KANON_KICAD_MCP_ROOT}/dist/index.js"
+  ],
+  "inventory_digest": "b76297d92c6844557e89e59dcfdf11e3cfa4997d2d3d1b77792f4a13a49de975",
+  "tools": [
+    {
+      "operation": "board.open",
+      "remote_tool": "open_board",
+      "access": "WRITE"
+    },
+    {
+      "operation": "board.read",
+      "remote_tool": "get_board_info",
+      "access": "READ"
+    },
+    {
+      "operation": "board.route",
+      "remote_tool": "route_trace",
+      "access": "WRITE"
+    },
+    {
+      "operation": "board.save",
+      "remote_tool": "save_board",
+      "access": "WRITE"
+    },
+    {
+      "operation": "backend.read",
+      "remote_tool": "get_backend_state",
+      "access": "READ"
+    }
+  ]
+}

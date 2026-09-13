@@ -1,0 +1,12 @@
+Ideal RC filter qualification
+V1 in 0 DC 0 AC 1
+R1 in out 1k
+C1 out 0 7.957747n
+.control
+ac dec 200 10 1Meg
+let gain_db = db(v(out))
+meas ac gain_at_1k FIND gain_db AT=1k
+meas ac cutoff_hz WHEN gain_db=-3.010299956 CROSS=1
+quit
+.endc
+.end

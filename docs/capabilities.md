@@ -2,17 +2,20 @@
 
 | Capability | Present now | Not established |
 |---|---|---|
-| Verification | Versioned reports, content identity, exit codes, serialization | Trusted automated execution provenance |
-| Release gates | YAML policy, mandatory gates, signed independent approvals/human waivers | Release transaction |
-| Design inputs | Five JSON Schemas, semantic ranges/rail references/cycles, migration | FPGA device rules and physical constraints |
-| KiCad | Real ERC/DRC parsing, export receipts, snapshots and mutation workflow | Complete release consistency and populated-board qualification |
-| Simulation | ngspice invocation, scalar parsing and finite limit checks | Local real ngspice execution, power/audio workflows |
-| BOM | Canonical rows, missing MPN/duplicate/conflict checks | CSV/KiCad importer, live sourcing, alternate qualification |
-| Evidence | Datasheet document/revision/locator/constraint identity | Registry, extraction, authenticity and rule applicability |
-| Agents/MCP | Audited designer stdio dispatch and separate snapshot-only reviewer tools | Model harness, live editing-server qualification, lifecycle |
-| Manufacturing | Unqualified example profile and review guidance | Qualified DFM, output consistency, manifest, release |
-| CI | Python pytest/Ruff workflow and lockfile | Remote CI execution; no commit/push made |
+| Verification | Versioned reports, content identity, exit codes, golden status tests | Trusted automated execution provenance across distributed agents |
+| Release gates | Mandatory YAML gates, signed independent approvals/human waivers | Release transaction |
+| Design inputs | Five schemas, semantic ranges/references/cycles, migration | Complete physical constraints and vendor device-family datasets |
+| KiCad | Real ERC/DRC, export receipts, snapshots and mutation workflow; narrow external MCP SWIG qualification | Interactive IPC and populated-board qualification |
+| Simulation | Real ngspice execution, log-error detection, declarative assertions, ideal power/audio examples | Vendor regulator stability, external model ingestion, board-level analog validation |
+| BOM | JSON/CSV import, missing MPN/duplicate/conflict checks, public JLCSearch lookup, sourcing risk | Account-gated official supplier API, alternate qualification |
+| Evidence | Content-addressed document registry and cited numeric limits | PDF extraction, authenticity and automatic applicability verification |
+| Electrical checks | Declared FPGA bank, current/thermal, decoupling, connector protection and test-point audits | Automatic native connectivity/geometry extraction for all audits |
+| Agents/MCP | Audited stdio dispatch, pinned inventory, snapshot-only reviewer tools | Model harness and lifecycle orchestration |
+| Manufacturing | Unqualified example profile and substantive review guidance | Qualified DFM, output consistency, manifest, release |
+| CI | Passing remote Python and real KiCad/ngspice jobs on M0/M1 PRs; M2 adds simulation/golden regressions | Reproducible live supplier or GUI server in CI |
 
-The KiCad integration smoke test checks executable version and missing-input rejection.
-It does not qualify ERC/DRC on a real board. The ngspice integration test skips explicitly
-when ngspice is absent. A passing schema check only establishes document structure.
+Read [integration qualification](integrations.md) for the exact external tools tested.
+The native KiCad fixtures are empty parser/export controls, not fabricated electronics.
+Electrical checks assess their declared inputs; independent review must reconcile those
+inputs against native design state and manufacturer evidence. Unknown information and
+skipped checks never become successful mandatory gates.

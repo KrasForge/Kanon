@@ -1,0 +1,8 @@
+netlist: power-transient.cir
+description: Ideal source resistance and bulk capacitor under a current step
+assumptions:
+  - Ideal capacitor; no ESR, ESL, derating or regulator control loop
+  - This checks the simulation infrastructure, not regulator topology stability
+assertions:
+  rail_min: {min: 4.89, max: 4.91}
+  rail_recovered: {min: 4.97, max: 4.99}

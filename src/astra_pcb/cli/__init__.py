@@ -8,12 +8,17 @@ from jsonschema.exceptions import ValidationError as SchemaError
 from pydantic import ValidationError
 from yaml import YAMLError
 
+from astra_pcb.bom import check_bom
+from astra_pcb.bom.importer import import_bom
+from astra_pcb.bom.jlcsearch import JLCSearch
 from astra_pcb.config import load_yaml, validate_document
+from astra_pcb.engineering.power import PowerTree
 from astra_pcb.kicad.verification import verify_design
 from astra_pcb.models import CheckResult, CheckStatus, VerificationReport
 from astra_pcb.models.provenance import InputIdentity
 from astra_pcb.release import GateConfig, evaluate
 from astra_pcb.release.attestations import Attestation, TrustedSigner
+from astra_pcb.simulation.workflow import SimulationJob, run_job
 from astra_pcb.verification.environment import diagnose
 
 
@@ -37,10 +42,31 @@ def main(argv: list[str] | None = None) -> int:
     kicad.add_argument("--board", type=Path)
     kicad.add_argument("--output", type=Path, required=True)
     kicad.add_argument("--parity", action="store_true")
+    simulate = sub.add_parser("simulate")
+    simulate.add_argument("job", type=Path)
+    simulate.add_argument("--output", type=Path, required=True)
+    bom = sub.add_parser("check-bom")
+    bom.add_argument("document", type=Path)
+    power = sub.add_parser("check-power")
+    power.add_argument("document", type=Path)
+    sourcing = sub.add_parser("source-part")
+    sourcing.add_argument("lcsc")
+    sourcing.add_argument("--expected-mpn")
     sub.add_parser("release")
     args = parser.parse_args(argv)
     try:
-        if args.command == "environment":
+        if args.command == "simulate":
+            report = run_job(
+                SimulationJob.model_validate(load_yaml(args.job)), args.job.parent, args.output
+            )
+        elif args.command == "check-bom":
+            report = VerificationReport(results=check_bom(import_bom(args.document)))
+        elif args.command == "check-power":
+            report = PowerTree.model_validate(load_yaml(args.document)).audit()
+        elif args.command == "source-part":
+            _, check = JLCSearch().lookup(args.lcsc, expected_mpn=args.expected_mpn)
+            report = VerificationReport(results=(check,))
+        elif args.command == "environment":
             report = diagnose(probe_mcp=args.probe_mcp)
         elif args.command == "validate":
             validate_document(args.document, args.schema)

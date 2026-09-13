@@ -1,0 +1,12 @@
+Ideal supply impedance and local bulk capacitance qualification
+V1 source 0 DC 5
+Rsource source rail 0.2
+Cbulk rail 0 100u
+Iload rail 0 PULSE(0.1 0.5 1m 1u 1u 2m 5m)
+.control
+tran 1u 5m
+meas tran rail_min MIN v(rail) FROM=1m TO=3m
+meas tran rail_recovered FIND v(rail) AT=4m
+quit
+.endc
+.end

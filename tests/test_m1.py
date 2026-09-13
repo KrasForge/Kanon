@@ -196,3 +196,27 @@ def test_snapshot_tampering_is_rejected(tmp_path):
     snapshot["documents"][path.name] = "(kicad_pcb (tampered))"
     with pytest.raises(ValueError, match="content identity"):
         Snapshot.model_validate(snapshot)
+
+
+def test_inventory_pinning_limits_exposed_operations():
+    from astra_pcb.kicad.mcp import DesignerTools, MCPProfile
+    from astra_pcb.models.provenance import canonical_digest
+
+    listing = {"tools": [{"name": "read"}, {"name": "write"}]}
+
+    class FakeTransport:
+        def request(self, method, params):
+            return listing if method == "tools/list" else {"content": []}
+
+    profile = MCPProfile(
+        command=("fake",),
+        tools=({"operation": "board.read", "remote_tool": "read", "access": "READ"},),
+        inventory_digest=canonical_digest(listing),
+    )
+    tools = DesignerTools(profile, FakeTransport())
+    assert tools.call("board.read", {}) == {"content": []}
+    with pytest.raises(PermissionError):
+        tools.call("write", {}, allow_write=True)
+    listing["tools"].append({"name": "new-tool"})
+    with pytest.raises(ValueError, match="inventory changed"):
+        DesignerTools(profile, FakeTransport())
