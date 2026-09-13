@@ -68,3 +68,12 @@ handshake does not qualify a server's editing tools.
 Protocol references:
 - https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle
 - https://modelcontextprotocol.io/specification/2025-06-18/basic/transports
+
+Decision link verification uses `models.decision_links.validate_links(decision, root, registry)`.
+Citation source paths or canonical registry URLs must match document title/manufacturer/revision
+and SHA-256. Calculation Markdown links resolve to local project artifacts and record their
+hashes; missing files, path escapes and remote calculation links fail. This validates evidence
+identity and link targets, not the correctness of the cited electrical interpretation.
+The decision-link regression covers valid round-trip, missing calculation artifacts,
+path traversal and a changed registered document. URL citations are matched to local
+registered documents; validation does not fetch arbitrary remote URLs.
