@@ -3,11 +3,13 @@
 import json
 import shutil
 import uuid
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
 
 from pydantic import Field, model_validator
 
+from astra_pcb.agents.critical_nets import Net, NetReview, check_critical_nets
 from astra_pcb.bom import check_board_bom, check_bom
 from astra_pcb.bom.importer import import_bom
 from astra_pcb.config import load_yaml, validate_document
@@ -32,6 +34,7 @@ class ReleaseProject(StrictModel):
     pcb: str
     bom: str
     manufacturing_profile: str
+    critical_net_plan: str | None = None
     additional_inputs: tuple[str, ...] = ()
     gerber_layers: tuple[str, ...] = Field(min_length=3)
     parity: Literal[True] = True
@@ -56,6 +59,7 @@ class ReleaseProject(StrictModel):
             self.pcb,
             self.bom,
             self.manufacturing_profile,
+            *((self.critical_net_plan,) if self.critical_net_plan else ()),
             *self.additional_inputs,
         )
 
@@ -118,6 +122,7 @@ def release(
     *,
     adapter: KiCadCLI | None = None,
     spec_schema: Path = Path("schemas/design-spec.schema.json"),
+    net_reviews: tuple[NetReview, ...] = (),
 ) -> VerificationReport:
     """Trusted coordinator owns adapter/trust configuration; agent tools cannot replace them.
 
@@ -191,6 +196,49 @@ def release(
         bom_items = import_bom(root / project.bom)
         checks.extend(check_bom(bom_items))
         checks.append(check_board_bom(bom_items, (root / project.pcb).read_text()))
+        source_nets = frozenset(n[-1] for n in nodes(board_tree, "net") if len(n) >= 3 and n[-1])
+        if not project.critical_net_plan:
+            raise ValueError("Critical-net classification plan is required for release")
+        plan = load_yaml(root / project.critical_net_plan)
+        classifications = tuple(Net.model_validate(n) for n in plan["nets"])
+        if net_reviews:
+            binding = "critical-net-reviews-sha256:" + canonical_digest(
+                {"reviews": [r.model_dump(mode="json") for r in net_reviews]}
+            )
+            authorized = set()
+            for attestation in attestations:
+                if (
+                    attestation.check_id == "critical-nets.review"
+                    and attestation.purpose == "approval"
+                    and binding in attestation.evidence
+                ):
+                    attestation.verify(
+                        trusted,
+                        now=datetime.now(UTC),
+                        digest=identity.digest,
+                        design_author=project.design_author,
+                    )
+                    authorized.add(attestation.issuer)
+            if not {r.reviewer for r in net_reviews} <= authorized:
+                raise ValueError("Critical-net review payload lacks its reviewer's signed binding")
+        coverage = check_critical_nets(
+            classifications,
+            net_reviews,
+            input_digest=identity.digest,
+            designer=project.design_author,
+            source_nets=source_nets,
+        )
+        checks.append(
+            CheckResult(
+                check_id="critical-nets.coverage",
+                name="Current native critical-net coverage",
+                status=CheckStatus.PASS if coverage.exit_code == 0 else CheckStatus.FAIL,
+                message="Current native net inventory and class-specific reviews match"
+                if coverage.exit_code == 0
+                else "Missing/stale/incomplete native critical-net review",
+                evidence=(coverage.model_dump_json(),),
+            )
+        )
         matching = [
             r
             for r in reviews
@@ -214,6 +262,7 @@ def release(
             "schematic.review": "MANUAL",
             "power.review": "MANUAL",
             "critical-nets.review": "MANUAL",
+            "critical-nets.coverage": "AUTOMATED",
             "mechanical.review": "MANUAL",
             "dfm.review": "MANUAL",
             "review.independent": "MANUAL",

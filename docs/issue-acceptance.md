@@ -1,7 +1,7 @@
 # Issue acceptance audit
 
 Acceptance is based on source, tests and qualification, not the presence of milestone scaffolding.
-Current audit: 55 implemented leaf issues; 21 partial.
+Current audit: 59 implemented leaf issues; 17 partial.
 
 Issue comments retain the exact acceptance evidence and remaining work. OS, electrical and manufacturing guarantees are limited to each documented check scope.
 
@@ -44,7 +44,11 @@ Issue comments retain the exact acceptance evidence and remaining work. OS, elec
 | [#34](https://github.com/KrasForge/Kanon/issues/34) | Numeric limits carry units, applicability and exact registered document evidence; stale documents and mismatched units error. [src/astra_pcb/datasheets/registry.py](../src/astra_pcb/datasheets/registry.py) [tests/test_engineering.py](../tests/test_engineering.py) |
 | [#36](https://github.com/KrasForge/Kanon/issues/36) | Ordered lifecycle transitions require current gates and signed evidence; changed inputs invalidate the prior lifecycle state. [src/astra_pcb/agents/lifecycle.py](../src/astra_pcb/agents/lifecycle.py) [tests/test_m3.py](../tests/test_m3.py) |
 | [#37](https://github.com/KrasForge/Kanon/issues/37) | Machine-readable roles are loaded and validated against actual tool facades; deterministic release has no model authority. OS isolation remains separately open in #12. [src/astra_pcb/agents/roles.py](../src/astra_pcb/agents/roles.py) [tests/test_m3.py](../tests/test_m3.py) |
+| [#38](https://github.com/KrasForge/Kanon/issues/38) | Frozen review packets execute in a required Linux namespace/seccomp boundary; structured independent findings remain separate from signed approval. Deterministic worker qualified, no live-model transport claim. [src/astra_pcb/agents/review.py](../src/astra_pcb/agents/review.py) [tests/test_remaining_review.py](../tests/test_remaining_review.py) [docs/review-enforcement.md](../docs/review-enforcement.md) |
+| [#39](https://github.com/KrasForge/Kanon/issues/39) | Persistent locked review history preserves finding identities across iterations and stops before further mutations after repeated unresolved blockers. [src/astra_pcb/agents/history.py](../src/astra_pcb/agents/history.py) [tests/test_remaining_review.py](../tests/test_remaining_review.py) |
 | [#40](https://github.com/KrasForge/Kanon/issues/40) | All requested critical-net classes, explicit rationale and class-specific review topics are represented. Release wiring remains #41. [src/astra_pcb/agents/critical_nets.py](../src/astra_pcb/agents/critical_nets.py) [tests/test_m3.py](../tests/test_m3.py) |
+| [#41](https://github.com/KrasForge/Kanon/issues/41) | Mandatory native net inventory/class-specific coverage gate checks current independent evidence and cryptographically binds supplied review payload to its reviewers approval. [src/astra_pcb/release/coordinator.py](../src/astra_pcb/release/coordinator.py) [tests/test_m4.py](../tests/test_m4.py) [docs/review-enforcement.md](../docs/review-enforcement.md) |
+| [#43](https://github.com/KrasForge/Kanon/issues/43) | Hard/soft functional regions and hard mechanical position/orientation anchors have explicit quantified findings and negative controls. [src/astra_pcb/layout/__init__.py](../src/astra_pcb/layout/__init__.py) [tests/test_remaining_review.py](../tests/test_remaining_review.py) |
 | [#44](https://github.com/KrasForge/Kanon/issues/44) | Quantified native footprint-anchor distance/region and rectangular edge checks retain geometric evidence and explicitly limit unsupported geometry. [src/astra_pcb/layout/__init__.py](../src/astra_pcb/layout/__init__.py) [tests/test_m3.py](../tests/test_m3.py) |
 | [#49](https://github.com/KrasForge/Kanon/issues/49) | Mechanical model represents outline/keepouts/holes/connectors/height/enclosure hashes, coordinate frame and declared tolerances. [src/astra_pcb/mechanical/__init__.py](../src/astra_pcb/mechanical/__init__.py) [tests/test_m4.py](../tests/test_m4.py) |
 | [#50](https://github.com/KrasForge/Kanon/issues/50) | Actual optional OpenCascade solid intersections and minimum clearances are checked in an evidenced shared frame; missing/invalid geometry cannot pass. [src/astra_pcb/mechanical/collision.py](../src/astra_pcb/mechanical/collision.py) [tests/test_m5.py](../tests/test_m5.py) |
@@ -71,11 +75,7 @@ Issue comments retain the exact acceptance evidence and remaining work. OS, elec
 |---|---|
 | [#20](https://github.com/KrasForge/Kanon/issues/20) | Compatibility evidence exists for seven criteria; explicit timing compatibility/differences and timing-specific qualification checks are absent. |
 | [#35](https://github.com/KrasForge/Kanon/issues/35) | One native-text datasheet table probe and recommendations exist; annotated multi-document/scanned/revision corpus and extraction-accuracy evaluation are absent. |
-| [#38](https://github.com/KrasForge/Kanon/issues/38) | Frozen packets, independent identity and structured findings work; isolated reviewer runtime execution is not implemented (#12). |
-| [#39](https://github.com/KrasForge/Kanon/issues/39) | Finding IDs, remediation and re-verification work; persistent iteration history and a stop policy for repeated unresolved blockers are missing. |
-| [#41](https://github.com/KrasForge/Kanon/issues/41) | Per-net coverage checks exist, but the release coordinator does not execute/reconcile this full current native inventory; a manual gate alone does not enforce class-specific coverage. |
 | [#42](https://github.com/KrasForge/Kanon/issues/42) | Plans bind starting identity and record affected objects/checks/rollback; comparison of actual mutations against planned scope is absent. |
-| [#43](https://github.com/KrasForge/Kanon/issues/43) | Rectangular regions and anchors exist; hard/soft constraint distinctions and a complete mechanical-anchor floorplan contract are missing. |
 | [#45](https://github.com/KrasForge/Kanon/issues/45) | Grid counterexamples and a literature discussion exist; evaluation of reference transitions and frequency-dependent geometric methods against real board/plane data remains. |
 | [#46](https://github.com/KrasForge/Kanon/issues/46) | A benchmark design and research recommendation exist; agent-directed versus general-routing experiments on reproducible boards have not been run. |
 | [#47](https://github.com/KrasForge/Kanon/issues/47) | STEP envelope/hash/source verification works; required missing-3D-model reporting and explicit unit/origin qualification are incomplete. |

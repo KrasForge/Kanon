@@ -28,7 +28,7 @@ from astra_pcb.verification.process import ProcessResult
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def sign(private, gate, digest):
+def sign(private, gate, digest, evidence=("fixture",)):
     now = datetime.now(UTC)
     value = Attestation(
         issuer="independent",
@@ -36,7 +36,7 @@ def sign(private, gate, digest):
         check_id=gate,
         input_digest=digest,
         reason="Synthetic contract-test approval; never manufacturing authorization",
-        evidence=("fixture",),
+        evidence=evidence,
         issued_at=now,
         expires_at=now + timedelta(hours=1),
         signature_base64="",
@@ -94,7 +94,7 @@ def package(tmp_path, monkeypatch):
     )
     # Native-parser-only fixture with one test reference. The FakeExporter never invokes KiCad.
     (tmp_path / "board.kicad_pcb").write_text(
-        "(kicad_pcb (general (thickness 1.6)) "
+        '(kicad_pcb (net 1 "CTRL") (general (thickness 1.6)) '
         '(layers (0 "F.Cu" signal) (2 "B.Cu" signal)) (footprint "TEST:0603" '
         '(property "Reference" "R1") (property "Value" "1k")))'
     )
@@ -110,8 +110,22 @@ def package(tmp_path, monkeypatch):
         layer_count=2,
     )
     (tmp_path / "profile.yaml").write_text(yaml.safe_dump(profile))
+    (tmp_path / "nets.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "nets": [
+                    {
+                        "name": "CTRL",
+                        "classes": ["ordinary-digital"],
+                        "rationale": "Synthetic passive test net",
+                    }
+                ]
+            }
+        )
+    )
     project = ReleaseProject(
         design_author="designer",
+        critical_net_plan="nets.yaml",
         spec="spec.yaml",
         schematic="board.kicad_sch",
         pcb="board.kicad_pcb",
@@ -332,3 +346,60 @@ def test_minimal_spec_to_blocked_release_cli(tmp_path, capsys):
     )
     assert json.loads(capsys.readouterr().out)["status"] == "ERROR"
     assert not (tmp_path / "never-created/manifest.json").exists()
+
+
+def test_release_rejects_missing_native_net_classification(package):
+    root, project, identity, gates, reviews, approvals, trusted, private = package
+    # Preserve current identity but omit the plan from the requested release operation.
+    # The baseline automatic coverage gate cannot be bypassed by a manual review approval.
+    result = release(
+        root,
+        project.model_copy(update={"critical_net_plan": None}),
+        identity,
+        gates,
+        reviews,
+        approvals,
+        trusted,
+        root / "missing-net-review",
+        adapter=FakeExporter(),
+    )
+    assert result.exit_code == 1
+    assert not (root / "missing-net-review/candidate-manifest.json").exists()
+
+
+def test_critical_net_review_signature_binds_payload(package, tmp_path):
+    from astra_pcb.agents.critical_nets import NetReview
+
+    root, project, identity, gates, reviews, approvals, trusted, private = package
+    net_review = NetReview(
+        net="CTRL",
+        reviewer="independent",
+        input_digest=identity.digest,
+        topics=(),
+        evidence=("Synthetic net inspection",),
+    )
+    binding = "critical-net-reviews-sha256:" + canonical_digest(
+        {"reviews": [net_review.model_dump(mode="json")]}
+    )
+    bound = tuple(a for a in approvals if a.check_id != "critical-nets.review") + (
+        sign(private, "critical-nets.review", identity.digest, (binding,)),
+    )
+    for name, payload, signatures, expected in (
+        ("bound", (net_review,), bound, 2),
+        ("unbound", (net_review,), approvals, 1),
+        ("tampered", (net_review.model_copy(update={"evidence": ("Forged",)}),), bound, 1),
+    ):
+        report = release(
+            root,
+            project,
+            identity,
+            gates,
+            reviews,
+            signatures,
+            trusted,
+            tmp_path / name,
+            adapter=FakeExporter(),
+            spec_schema=ROOT / "schemas/design-spec.schema.json",
+            net_reviews=payload,
+        )
+        assert report.exit_code == expected
