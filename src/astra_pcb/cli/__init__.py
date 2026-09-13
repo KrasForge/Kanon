@@ -12,6 +12,7 @@ from astra_pcb.bom import check_bom
 from astra_pcb.bom.adafruit import Adafruit
 from astra_pcb.bom.importer import import_bom
 from astra_pcb.bom.jlcsearch import JLCSearch
+from astra_pcb.bom.policy import BOMPolicy, audit_bom
 from astra_pcb.config import load_yaml, validate_document
 from astra_pcb.datasheets.registry import Registry, SourcedLimit
 from astra_pcb.engineering.power import PowerTree
@@ -22,6 +23,7 @@ from astra_pcb.models.provenance import InputIdentity
 from astra_pcb.release import GateConfig, evaluate
 from astra_pcb.release.attestations import Attestation, TrustedSigner
 from astra_pcb.release.coordinator import ReleaseProject, finalize_release, identify, release
+from astra_pcb.simulation.corners import AudioFilterSweep, PowerSweep
 from astra_pcb.simulation.workflow import SimulationJob, run_job
 from astra_pcb.verification.environment import diagnose
 from astra_pcb.verifier.__main__ import check as bounded_check
@@ -57,11 +59,16 @@ def main(argv: list[str] | None = None) -> int:
     kicad.add_argument("--board", type=Path)
     kicad.add_argument("--output", type=Path, required=True)
     kicad.add_argument("--parity", action="store_true")
+    corners = sub.add_parser("simulate-corners")
+    corners.add_argument("kind", choices=("audio-filter", "power-source"))
+    corners.add_argument("document", type=Path)
+    corners.add_argument("--output", type=Path, required=True)
     simulate = sub.add_parser("simulate")
     simulate.add_argument("job", type=Path)
     simulate.add_argument("--output", type=Path, required=True)
     bom = sub.add_parser("check-bom")
     bom.add_argument("document", type=Path)
+    bom.add_argument("--policy", type=Path)
     power = sub.add_parser("check-power")
     power.add_argument("document", type=Path)
     sourcing = sub.add_parser("source-part")
@@ -97,12 +104,20 @@ def main(argv: list[str] | None = None) -> int:
                     for item in observations
                 )
             )
+        elif args.command == "simulate-corners":
+            model = AudioFilterSweep if args.kind == "audio-filter" else PowerSweep
+            report = model.model_validate(load_yaml(args.document)).run(args.output)
         elif args.command == "simulate":
             report = run_job(
                 SimulationJob.model_validate(load_yaml(args.job)), args.job.parent, args.output
             )
         elif args.command == "check-bom":
-            report = VerificationReport(results=check_bom(import_bom(args.document)))
+            items = import_bom(args.document)
+            report = (
+                audit_bom(items, BOMPolicy.model_validate(load_yaml(args.policy)))
+                if args.policy
+                else VerificationReport(results=check_bom(items))
+            )
         elif args.command == "check-power":
             report = PowerTree.model_validate(load_yaml(args.document)).audit()
         elif args.command == "source-part":

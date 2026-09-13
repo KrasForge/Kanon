@@ -1,8 +1,17 @@
 netlist: rc-filter.cir
 description: Ideal unity-gain passive RC reconstruction/anti-alias stage
 assumptions:
-  - Ideal source, unloaded output, nominal R and C only
-  - No codec impedance, op-amp stability, tolerance, noise or distortion coverage
+- Ideal source, unloaded output, nominal R and C only
+- No codec impedance, op-amp stability, tolerance, noise or distortion coverage
 assertions:
-  gain_at_1k: {min: -0.012, max: -0.009}
-  cutoff_hz: {min: 19900, max: 20100}
+  gain_at_1k:
+    min: -0.012
+    max: -0.009
+    unit: dB
+  cutoff_hz:
+    min: 19900
+    max: 20100
+    unit: Hz
+measurement_units:
+  gain_at_1k: dB
+  cutoff_hz: Hz

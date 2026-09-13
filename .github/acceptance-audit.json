@@ -172,15 +172,23 @@
       "number": 16,
       "title": "P0 \u2014 Validate manufacturer part-number completeness",
       "milestone": "M2 \u2013 Engineering Verification",
-      "assessment": "partial",
-      "reason": "Missing/ambiguous text MPN checks exist; ordering-suffix rules and explicit policy-controlled non-populated/mechanical exclusions are incomplete."
+      "assessment": "implemented",
+      "reason": "Explicit evidence-backed ordering suffix rules and policy-controlled unfitted/mechanical exclusions augment MPN completeness without guessing ordering codes.",
+      "evidence": [
+        "src/astra_pcb/bom/policy.py",
+        "tests/test_remaining_bom.py"
+      ]
     },
     {
       "number": 17,
       "title": "P1 \u2014 Implement BOM normalization and inconsistency checks",
       "milestone": "M2 \u2013 Engineering Verification",
-      "assessment": "partial",
-      "reason": "Whitespace/grouped-reference and value/package checks exist; manufacturer conflict/alias normalization policy and its fixtures are incomplete."
+      "assessment": "implemented",
+      "reason": "Canonical manufacturer alias policy retains MPN case, detects supplier identity conflicts and inconsistent normalized metadata, and rejects duplicate references including exclusions.",
+      "evidence": [
+        "src/astra_pcb/bom/policy.py",
+        "tests/test_remaining_bom.py"
+      ]
     },
     {
       "number": 18,
@@ -292,29 +300,45 @@
       "number": 28,
       "title": "P0 \u2014 Implement ngspice process adapter",
       "milestone": "M2 \u2013 Engineering Verification",
-      "assessment": "partial",
-      "reason": "Real bounded ngspice execution works, but model include/library resolution is rejected rather than implemented and qualified."
+      "assessment": "implemented",
+      "reason": "Approved local include/library sections resolve with hashes, bounded recursion and cycle/path checks before real ngspice execution; sources are rechecked afterward.",
+      "evidence": [
+        "src/astra_pcb/simulation/models.py",
+        "tests/test_simulation_models.py"
+      ]
     },
     {
       "number": 29,
       "title": "P1 \u2014 Add declarative simulation assertions",
       "milestone": "M2 \u2013 Engineering Verification",
-      "assessment": "partial",
-      "reason": "Scalar min/max and missing/nonfinite checks work; declarative measurement units and unit-validation contracts are absent."
+      "assessment": "implemented",
+      "reason": "Assertions declare measurement/limit units, reject dimension mismatch and convert compatible units; report identity includes the complete job and model inputs.",
+      "evidence": [
+        "src/astra_pcb/simulation/workflow.py",
+        "tests/test_simulation_models.py"
+      ]
     },
     {
       "number": 30,
       "title": "P1 \u2014 Add audio filter simulation workflow",
       "milestone": "M2 \u2013 Engineering Verification",
-      "assessment": "partial",
-      "reason": "The fixed ideal RC example runs, but the scoped audio source/load and component-corner workflow is not implemented."
+      "assessment": "implemented",
+      "reason": "Loaded passive RC anti-alias/reconstruction workflow measures gain/cutoff across explicit source/load/R/C corners, with 16 actual ngspice combinations and stated physical limits.",
+      "evidence": [
+        "src/astra_pcb/simulation/corners.py",
+        "tests/test_simulation_models.py"
+      ]
     },
     {
       "number": 31,
       "title": "P1 \u2014 Add power-circuit simulation workflow",
       "milestone": "M2 \u2013 Engineering Verification",
-      "assessment": "partial",
-      "reason": "The ideal supply RC transient example runs; approved external model handling and a reusable startup/load-transient model workflow remain incomplete."
+      "assessment": "implemented",
+      "reason": "Power source startup/load/recovery workflow uses hashed approved library sections and eight actual voltage/R/C corners; arbitrary vendor jobs use the same qualified include/assertion infrastructure without assuming RC/regulator equivalence.",
+      "evidence": [
+        "src/astra_pcb/simulation/corners.py",
+        "tests/test_simulation_models.py"
+      ]
     },
     {
       "number": 32,

@@ -68,3 +68,13 @@ regulator stability, capacitor derating or manufacturing design.
 Run `pytest -m integration` on a host with KiCad and ngspice. CI's Fedora integration
 job supplies both. Offline unit tests exercise contract failures; live supplier lookup
 is opt-in through the CLI and never required by CI.
+
+BOM policies are available through `astra-pcb check-bom bom.json --policy policy.yaml`.
+They define manufacturer aliases (no chains/cycles), evidence-backed ordering suffix sets,
+and explicit unfitted/mechanical reference exclusions with reasons. MPN case is retained.
+Conflicting identities for one supplier part number fail, as do duplicate references even
+when excluded. A completely excluded electrical BOM remains unresolved, not release-ready.
+See `bom.policy.BOMPolicy` and `tests/test_remaining_bom.py` for the typed input contract.
+
+Approved local model includes and dimension-checked simulation assertions are now implemented;
+see [simulation corners](simulation-corners.md) for the qualified workflows and limits.
