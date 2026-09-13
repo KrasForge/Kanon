@@ -128,8 +128,12 @@
       "number": 12,
       "title": "P0 \u2014 Enforce read-only reviewer tool policy",
       "milestone": "M1 \u2013 KiCad Closed Loop",
-      "assessment": "partial",
-      "reason": "Tool facades deny mutations, but there is no deployable reviewer runtime enforcing read-only OS mounts, credentials and shell isolation. Role flags alone do not enforce mounts."
+      "assessment": "implemented",
+      "reason": "Linux bubblewrap and libseccomp runtime enforces read-only frozen evidence, no host credentials/network or child execution; actual adversarial OS tests and dedicated CI cover the boundary, with no unsandboxed fallback.",
+      "evidence": [
+        "src/astra_pcb/agents/sandbox.py",
+        "tests/test_sandbox.py"
+      ]
     },
     {
       "number": 13,
@@ -146,8 +150,12 @@
       "number": 14,
       "title": "P1 \u2014 Add design mutation \u2192 verify workflow",
       "milestone": "M1 \u2013 KiCad Closed Loop",
-      "assessment": "partial",
-      "reason": "Mutation/readback/check flow works for parseable sources; deletion or malformed native files during mutation can escape before a structured failure report is persisted."
+      "assessment": "implemented",
+      "reason": "Deleted or malformed persisted native state now emits a structured failure report and preserves the before snapshot while invalidating prior approvals; valid readback still invokes independent checks.",
+      "evidence": [
+        "src/astra_pcb/kicad/workflow.py",
+        "tests/test_sandbox.py"
+      ]
     },
     {
       "number": 15,
