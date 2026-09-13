@@ -15,15 +15,17 @@ end and unapproved ignored rules. This is a negative integration control, not a 
 `config/integrations/qualification.json` records the source revision, tool inventory,
 qualified operations and dependency digests. The original npm lock had six vulnerable
 runtime dependencies. The qualified lock includes compatible security updates and
-`npm audit --omit=dev` reported zero findings. Its development test stack still has
-advisories; do not expose that external development server. Kanon does not run it.
+`npm audit --omit=dev` reported zero findings. The deployment manifest excludes the external development/test servers and retains
+only runtime dependencies plus TypeScript build dependencies; its complete npm audit
+also reports zero findings. The Python runtime lock excludes pip (installation uses uv).
 
 ## Reproduce the installation
 
 Install Node.js and the Python that can import the installed KiCad `pcbnew` module.
 For Fedora this is system Python, not necessarily Kanon's uv Python.
 Clone the repository into an external installation directory and detach at the commit
-above. Copy `config/integrations/kicad-mcp-package-lock.json` over its package-lock.json,
+above. Copy `config/integrations/kicad-mcp-package.json` over its package.json and
+`config/integrations/kicad-mcp-package-lock.json` over its package-lock.json,
 then run `npm ci --ignore-scripts` and `npm run build` in that external checkout.
 Create its `venv` with `python3 -m venv --system-site-packages venv` and install
 `config/integrations/kicad-mcp-requirements.txt` using `uv pip install --python venv/bin/python`.
