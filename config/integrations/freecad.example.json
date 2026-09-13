@@ -1,0 +1,10 @@
+{
+  "provider": "https://github.com/neka-nat/freecad-mcp",
+  "status": "UNQUALIFIED_OPTIONAL",
+  "launch": {"command": "uvx", "args": ["freecad-mcp"]},
+  "requirements": ["FreeCAD installed", "Audited provider addon loaded in isolated FreeCAD session"],
+  "designer": {"enabled": false, "tools": [], "require_explicit_enclosure_edit_intent": true},
+  "reviewer": {"enabled": false, "tools": [], "source_access": "none"},
+  "secrets": "Environment variables only; do not store credentials here",
+  "notice": "This server can execute CAD mutations; never give it to the read-only Reviewer. Review exported STEP and immutable evidence instead. Pin and qualify a provider version before enabling."
+}

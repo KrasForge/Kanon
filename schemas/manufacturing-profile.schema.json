@@ -1,0 +1,195 @@
+{
+  "$defs": {
+    "Copper": {
+      "additionalProperties": false,
+      "properties": {
+        "outer": {
+          "exclusiveMinimum": 0,
+          "title": "Outer",
+          "type": "number"
+        },
+        "inner": {
+          "exclusiveMinimum": 0,
+          "title": "Inner",
+          "type": "number"
+        }
+      },
+      "required": [
+        "outer",
+        "inner"
+      ],
+      "title": "Copper",
+      "type": "object"
+    },
+    "Soldermask": {
+      "additionalProperties": false,
+      "properties": {
+        "color": {
+          "title": "Color",
+          "type": "string"
+        },
+        "minimum_web_mm": {
+          "minimum": 0,
+          "title": "Minimum Web Mm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "color",
+        "minimum_web_mm"
+      ],
+      "title": "Soldermask",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "status": {
+      "default": "UNQUALIFIED",
+      "enum": [
+        "UNQUALIFIED",
+        "QUALIFIED"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "capabilities_checked_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Capabilities Checked At"
+    },
+    "source_url": {
+      "minLength": 1,
+      "title": "Source Url",
+      "type": "string"
+    },
+    "qualification_evidence": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualification Evidence",
+      "type": "array"
+    },
+    "notice": {
+      "title": "Notice",
+      "type": "string"
+    },
+    "layer_count": {
+      "maximum": 32,
+      "minimum": 2,
+      "title": "Layer Count",
+      "type": "integer"
+    },
+    "board_thickness_mm": {
+      "exclusiveMinimum": 0,
+      "title": "Board Thickness Mm",
+      "type": "number"
+    },
+    "copper_oz": {
+      "$ref": "#/$defs/Copper"
+    },
+    "minimum_trace_mm": {
+      "exclusiveMinimum": 0,
+      "title": "Minimum Trace Mm",
+      "type": "number"
+    },
+    "minimum_spacing_mm": {
+      "exclusiveMinimum": 0,
+      "title": "Minimum Spacing Mm",
+      "type": "number"
+    },
+    "via_drill_mm": {
+      "exclusiveMinimum": 0,
+      "title": "Via Drill Mm",
+      "type": "number"
+    },
+    "annular_ring_mm": {
+      "exclusiveMinimum": 0,
+      "title": "Annular Ring Mm",
+      "type": "number"
+    },
+    "copper_edge_clearance_mm": {
+      "exclusiveMinimum": 0,
+      "title": "Copper Edge Clearance Mm",
+      "type": "number"
+    },
+    "soldermask": {
+      "$ref": "#/$defs/Soldermask"
+    },
+    "preferred_package": {
+      "title": "Preferred Package",
+      "type": "string"
+    },
+    "bga_policy": {
+      "enum": [
+        "forbidden",
+        "requires_explicit_process_review",
+        "allowed"
+      ],
+      "title": "Bga Policy",
+      "type": "string"
+    },
+    "policy_0402": {
+      "enum": [
+        "forbidden",
+        "requires_assembly_review",
+        "allowed"
+      ],
+      "title": "Policy 0402",
+      "type": "string"
+    },
+    "single_sided_assembly_preferred": {
+      "title": "Single Sided Assembly Preferred",
+      "type": "boolean"
+    },
+    "sourcing_preferences": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sourcing Preferences",
+      "type": "array"
+    },
+    "stackup": {
+      "minLength": 1,
+      "title": "Stackup",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "source_url",
+    "notice",
+    "layer_count",
+    "board_thickness_mm",
+    "copper_oz",
+    "minimum_trace_mm",
+    "minimum_spacing_mm",
+    "via_drill_mm",
+    "annular_ring_mm",
+    "copper_edge_clearance_mm",
+    "soldermask",
+    "preferred_package",
+    "bga_policy",
+    "policy_0402",
+    "single_sided_assembly_preferred",
+    "sourcing_preferences",
+    "stackup"
+  ],
+  "title": "ManufacturingProfile",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

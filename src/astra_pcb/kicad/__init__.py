@@ -121,19 +121,21 @@ class KiCadCLI:
 
     def export(
         self,
-        kind: Literal["gerbers", "drill", "step", "bom", "netlist"],
+        kind: Literal["gerbers", "drill", "step", "bom", "netlist", "pos"],
         design: Path,
         output: Path,
         *,
         layers: tuple[str, ...] = (),
     ) -> ProcessResult:
-        if kind not in {"gerbers", "drill", "step", "bom", "netlist"}:
+        if kind not in {"gerbers", "drill", "step", "bom", "netlist", "pos"}:
             raise ValueError("unsupported export")
         args = ["sch" if kind in {"bom", "netlist"} else "pcb", "export", kind]
         if layers:
             if kind != "gerbers" or any("," in layer for layer in layers):
                 raise ValueError("Explicit layers apply only to Gerbers")
             args += ["--layers", ",".join(layers)]
+        if kind == "pos":
+            args += ["--format", "csv", "--units", "mm", "--exclude-dnp"]
         if kind == "gerbers":
             args.append("--no-protel-ext")
         return self._execute(args, design, output)

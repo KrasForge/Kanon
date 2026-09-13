@@ -41,3 +41,15 @@ gates:
   - check_id: review.independent
     mode: MANUAL
     mandatory: true
+  - check_id: spec.schema
+    mode: AUTOMATED
+    mandatory: true
+  - check_id: manufacturing.profile
+    mode: AUTOMATED
+    mandatory: true
+  - check_id: bom.parity
+    mode: AUTOMATED
+    mandatory: true
+  - check_id: export.step
+    mode: AUTOMATED
+    mandatory: true
