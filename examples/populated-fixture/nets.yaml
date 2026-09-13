@@ -1,0 +1,11 @@
+nets:
+- classes:
+  - power
+  name: /A
+  rationale: Synthetic DC coupon connection; requires current/voltage/thermal/return
+    review in test transaction.
+- classes:
+  - power
+  name: /B
+  rationale: Synthetic DC coupon connection; requires current/voltage/thermal/return
+    review in test transaction.

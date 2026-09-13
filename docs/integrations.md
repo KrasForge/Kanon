@@ -91,3 +91,12 @@ C-prefixed-ID requirement for LCSC/JLCPCB. Existing JLCSearch commands remain co
 All network reads are bounded, reject redirects and have explicit failure results.
 Contract tests use a reduced response observed on 2026-09-13; live stock is never a CI
 assertion. Neither provider requires credentials, substitutes parts, uploads designs or orders.
+
+
+## KiCad 10.0.6 requalification
+
+After updating the host from KiCad 10.0.0 to 10.0.6, the same pinned SWIG provider again
+opened a disposable board, read state, added one trace, saved and produced a native file
+containing exactly one segment. Independent CLI verification reported the deliberately
+unassigned/dangling trace and ignored-check warnings; mutation success did not become
+verification PASS. This requalification does not cover IPC or schematic editing.

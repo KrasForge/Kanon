@@ -56,3 +56,6 @@ gates:
   - check_id: critical-nets.coverage
     mode: AUTOMATED
     mandatory: true
+  - check_id: mechanical.models
+    mode: AUTOMATED
+    mandatory: true

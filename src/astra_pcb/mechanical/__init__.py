@@ -1,5 +1,6 @@
 """Mechanical constraints and revision-bound STEP verification."""
 
+import re
 from pathlib import Path
 
 from pydantic import Field
@@ -35,7 +36,7 @@ class MechanicalConstraints(StrictModel):
     evidence: tuple[str, ...] = Field(min_length=1)
 
 
-def check_step(process: ProcessResult, step: Path) -> CheckResult:
+def check_step(process: ProcessResult, step: Path, *, require_frame: bool = False) -> CheckResult:
     passed = not process.error and process.exit_code == 0 and step.is_file()
     reason = process.error or "Missing STEP export"
     if passed:
@@ -48,6 +49,21 @@ def check_step(process: ProcessResult, step: Path) -> CheckResult:
             and "END-ISO-10303-21;" in data[-500:]
             and bool(process.input_digest)
         )
+        if require_frame:
+            passed = passed and bool(re.search(r"SI_UNIT\(\s*\.MILLI\.\s*,\s*\.METRE\.\s*\)", data))
+            command = list(process.command)
+            passed = (
+                passed
+                and "--user-origin" in command
+                and command[command.index("--user-origin") + 1 :][:1] == ["0x0mm"]
+            )
+        if re.search(
+            r"(?:missing|not found|failed|unable).*model|"
+            r"model.*(?:missing|not found|failed|unable)",
+            process.stdout + process.stderr,
+            re.I,
+        ):
+            passed = False
         reason = (
             "STEP envelope and source/export identity match"
             if passed

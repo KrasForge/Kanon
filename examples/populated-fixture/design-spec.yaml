@@ -1,0 +1,42 @@
+schema_version: '1.0'
+project:
+  name: populated-software-fixture
+  revision: draft-1
+  status: draft
+  description: Two synthetic 1k passive resistors in parallel; software qualification
+    only, no purchasable BOM.
+functional_requirements:
+- id: FUNC-001
+  description: Connect two ideal 1k resistors in parallel on /A and /B. Nominal combined
+    resistance 500 ohm.
+  status: draft
+interfaces: []
+power_inputs: []
+rails: []
+clocks: []
+devices: []
+audio_requirements: []
+environmental_limits:
+  temperature_min_c: 0
+  temperature_max_c: 40
+mechanical_constraints:
+- id: MECH-001
+  description: 20 x 18 x 1.6 mm outline, synthetic component bodies 4 x 1.6 x 0.8
+    mm.
+  status: draft
+manufacturing_constraints:
+  profile: profile.yaml
+sourcing_rules: []
+cost_targets:
+  currency: EUR
+  unit_cost_max: 5
+  quantity: 10
+test_requirements:
+- id: TEST-001
+  description: Qualify actual ERC/DRC/parity/exports and signed transaction with test-only
+    approvals.
+  status: draft
+forbidden_parts: []
+forbidden_packages:
+- BGA
+required_debug_interfaces: []

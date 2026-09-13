@@ -73,13 +73,13 @@ class FakeExporter:
             files = tuple(output.iterdir())
         else:
             output.write_text(
-                "ISO-10303-21;\nDATA;\nENDSEC;\nEND-ISO-10303-21;\n"
+                "ISO-10303-21;\nDATA;\n#1=SI_UNIT(.MILLI.,.METRE.);\nENDSEC;\nEND-ISO-10303-21;\n"
                 if kind == "step"
                 else "Ref,PosX,PosY,Rot,Side\nR1,1,1,0,top\n"
             )
             files = (output,)
         return ProcessResult(
-            command=("fake",),
+            command=("fake", "--user-origin", "0x0mm"),
             exit_code=0,
             input_digest="a" * 64,
             artifacts=tuple(str(f.resolve()) for f in files),
@@ -126,6 +126,7 @@ def package(tmp_path, monkeypatch):
     project = ReleaseProject(
         design_author="designer",
         critical_net_plan="nets.yaml",
+        model_exemptions={"R1": "Synthetic exporter fixture has no physical model"},
         spec="spec.yaml",
         schematic="board.kicad_sch",
         pcb="board.kicad_pcb",

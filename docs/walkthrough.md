@@ -1,7 +1,7 @@
 # Design a board with Astra
 
 This walkthrough separates working tooling from the engineering work a Designer and
-independent Reviewer must supply. No complete board is bundled or claimed fabrication-ready.
+independent Reviewer must supply. The populated software fixture is not a fabrication-ready product.
 The Codex-compatible harness supplies model invocation; Kanon provides policy, state,
 verification and evidence APIs. Loading model configuration does not run GPT-6 Astra.
 
@@ -44,3 +44,25 @@ verification and evidence APIs. Loading model configuration does not run GPT-6 A
 The reproducible CI example covers spec validation, checks, export integrity, manifest
 contracts and blocked release behavior. It does not demonstrate autonomous end-to-end PCB
 design or eliminate engineering judgment. See [capabilities](capabilities.md) for limits.
+
+## Reproducible populated integration path
+
+The [populated coupon](../examples/populated-fixture/README.md) now exercises native
+schematic → routed PCB → independent CLI checks → actual Gerber/drill/STEP/placement
+exports → blocked candidate → signed finalization. Run
+`uv run pytest tests/test_populated_release.py -v`. Native source files, library tables,
+courtyards, 3D geometry and net classifications are committed for inspection. The test
+uses a temporary repository and explicitly synthetic manufacturing/review approvals;
+it does not ask an LLM to approve its own physical design.
+
+For a real project, follow steps 1–8 above with real component/data evidence and separate
+review principals. Supply a `critical_net_plan` covering native net names, an assembly
+plan for package/side/courtyard/polarity/placement checks, and all assigned 3D model files
+inside the input identity. Model omissions require explicit per-reference rationale.
+STEP export uses a fixed 0 × 0 mm native-board origin and millimetre length units. Coordinate
+transform into an enclosure remains a reviewed mechanical constraint.
+
+The optional FreeCAD MCP subset can construct/read primitive geometry in an explicitly
+selected local Designer session; see [qualification](freecad.md). It is not passed to
+Reviewer. A full model-driven schematic authoring/routing session still requires the
+Codex-compatible deployment harness and its independently qualified tool capabilities.

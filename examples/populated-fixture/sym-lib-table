@@ -1,0 +1,1 @@
+(sym_lib_table (lib (name Fixture) (type KiCad) (uri ${KIPRJMOD}/Fixture.kicad_sym) (options "") (descr "Synthetic qualification symbol")))
