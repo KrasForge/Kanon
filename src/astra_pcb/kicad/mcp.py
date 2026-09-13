@@ -10,6 +10,7 @@ from pydantic import Field, model_validator
 
 from astra_pcb.kicad.snapshot import Snapshot
 from astra_pcb.models import StrictModel
+from astra_pcb.models.provenance import Digest, canonical_digest
 from astra_pcb.verification.environment import PROTOCOL
 
 
@@ -22,6 +23,7 @@ class ToolMapping(StrictModel):
 class MCPProfile(StrictModel):
     command: tuple[str, ...] = Field(min_length=1)
     tools: tuple[ToolMapping, ...]
+    inventory_digest: Digest | None = None
 
     @model_validator(mode="after")
     def unique_mapping(self):
@@ -133,7 +135,14 @@ class DesignerTools:
         self._transport = transport
         listing = transport.request("tools/list", {})
         available = {t["name"] for t in listing.get("tools", [])}
-        if available != {t.remote_tool for t in profile.tools}:
+        selected = {t.remote_tool for t in profile.tools}
+        if profile.inventory_digest is not None:
+            inventory = sorted(listing.get("tools", []), key=lambda tool: tool["name"])
+            if canonical_digest({"tools": inventory}) != profile.inventory_digest:
+                raise ValueError("Server tool inventory changed; qualification required")
+            if not selected <= available:
+                raise ValueError("Selected tools unavailable")
+        elif available != selected:
             raise ValueError("Server tools differ from explicitly audited profile")
 
     def call(self, operation: str, arguments: dict, *, allow_write: bool = False) -> dict:

@@ -1,0 +1,43 @@
+{
+  "server": "https://github.com/mixelpixx/KiCAD-MCP-Server",
+  "commit": "ac716d1a8bfad325b4aa93a398222645b3f78fd7",
+  "version": "2.7.0",
+  "license": "MIT",
+  "backend": "swig",
+  "kicad_cli": "10.0.0",
+  "python": "3.14.6",
+  "inventory_digest": "b76297d92c6844557e89e59dcfdf11e3cfa4997d2d3d1b77792f4a13a49de975",
+  "qualified_tools": [
+    "open_board",
+    "get_board_info",
+    "route_trace",
+    "save_board",
+    "get_backend_state"
+  ],
+  "qualification": {
+    "board_open": "PASS",
+    "board_information": "PASS",
+    "trace_save_readback": "PASS",
+    "independent_drc": "WARN: intentional dangling track; ignored KiCad rules reported",
+    "ipc": "NOT QUALIFIED",
+    "schematic_mutation": "NOT QUALIFIED",
+    "other_tools": "NOT QUALIFIED"
+  },
+  "dependency_changes": "npm audit fix --ignore-scripts; runtime audit zero findings at qualification",
+  "npm_lock_sha256": "f94faad03043a3871a4c27e6a57cc9b331b9fa9df94541f3e92dd4df33c29e99",
+  "python_requirements_sha256": "73da5a8f611805bfea3d6c2a38b8caf02bf59d4243cb91d54fcf4eed8014ce0e",
+  "source_lookup": {
+    "endpoint": "https://jlcsearch.tscircuit.com/components/list.json",
+    "implementation_revision": "ba23a0a53a615ecd23ebe6eb8e6140c716f75302",
+    "part": "C21190",
+    "expected_mpn": "0603WAF1001T5E",
+    "result": "WARN",
+    "limitations": [
+      "Third-party mirror",
+      "Manufacturer not supplied",
+      "Stock source age unknown",
+      "Price currency not supplied",
+      "No order or purchase capability"
+    ]
+  }
+}

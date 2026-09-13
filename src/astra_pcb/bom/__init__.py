@@ -1,5 +1,6 @@
 """Canonical per-reference BOM rows and offline integrity checks."""
 
+import re
 from decimal import Decimal
 
 from pydantic import Field
@@ -35,6 +36,8 @@ def check_bom(items: list[BOMItem]) -> tuple[CheckResult, ...]:
         refs.add(item.reference)
         if not item.mpn or item.mpn.strip().lower() in {"", "tbd", "unknown", "n/a"}:
             problems.append(f"Missing/ambiguous MPN: {item.reference}")
+        elif re.search(r"\s+(?:or|/)\s+|[;,]", item.mpn, flags=re.IGNORECASE):
+            problems.append(f"Ambiguous MPN alternatives: {item.reference}")
         else:
             key = ((item.manufacturer or "").strip().casefold(), item.mpn.strip())
             metadata = (item.value.strip(), item.package.strip())

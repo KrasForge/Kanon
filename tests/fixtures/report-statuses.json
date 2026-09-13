@@ -1,0 +1,47 @@
+{
+  "report": {
+    "schema_version": "1.1",
+    "report_id": "golden-statuses",
+    "created_at": "2026-01-01T00:00:00Z",
+    "results": [
+      {
+        "check_id": "pass",
+        "name": "PASS",
+        "status": "PASS",
+        "message": "Golden PASS"
+      },
+      {
+        "check_id": "fail",
+        "name": "FAIL",
+        "status": "FAIL",
+        "message": "Golden FAIL"
+      },
+      {
+        "check_id": "warn",
+        "name": "WARN",
+        "status": "WARN",
+        "message": "Golden WARN"
+      },
+      {
+        "check_id": "skip",
+        "name": "SKIP",
+        "status": "SKIP",
+        "message": "Golden SKIP"
+      },
+      {
+        "check_id": "error",
+        "name": "ERROR",
+        "status": "ERROR",
+        "message": "Golden ERROR"
+      }
+    ]
+  },
+  "expected_gate_statuses": [
+    "PASS",
+    "FAIL",
+    "FAIL",
+    "FAIL",
+    "FAIL"
+  ],
+  "expected_exit_code": 1
+}
