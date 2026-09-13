@@ -1,0 +1,192 @@
+{
+  "$defs": {
+    "ConnectorPosition": {
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "title": "Reference",
+          "type": "string"
+        },
+        "center": {
+          "$ref": "#/$defs/Point"
+        },
+        "tolerance_mm": {
+          "minimum": 0,
+          "title": "Tolerance Mm",
+          "type": "number"
+        },
+        "mating_direction_degrees": {
+          "title": "Mating Direction Degrees",
+          "type": "number"
+        }
+      },
+      "required": [
+        "reference",
+        "center",
+        "tolerance_mm",
+        "mating_direction_degrees"
+      ],
+      "title": "ConnectorPosition",
+      "type": "object"
+    },
+    "MountingHole": {
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "title": "Reference",
+          "type": "string"
+        },
+        "center": {
+          "$ref": "#/$defs/Point"
+        },
+        "drill_mm": {
+          "exclusiveMinimum": 0,
+          "title": "Drill Mm",
+          "type": "number"
+        },
+        "fastener_clearance_mm": {
+          "minimum": 0,
+          "title": "Fastener Clearance Mm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "reference",
+        "center",
+        "drill_mm",
+        "fastener_clearance_mm"
+      ],
+      "title": "MountingHole",
+      "type": "object"
+    },
+    "Point": {
+      "additionalProperties": false,
+      "properties": {
+        "x_mm": {
+          "title": "X Mm",
+          "type": "number"
+        },
+        "y_mm": {
+          "title": "Y Mm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x_mm",
+        "y_mm"
+      ],
+      "title": "Point",
+      "type": "object"
+    },
+    "Region": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "function": {
+          "enum": [
+            "power",
+            "logic",
+            "converter",
+            "analog-input",
+            "analog-output",
+            "connectors",
+            "memory",
+            "clocks",
+            "other"
+          ],
+          "title": "Function",
+          "type": "string"
+        },
+        "minimum": {
+          "$ref": "#/$defs/Point"
+        },
+        "maximum": {
+          "$ref": "#/$defs/Point"
+        }
+      },
+      "required": [
+        "id",
+        "function",
+        "minimum",
+        "maximum"
+      ],
+      "title": "Region",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "outline_points": {
+      "items": {
+        "$ref": "#/$defs/Point"
+      },
+      "minItems": 3,
+      "title": "Outline Points",
+      "type": "array"
+    },
+    "keepouts": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Region"
+      },
+      "title": "Keepouts",
+      "type": "array"
+    },
+    "mounting_holes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/MountingHole"
+      },
+      "title": "Mounting Holes",
+      "type": "array"
+    },
+    "connectors": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ConnectorPosition"
+      },
+      "title": "Connectors",
+      "type": "array"
+    },
+    "maximum_component_height_mm": {
+      "exclusiveMinimum": 0,
+      "title": "Maximum Component Height Mm",
+      "type": "number"
+    },
+    "enclosure_references": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Enclosure References",
+      "type": "object"
+    },
+    "coordinate_frame": {
+      "minLength": 1,
+      "title": "Coordinate Frame",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence",
+      "type": "array"
+    }
+  },
+  "required": [
+    "outline_points",
+    "maximum_component_height_mm",
+    "enclosure_references",
+    "coordinate_frame",
+    "evidence"
+  ],
+  "title": "MechanicalConstraints",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

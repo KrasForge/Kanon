@@ -15,6 +15,7 @@ dependencies = [
 ]
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+visual = ["gerbonara==1.6.3"]
 science = ["numpy>=2,<3", "scipy>=1.14,<2"]
 [project.scripts]
 astra-pcb = "astra_pcb.cli:main"

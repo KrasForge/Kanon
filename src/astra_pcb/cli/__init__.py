@@ -1,4 +1,4 @@
-"""Repository-local CLI. Release remains explicitly blocked pending M4."""
+"""Repository-local CLI with deterministic checks and two-phase manufacturing release."""
 
 import argparse
 import json
@@ -15,9 +15,11 @@ from astra_pcb.config import load_yaml, validate_document
 from astra_pcb.engineering.power import PowerTree
 from astra_pcb.kicad.verification import verify_design
 from astra_pcb.models import CheckResult, CheckStatus, VerificationReport
+from astra_pcb.models.engineering import Review
 from astra_pcb.models.provenance import InputIdentity
 from astra_pcb.release import GateConfig, evaluate
 from astra_pcb.release.attestations import Attestation, TrustedSigner
+from astra_pcb.release.coordinator import ReleaseProject, finalize_release, identify, release
 from astra_pcb.simulation.workflow import SimulationJob, run_job
 from astra_pcb.verification.environment import diagnose
 
@@ -52,7 +54,16 @@ def main(argv: list[str] | None = None) -> int:
     sourcing = sub.add_parser("source-part")
     sourcing.add_argument("lcsc")
     sourcing.add_argument("--expected-mpn")
-    sub.add_parser("release")
+    releasing = sub.add_parser("release")
+    releasing.add_argument("--project", type=Path)
+    releasing.add_argument("--root", type=Path, default=Path.cwd())
+    releasing.add_argument("--gates", type=Path, default=Path("config/release-gates.yaml"))
+    releasing.add_argument("--output", type=Path)
+    releasing.add_argument("--reviews", type=Path)
+    releasing.add_argument("--attestations", type=Path)
+    releasing.add_argument("--trusted-signers", type=Path)
+    releasing.add_argument("--identity-only", action="store_true")
+    releasing.add_argument("--finalize", action="store_true")
     args = parser.parse_args(argv)
     try:
         if args.command == "simulate":
@@ -118,19 +129,44 @@ def main(argv: list[str] | None = None) -> int:
                 trusted=trusted,
             )
         else:
-            report = VerificationReport(
-                results=(
-                    CheckResult(
-                        check_id="release.pipeline",
-                        name="Manufacturing release",
-                        status=CheckStatus.ERROR,
-                        message=(
-                            "Not implemented: exports, provenance and "
-                            "authenticated approvals required"
-                        ),
-                    ),
-                )
+            if args.finalize and not args.output:
+                raise ValueError("Finalization requires an existing candidate output directory")
+            trusted = {
+                k: TrustedSigner.model_validate(v)
+                for k, v in (
+                    json.loads(args.trusted_signers.read_text()) if args.trusted_signers else {}
+                ).items()
+            }
+            attestations = tuple(
+                Attestation.model_validate(a)
+                for a in (json.loads(args.attestations.read_text()) if args.attestations else [])
             )
+            if args.finalize:
+                report = finalize_release(args.root, args.output, attestations, trusted)
+            else:
+                if not args.project:
+                    raise ValueError("Release requires --project; no design is implicitly released")
+                project = ReleaseProject.model_validate(load_yaml(args.project))
+                identity = identify(args.root, project, args.project, args.gates)
+                if args.identity_only:
+                    print(identity.model_dump_json(indent=2))
+                    return 0
+                if not args.output:
+                    raise ValueError("Release preparation requires a fresh --output directory")
+                reviews = tuple(
+                    Review.model_validate(r)
+                    for r in (json.loads(args.reviews.read_text()) if args.reviews else [])
+                )
+                report = release(
+                    args.root,
+                    project,
+                    identity,
+                    GateConfig.model_validate(load_yaml(args.gates)),
+                    reviews,
+                    attestations,
+                    trusted,
+                    args.output,
+                )
         print(report.model_dump_json(indent=2))
         return report.exit_code
     except (OSError, ValueError, ValidationError, SchemaError, YAMLError) as exc:

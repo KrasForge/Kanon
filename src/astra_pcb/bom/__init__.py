@@ -57,3 +57,38 @@ def check_bom(items: list[BOMItem]) -> tuple[CheckResult, ...]:
             source="canonical BOM",
         ),
     )
+
+
+def check_board_bom(items: list[BOMItem], board_text: str) -> CheckResult:
+    """Compare populated native footprints with per-reference BOM value and footprint ID."""
+    from astra_pcb.kicad.snapshot import nodes, parse_sexpr
+
+    expected = {}
+    for footprint in nodes(parse_sexpr(board_text), "footprint"):
+        fields = [x for x in footprint if isinstance(x, list)]
+        attributes = next((f[1:] for f in fields if f and f[0] == "attr"), [])
+        dnp = any(f == ["dnp", "yes"] for f in fields)
+        if "exclude_from_bom" in attributes or dnp:
+            continue
+        properties = {f[1]: f[2] for f in fields if len(f) > 2 and f[0] == "property"}
+        reference = properties.get("Reference")
+        if not reference or reference in expected:
+            return CheckResult(
+                check_id="bom.parity",
+                name="Native BOM parity",
+                status=CheckStatus.FAIL,
+                message="Missing/duplicate native footprint reference",
+            )
+        expected[reference] = (properties.get("Value"), footprint[1])
+    actual = {i.reference: (i.value, i.package) for i in items}
+    passed = bool(expected) and expected == actual and all(i.quantity == 1 for i in items)
+    return CheckResult(
+        check_id="bom.parity",
+        name="Native BOM parity",
+        status=CheckStatus.PASS if passed else CheckStatus.FAIL,
+        message="Native populated footprint/value inventory matches BOM"
+        if passed
+        else "Empty design or populated reference/value/footprint/quantity mismatch",
+        evidence=(str(expected), str(actual)),
+        source="native KiCad footprint inventory",
+    )

@@ -13,7 +13,7 @@ jobs:
           dnf -y --setopt=install_weak_deps=False install kicad ngspice python3-pip git
           python3 -m venv /tmp/ci-tools
           /tmp/ci-tools/bin/pip install uv==0.11.30
-          /tmp/ci-tools/bin/uv sync --locked --extra dev
+          /tmp/ci-tools/bin/uv sync --locked --extra dev --extra visual
       - name: Exercise actual KiCad checks and exports
         run: |
           kicad-cli version
