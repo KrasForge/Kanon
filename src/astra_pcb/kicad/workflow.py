@@ -3,6 +3,7 @@
 from collections.abc import Callable
 from pathlib import Path
 
+from astra_pcb.agents.change_plan import ChangePlan
 from astra_pcb.kicad import KiCadCLI
 from astra_pcb.kicad.reports import interpret
 from astra_pcb.kicad.snapshot import Snapshot, capture
@@ -23,9 +24,13 @@ def mutate_verify(
     mutation: Callable[[], None],
     output: Path,
     adapter: KiCadCLI | None = None,
+    *,
+    change_plan: ChangePlan | None = None,
 ) -> MutationResult:
     output.mkdir(parents=True, exist_ok=False)
     before = capture(root, sources, revision)
+    if change_plan:
+        change_plan.authorize(before.identity.digest)
     failure = None
     try:
         mutation()  # Contract: remote edit AND explicit persistence/readback must finish here.
@@ -57,6 +62,8 @@ def mutate_verify(
             before=before, after=None, verification=report, prior_evidence_invalidated=True
         )
     checks = [failure] if failure else []
+    if change_plan:
+        checks.append(change_plan.audit_changes(before, after))
     adapter = adapter or KiCadCLI()
     # An exception can occur after a partial edit: still run independent checks.
     for index, path in enumerate(sources):

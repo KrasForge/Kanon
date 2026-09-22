@@ -31,6 +31,9 @@ class DeviceRules(StrictModel):
     required_configuration_pins: dict[str, str]
     required_boot_straps: dict[str, dict[str, Literal["high", "low"]]] = {}
     qualified_boot_mpns: tuple[str, ...] = ()
+    boot_pin_map: dict[str, dict[str, str]] = Field(default_factory=dict)
+    programming_pin_map: dict[str, str] = Field(default_factory=dict)
+    dedicated_supply_v: dict[str, float] = Field(default_factory=dict)
     reserved_pins: tuple[str, ...] = ()
     sequencing: tuple[Sequence, ...] = ()
     decoupling: tuple[DecouplingRule, ...] = ()
@@ -153,7 +156,10 @@ class BootPlan(StrictModel):
     pull_resistors: dict[str, float]
     evidence: DatasheetEvidence
 
-    def audit(self, rules: DeviceRules) -> CheckResult:
+    flash_connections: dict[str, str] = Field(default_factory=dict)
+    header_connections: dict[str, str] = Field(default_factory=dict)
+
+    def audit(self, rules: DeviceRules, pin_plan: dict | None = None) -> CheckResult:
         failures = []
         unknown = []
         expected_straps = rules.required_boot_straps.get(self.interface)
@@ -180,6 +186,43 @@ class BootPlan(StrictModel):
                 failures.append("Wrong/floating strap: " + net)
             if not 0 < self.pull_resistors.get(net, 0):
                 failures.append("Missing pull resistor: " + net)
+        if pin_plan is None:
+            unknown.append("Actual pin plan not supplied")
+        else:
+            pin_report = check_pin_plan(pin_plan, rules)
+            if pin_report.exit_code:
+                failures.append("Actual pin plan does not pass device validation")
+            fpga = pin_plan["fpga"]
+            signals = {
+                s["pin"]: (s["name"], bank["voltage"])
+                for bank in fpga["banks"].values()
+                for s in bank["signals"]
+            }
+            signals.update(
+                {
+                    pin: (function, rules.dedicated_supply_v.get(pin))
+                    for pin, function in fpga.get("dedicated_pins", {}).items()
+                }
+            )
+            if set(self.required_straps) - {v[0] for v in signals.values()}:
+                failures.append("Boot strap not present in actual pin-plan nets")
+            for kind, expected, connections in (
+                ("flash", rules.boot_pin_map.get(self.interface), self.flash_connections),
+                ("programmer", rules.programming_pin_map, self.header_connections),
+            ):
+                if not expected:
+                    unknown.append("Device " + kind + " pin map unavailable")
+                    continue
+                if set(connections) != set(expected):
+                    failures.append(kind + " connection inventory mismatch")
+                for function, pin in expected.items():
+                    assignment = signals.get(pin)
+                    if assignment is None or connections.get(function) != assignment[0]:
+                        failures.append(kind + " pin/net mismatch: " + function)
+                    elif assignment[1] is None:
+                        unknown.append("Dedicated-pin supply rule missing: " + pin)
+                    elif abs(assignment[1] - self.bank_supply_v) > 1e-6:
+                        failures.append("Actual configuration pin voltage conflicts: " + pin)
         return CheckResult(
             check_id="fpga.boot",
             name="FPGA configuration/boot audit",

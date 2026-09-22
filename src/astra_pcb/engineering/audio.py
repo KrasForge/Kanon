@@ -12,6 +12,22 @@ from astra_pcb.models import CheckResult, CheckStatus, StrictModel, Verification
 class AudioStage(StrictModel):
     id: str = Field(min_length=1)
     gain_db: float
+    gain_tolerance_db: float = Field(default=0, ge=0, le=60)
+    input_common_mode_limits_v: tuple[float, float] | None = None
+    output_common_mode_v: tuple[float, float] | None = None
+    ac_bias_v: tuple[float, float] | None = None
+
+    @model_validator(mode="after")
+    def common_mode_ranges(self):
+        for interval in (
+            self.input_common_mode_limits_v,
+            self.output_common_mode_v,
+            self.ac_bias_v,
+        ):
+            if interval is not None and interval[0] > interval[1]:
+                raise ValueError("Reversed common-mode interval")
+        return self
+
     input_maximum_vrms: float = Field(gt=0)
     output_maximum_vrms: float = Field(gt=0)
     input_impedance_ohm: float = Field(gt=0)
@@ -31,6 +47,7 @@ class AudioChain(StrictModel):
     required_headroom_db: float = Field(ge=0)
     stages: tuple[AudioStage, ...] = Field(min_length=1)
     level_convention: str = Field(min_length=1)
+    source_common_mode_v: tuple[float, float] | None = None
 
     @model_validator(mode="after")
     def ordered(self):
@@ -45,14 +62,17 @@ class AudioChain(StrictModel):
     def audit(self) -> VerificationReport:
         nominal, maximum = self.nominal_input_vrms, self.maximum_input_vrms
         previous = None
+        common_mode = self.source_common_mode_v
         checks = []
         for stage in self.stages:
             gain = 10 ** (stage.gain_db / 20)
+            worst_gain = 10 ** ((stage.gain_db + stage.gain_tolerance_db) / 20)
+            minimum_gain = 10 ** ((stage.gain_db - stage.gain_tolerance_db) / 20)
             input_limit = min(stage.input_maximum_vrms, stage.adc_full_scale_vrms or math.inf)
             output_limit = min(stage.output_maximum_vrms, stage.dac_full_scale_vrms or math.inf)
             headroom = min(
                 20 * math.log10(input_limit / maximum),
-                20 * math.log10(output_limit / (maximum * gain)),
+                20 * math.log10(output_limit / (maximum * worst_gain)),
             )
             interface_ok = previous is None or previous.output_mode == stage.input_mode
             # gain_db must include loading for the declared connected impedances.
@@ -64,15 +84,34 @@ class AudioChain(StrictModel):
                     if headroom >= self.required_headroom_db and interface_ok
                     else CheckStatus.FAIL,
                     message=f"Nominal output {nominal * gain:.6g} Vrms; "
-                    f"max {maximum * gain:.6g} Vrms; "
+                    f"max {maximum * worst_gain:.6g} Vrms; "
+                    f"loaded gain interval [{minimum_gain:.6g}, {worst_gain:.6g}]; "
                     f"headroom {headroom:.4g} dB; interface compatible: {interface_ok}",
                     evidence=(stage.evidence.model_dump_json(), self.level_convention),
                     affected_objects=(stage.id,),
                     source="declared loaded-gain signal chain",
                 )
             )
+            actual_cm = stage.ac_bias_v if stage.coupling == "ac" else common_mode
+            limits = stage.input_common_mode_limits_v
+            known = actual_cm is not None and limits is not None
+            checks.append(
+                CheckResult(
+                    check_id=f"audio.common-mode.{stage.id}",
+                    name="Declared DC common-mode compatibility",
+                    status="SKIP"
+                    if not known
+                    else "PASS"
+                    if limits[0] <= actual_cm[0] <= actual_cm[1] <= limits[1]
+                    else "FAIL",
+                    message=f"Input common mode {actual_cm}; permitted {limits}. AC stages require local bias evidence.",
+                    evidence=(stage.evidence.model_dump_json(),),
+                    affected_objects=(stage.id,),
+                )
+            )
+            common_mode = stage.output_common_mode_v
             nominal *= gain
-            maximum *= gain
+            maximum *= worst_gain
             previous = stage
         return VerificationReport(results=tuple(checks))
 

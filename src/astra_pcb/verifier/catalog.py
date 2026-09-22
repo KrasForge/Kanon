@@ -56,6 +56,7 @@ class DeviceInput(StrictModel):
 class BootInput(StrictModel):
     plan: BootPlan
     rules: DeviceRules
+    pin_plan: dict | None = None
 
 
 class DecouplingInput(StrictModel):
@@ -133,7 +134,7 @@ CHECKS = {
     ),
     "check_fpga_boot": (
         BootInput,
-        lambda x: x.plan.audit(x.rules),
+        lambda x: x.plan.audit(x.rules, x.pin_plan),
         "Declared configuration/flash/strap expectations",
     ),
     "check_decoupling": (

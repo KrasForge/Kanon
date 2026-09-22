@@ -10,7 +10,14 @@ from astra_pcb.models import CheckResult, CheckStatus, StrictModel
 
 class Compatibility(StrictModel):
     criterion: Literal[
-        "pinout", "electrical", "footprint", "thermal", "firmware", "assembly", "lifecycle"
+        "pinout",
+        "electrical",
+        "footprint",
+        "thermal",
+        "firmware",
+        "assembly",
+        "lifecycle",
+        "timing",
     ]
     compatible: bool | None
     explanation: str = Field(min_length=1)
@@ -37,6 +44,7 @@ class Alternate(StrictModel):
             "firmware",
             "assembly",
             "lifecycle",
+            "timing",
         }
         missing = required - by_criterion.keys()
         failures = [a.criterion for a in self.assessments if a.compatible is False]

@@ -57,6 +57,9 @@ def test_audio_headroom_and_interface_mismatch(evidence):
         input_mode="unbalanced",
         output_mode="unbalanced",
         coupling="ac",
+        input_common_mode_limits_v=(0, 3.3),
+        ac_bias_v=(1.6, 1.7),
+        output_common_mode_v=(1.6, 1.7),
         filtering="Declared ideal passband",
         evidence=evidence,
     )
@@ -251,7 +254,7 @@ def test_boot_sequencing_and_device_decoupling(device, evidence):
         pull_resistors={"MODE": 10000},
         evidence=evidence,
     )
-    assert boot.audit(device).status == "PASS"
+    assert boot.audit(device).status == "SKIP"  # Full boot qualification needs actual pin plan.
     assert boot.model_copy(update={"flash_supply_v": 3.3}).audit(device).status == "FAIL"
     assert boot.model_copy(update={"required_straps": {}}).audit(device).status == "FAIL"
     rule = Sequence(before="core", after="io", minimum_delay_ms=1, maximum_delay_ms=5)
@@ -294,6 +297,7 @@ def test_alternate_requires_all_compatibility_evidence(evidence):
             "firmware",
             "assembly",
             "lifecycle",
+            "timing",
         )
     )
     assert alternate.model_copy(update={"assessments": assessments}).check().status == "PASS"
